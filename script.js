@@ -1,24 +1,26 @@
 // Arabic Alphabet (28 letters, ا to ي) - SparkKids
 // Each Arabic letter maps to its Bengali pronunciation name (no emojis).
 const arabicMeta = {
-  'ا': { name: 'আলিফ' }, 'ب': { name: 'বা' }, 'ت': { name: 'তা' }, 'ث': { name: 'ছা' },
+  'ا': { name: 'আলিফ' }, 'ب': { name: 'বা' }, 'ت': { name: 'তা' }, 'ث': { name: 'সা' },
   'ج': { name: 'জীম' }, 'ح': { name: 'হা' }, 'خ': { name: 'খা' }, 'د': { name: 'দাল' },
-  'ذ': { name: 'যাল' }, 'ر': { name: 'রা' }, 'ز': { name: 'ঝা' }, 'س': { name: 'সীন' },
+  'ذ': { name: 'যাল' }, 'ر': { name: 'রা' }, 'ز': { name: 'যা' }, 'س': { name: 'সীন' },
   'ش': { name: 'শীন' }, 'ص': { name: 'সোয়াদ' }, 'ض': { name: 'দোয়াদ' }, 'ط': { name: 'তোয়া' },
-  'ظ': { name: 'যোয়া' }, 'ع': { name: 'আইন' }, 'غ': { name: 'গাইন' }, 'ف': { name: 'ফা' },
+  'ظ': { name: 'জোয়া' }, 'ع': { name: 'আইন' }, 'غ': { name: 'গাইন' }, 'ف': { name: 'ফা' },
   'ق': { name: 'ক্বাফ' }, 'ك': { name: 'কাফ' }, 'ل': { name: 'লাম' }, 'م': { name: 'মীম' },
-  'ن': { name: 'নূন' }, 'ه': { name: 'গোল হা' }, 'و': { name: 'ওয়াও' }, 'ي': { name: 'ইয়া' }
+  'ن': { name: 'নূন' }, 'ه': { name: 'গোল হা' }, 'و': { name: 'ওয়াও' }, 'ي': { name: 'ইয়া' },
+  'ء': { name: 'হামযাহ' }
 };
 
-// Arabic groups: 28 letters in 4-column pages (RTL: first letter renders top-right).
+// Arabic groups: 29 items in 8 visual-family pages (RTL: first letter renders top-right).
 const arabicGroups = [
   ['ا', 'ب', 'ت', 'ث'],
-  ['ج', 'ح', 'خ', 'د'],
-  ['ذ', 'ر', 'ز', 'س'],
-  ['ش', 'ص', 'ض', 'ط'],
-  ['ظ', 'ع', 'غ', 'ف'],
-  ['ق', 'ك', 'ل', 'م'],
-  ['ن', 'ه', 'و', 'ي']
+  ['ج', 'ح', 'خ'],
+  ['د', 'ذ', 'ر', 'ز'],
+  ['س', 'ش', 'ص', 'ض'],
+  ['ط', 'ظ', 'ع', 'غ'],
+  ['ف', 'ق', 'ك', 'ل'],
+  ['م', 'ن', 'و'],
+  ['ه', 'ء', 'ي']
 ];
 
 const container = document.getElementById('worksheet-container');
