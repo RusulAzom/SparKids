@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap');
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Hind Siliguri', Arial, sans-serif; background-color: #f0f0f0; color: #000; }
+body { font-family: 'Hind Siliguri', 'Noto Naskh Arabic', Arial, sans-serif; background-color: #f0f0f0; color: #000; }
 .no-print { text-align: center; padding: 15px; background-color: #e0e0e0; }
 .btn-download { background-color: #28a745; color: #fff; font-size: 16px; font-weight: bold; padding: 10px 24px; border: none; border-radius: 6px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background 0.2s; font-family: 'Hind Siliguri', sans-serif; }
 .btn-download:hover { background-color: #218838; }
@@ -21,7 +21,7 @@ body { font-family: 'Hind Siliguri', Arial, sans-serif; background-color: #f0f0f
 .header-table { width: 100%; margin-bottom: 6px; border-bottom: 2px solid #000; padding-bottom: 4px; }
 .header-table td { border: none; font-weight: bold; font-size: 14px; }
 .title { font-size: 16px; letter-spacing: 0.5px; }
-table.practice-grid { width: 100%; border-collapse: collapse; table-layout: fixed; }
+table.practice-grid { width: 100%; border-collapse: collapse; table-layout: fixed; direction: rtl; }
 table.practice-grid th, table.practice-grid td { border: 1.5px solid #000; text-align: center; padding: 0; vertical-align: middle; position: relative; }
 table.practice-grid th { background-color: #f5f5f5; font-size: 15px; height: 24px; }
 .guide-row td { font-weight: bold; font-size: 30px; height: 40px!important; background-color: #fff; color: #000; }
@@ -29,17 +29,17 @@ table.practice-grid th { background-color: #f5f5f5; font-size: 15px; height: 24p
 .dot-cell { height: 52px; background: linear-gradient(to bottom, transparent 18%, #000 19%, transparent 20%, transparent 50%, #bbb 51%, transparent 52%, transparent 80%, #000 81%, transparent 82%); background-size: 100% 100%; position: relative; }
 .dual-container { display: flex; width: 100%; height: 100%; justify-content: space-around; align-items: center; }
 .char-svg { width: 48%; height: 100%; display: block; }
-.dotted-text { font-family: 'Hind Siliguri', sans-serif; font-size: 34px; font-weight: bold; fill: none; stroke: #000; stroke-width: 1.2; stroke-dasharray: 2,2; }
-.exercise-section { margin-top: 10px; border: 2px dashed #000; border-radius: 8px; padding: 6px 8px; background-color: #fafafa; }
-.exercise-title { font-size: 13px; font-weight: bold; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
-.train-container { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; }
-.train-engine { width: 12%; text-align: center; font-size: 28px; padding-bottom: 5px; }
+.dotted-text { font-family: 'Noto Naskh Arabic', 'Hind Siliguri', sans-serif; font-size: 34px; font-weight: bold; fill: none; stroke: #000; stroke-width: 1.2; stroke-dasharray: 2,2; }
+.exercise-section { margin-top: 25px; border: 2px dashed #000; border-radius: 8px; padding: 10px 8px 14px; background-color: #fafafa; }
+.exercise-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+.train-container { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; direction: rtl; }
+.train-engine { width: 12%; text-align: center; font-size: 42px; padding-bottom: 5px; }
 .train-bogie { width: 20%; border: 2px solid #000; border-radius: 6px; background: #fff; position: relative; display: flex; flex-direction: column; align-items: center; }
 .bogie-header { font-size: 12px; font-weight: bold; border-bottom: 1px solid #000; width: 100%; text-align: center; padding: 2px 0; background-color: #eee; }
-.bogie-line-cell { width: 100%; height: 40px; background: linear-gradient(to bottom, transparent 18%, #000 19%, transparent 20%, transparent 50%, #bbb 51%, transparent 52%, transparent 80%, #000 81%, transparent 82%); background-size: 100% 100%; }
-.bogie-wheels { display: flex; justify-content: space-around; width: 70%; margin-top: -3px; margin-bottom: -8px; }
-.wheel { width: 10px; height: 10px; background-color: #000; border-radius: 50%; }
-.train-connector { width: 2%; height: 3px; background-color: #000; margin-bottom: 12px; }
+.bogie-line-cell { width: 100%; height: 55px; background: linear-gradient(to bottom, transparent 18%, #000 19%, transparent 20%, transparent 50%, #bbb 51%, transparent 52%, transparent 80%, #000 81%, transparent 82%); background-size: 100% 100%; }
+.bogie-wheels { display: flex; justify-content: space-around; width: 70%; margin-top: -3px; margin-bottom: -10px; }
+.wheel { width: 14px; height: 14px; background-color: #000; border-radius: 50%; }
+.train-connector { width: 2%; height: 3px; background-color: #000; margin-bottom: 16px; }
 .footer { text-align: right; font-size: 11px; margin-top: 6px; color: #000; font-weight: bold; }
 /* Section divider page (e.g. ব্যঞ্জনবর্ণ) inserted between vowel & consonant worksheets */
 .divider-page { padding: 15mm; background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 50%, #e3f2fd 100%); display: flex; flex-direction: column; justify-content: space-between; align-items: center; border: 8px solid #2e7d32; border-radius: 12px; text-align: center; }
