@@ -119,7 +119,7 @@
 
         <div class="mx-auto mt-7 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
           <div class="rounded-2xl border border-white bg-white/85 px-3 py-3 shadow-card">
-            <p class="text-2xl font-bold text-sky-600">৪</p>
+            <p class="text-2xl font-bold text-sky-600">৫</p>
             <p class="text-xs font-semibold text-slate-500">লাইভ জেনারেটর</p>
           </div>
           <div class="rounded-2xl border border-white bg-white/85 px-3 py-3 shadow-card">
@@ -156,18 +156,19 @@
             <button type="button" data-filter="arabic" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-emerald-300 hover:text-emerald-700">আরবি</button>
             <button type="button" data-filter="math" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-violet-300 hover:text-violet-700">গণিত</button>
             <button type="button" data-filter="phonics" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-spark-300 hover:text-spark-700">ফোনেটিক্স</button>
+            <button type="button" data-filter="practice" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-pink-300 hover:text-pink-700">ওয়ার্ড মেকিং</button>
             <button type="button" data-filter="soon" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-slate-400">শীঘ্রই আসছে</button>
           </div>
         </div>
 
         <p class="mt-3 text-xs font-semibold text-slate-500" aria-live="polite">
-          মোট <span id="resultCount" class="text-sm font-bold text-sky-700">৪</span>টি টুল দেখানো হচ্ছে
+          মোট <span id="resultCount" class="text-sm font-bold text-sky-700">৮</span>টি টুল দেখানো হচ্ছে
         </p>
       </div>
     </section>
     <!-- ============================ GENERATOR CARDS ============================ -->
     <section class="relative mx-auto max-w-7xl px-4 py-6 sm:px-6">
-      <div id="cardGrid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      <div id="cardGrid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
         <!-- ---------- 1. WRITING ---------- -->
         <div data-card data-href="writing/index.html" data-category="writing" data-accent="sky"
@@ -292,6 +293,36 @@
             </span>
           </span>
         </div>
+        <!-- ---------- 5. PRACTICE WORKSHEET (WORD MAKING) ---------- -->
+        <div data-card data-href="practice-worksheet/index.html" data-category="practice" data-accent="rose"
+           class="card-link group flex animate-popIn cursor-pointer flex-col overflow-hidden rounded-3xl border border-white bg-white shadow-card transition duration-300 hover:-translate-y-1.5 hover:shadow-pop"
+           data-title="Practice Worksheet Word Making word building letters join reading"
+           data-keywords="practice worksheet word making word building join letters reading phonics at an it op ug ake ee ight ing ly tion emoji প্র্যাকটিস ওয়ার্ড মেকিং শব্দ তৈরি">
+          <span class="relative block h-36 overflow-hidden bg-gradient-to-br from-pink-400 via-rose-500 to-fuchsia-600">
+            <span class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 22% 26%, #fff 2px, transparent 2.5px), radial-gradient(circle at 72% 68%, #fff 2px, transparent 2.5px); background-size: 36px 36px;"></span>
+            <span class="absolute -bottom-6 -right-3 select-none text-[2.4rem] font-bold leading-none text-white/25">at → mat</span>
+            <span class="absolute left-5 top-4 grid h-14 w-14 place-items-center rounded-2xl bg-white/95 text-3xl shadow-card transition duration-300 group-hover:animate-wiggle">🧩</span>
+            <span class="absolute right-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-rose-700">New</span>
+          </span>
+          <span class="flex flex-1 flex-col p-5">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-rose-600">প্র্যাকটিস • Word Making</span>
+            <span class="mt-1 text-lg font-bold leading-snug text-slate-900">Practice Worksheet (Word Making)</span>
+            <span class="mt-2 text-sm leading-relaxed text-slate-600">
+              বাঁ দিকের অক্ষর + মাঝের ফ্লাওয়ার-চাঙ্ক (at, ee, ight, tion…) জোড়া দিয়ে ডান দিকের শব্দ তৈরি — ১০টি ওয়ার্কশিট, প্রতি A4 পাতায় ২টি কার্ড, ইমোজি ও ড্যাশ-লাইনসহ।
+            </span>
+            <span class="mt-3 flex flex-wrap gap-1.5">
+              <span class="rounded-full bg-rose-50 px-2.5 py-1 text-[11px] font-bold text-rose-700">১০টি ওয়ার্কশিট</span>
+              <span class="rounded-full bg-rose-50 px-2.5 py-1 text-[11px] font-bold text-rose-700">পাতায় ২টি</span>
+              <span class="rounded-full bg-rose-50 px-2.5 py-1 text-[11px] font-bold text-rose-700">A4 PDF</span>
+            </span>
+            <span class="mt-auto pt-4">
+              <a href="practice-worksheet/index.html" class="flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-600 px-4 py-3 text-sm font-bold text-white shadow-card transition group-hover:from-pink-600 group-hover:to-rose-700">
+                Open Worksheet <span aria-hidden="true">→</span>
+              </a>
+            </span>
+          </span>
+        </div>
+
       </div>
 
       <!-- No-results state (shown by the filter script) -->
@@ -394,6 +425,8 @@
         <a href="arabic/index.html" class="text-xs font-bold text-slate-600 transition hover:text-sky-700">আরবি</a>
         <a href="math/index.html" class="text-xs font-bold text-slate-600 transition hover:text-sky-700">গণিত</a>
         <a href="phonetics/index.html" class="text-xs font-bold text-slate-600 transition hover:text-sky-700">ফোনেটিক্স</a>
+        <a href="practice-worksheet/index.html" class="text-xs font-bold text-slate-600 transition hover:text-sky-700">প্র্যাকটিস ওয়ার্কশিট</a>
+
         <a href="https://wa.me/8801882834071" target="_blank" rel="noopener" class="text-xs font-bold text-emerald-600 transition hover:text-emerald-800">📞 01882834071</a>
       </nav>
     </div>

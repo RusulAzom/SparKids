@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice Worksheet (Word Making) - SparkKids</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hind Siliguri', Arial, sans-serif;
+  background: #eef4fb;
+  color: #1f2937;
+  padding-top: 104px;            /* cleared by JS once the fixed bar is measured */
+}
+
+/* ================= TOP ACTION BAR (screen only) ================= */
+.action-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: #ffffff;
+  border-bottom: 1px solid #dbeafe;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+.action-bar-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0f172a; }
+.brand-badge {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f472b6, #e11d48);
+  display: grid; place-items: center;
+  font-size: 20px;
+}
+.brand-text { font-size: 17px; font-weight: 800; line-height: 1.1; }
+.brand-text small {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #E9407D;
+}
+.bar-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.bar-hint { font-size: 11px; font-weight: 700; color: #64748b; }
+.btn {
+  font-family: 'Hind Siliguri', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-print {
+  background: linear-gradient(135deg, #E9407D, #c81e5b);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(233, 64, 125, 0.35);
+}
+.btn-back { background: #fff; color: #3A86FF; border: 2px solid #BFDBFE; }
+
+/* ================= A4 SHEETS ================= */
+.packet {
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 0 8px 40px;
+}
+.a4-page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  min-height: 297mm;
+  padding: 10mm 12mm;
+  margin: 0 auto 18px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+}
+
+/* ---- sheet header ---- */
+.sheet-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #E2E8F0;
+}
+.sheet-title {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #E9407D;
+}
+.sheet-sub {
+  margin-top: 2px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #3A86FF;
+}
+.sheet-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  border-top: 1.5px dashed #CBD5E1;
+  padding-top: 5px;
+}
+
+/* ================= WORKSHEET ITEMS (2 per A4 sheet) ================= */
+.items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+.item {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 2px dashed #90CDF4;
+  border-radius: 16px;
+  background: #F8FBFF;
+  overflow: hidden;
+}
+.item-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.item-no {
+  font-size: 18px;
+  font-weight: 800;
+  color: #3A86FF;
+}
+.item-type {
+  margin-left: auto;
+  padding: 2px 10px;
+  border: 1.5px dashed #F9A8D4;
+  border-radius: 999px;
+  background: #FDF2F8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #E9407D;
+}
+
+/* ---- 3 column inner grid: letters | flower | word pills ---- */
+.item-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 122px 1.35fr;
+  gap: 6px 12px;
+  align-items: stretch;
+}
+.col-left,
+.col-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+.col-left { align-items: center; }
+.col-right { align-items: stretch; }
+.col-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* left column: single letters / letter chunks */
+.chunk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  padding: 5px 12px;
+  border: 1.5px solid #BFDBFE;
+  border-radius: 999px;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+/* right column: pill shaped word boxes */
+.pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 18px;
+  border: 2px solid #3A86FF;
+  border-radius: 999px;
+  background: #fff;
+  color: #3A86FF;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.15;
+  min-height: 38px;
+}
+.pill-emoji { font-size: 20px; line-height: 1; }
+
+/* ---- center flower anchor ---- */
+.flower {
+  position: relative;
+  z-index: 1;
+  width: 122px;
+  height: 122px;
+  display: grid;
+  place-items: center;
+}
+.flower-center {
+  position: relative;
+  z-index: 2;
+  width: 64px;
+  height: 64px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: #E9407D;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 16px rgba(233, 64, 125, 0.35);
+}
+.flower-center.is-long { font-size: 16px; }
+.petal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.14);
+}
+
+/* ---- dashed connector overlay ---- */
+.connectors {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================= RESPONSIVE (small screens) ================= */
+/* A4 sheets keep exact print width; on narrow screens the packet
+   scrolls horizontally instead of breaking the whole page layout. */
+body { overflow-x: clip; }
+.packet { overflow-x: auto; }
+.a4-page { flex: 0 0 auto; }
+@media (min-width: 821px) {
+  .packet { overflow-x: visible; }
+}
+
+/* ================= PRINT ================= */
+@page { size: A4 portrait; margin: 0; }
+
+@media print {
+  body { background: #fff; padding-top: 0 !important; }
+  .no-print { display: none !important; }
+  .packet { max-width: none; padding: 0; }
+  .a4-page {
+    page-break-after: always;
+    break-after: page;
+    width: 210mm;
+    height: auto !important;      /* keeps the bottom of a sheet from being clipped */
+    max-height: none !important;
+    min-height: 297mm;
+    overflow: visible !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+  .a4-page:last-of-type { page-break-after: auto; break-after: auto; }
+  .item,
+  .chunk,
+  .pill,
+  .flower-center,
+  .petal,
+  .item-type,
+  .connectors line {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= TOP ACTION BAR (non-printable) ================= -->
+<header class="action-bar no-print">
+  <div class="action-bar-inner">
+    <a href="../index.html" class="brand">
+      <span class="brand-badge">🧩</span>
+      <span class="brand-text">
+        SparKids
+        <small>Practice Worksheet • Word Making</small>
+      </span>
+    </a>
+    <div class="bar-actions">
+      <span class="bar-hint">১০টি ওয়ার্কশিট • ৫টি A4 পাতা</span>
+      <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Print Worksheets</button>
+      <a href="../index.html" class="btn btn-back">← মেইন ড্যাশবোর্ড</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= A4 PACKET (rendered by the script below) ================= -->
+<main class="packet" id="packet"></main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------------------------------------------------------
+     Exact worksheet dataset — 10 items, 2 items per A4 sheet (5 sheets)
+  --------------------------------------------------------------- */
+  const worksheets = [
+    { id: 1, center: "an", left: ["m","r","p","c","f","v"], right: [{word:"man", emoji:"👨"}, {word:"ran", emoji:"🏃"}, {word:"pan", emoji:"🍳"}, {word:"can", emoji:"🥫"}, {word:"fan", emoji:"🪭"}] },
+    { id: 2, center: "it", left: ["b","f","h","k","s"], right: [{word:"bit", emoji:"🤏"}, {word:"fit", emoji:"💪"}, {word:"hit", emoji:"🥊"}, {word:"kit", emoji:"🧰"}, {word:"sit", emoji:"🪑"}] },
+    { id: 3, center: "op", left: ["m","t","h","p","c"], right: [{word:"mop", emoji:"🧹"}, {word:"top", emoji:"🔝"}, {word:"hop", emoji:"🐰"}, {word:"pop", emoji:"🎈"}, {word:"cop", emoji:"👮"}] },
+    { id: 4, center: "ug", left: ["b","h","m","j","r"], right: [{word:"bug", emoji:"🐛"}, {word:"hug", emoji:"🤗"}, {word:"mug", emoji:"☕"}, {word:"jug", emoji:"🏺"}, {word:"rug", emoji:"🟫"}] },
+    { id: 5, center: "ake", left: ["m","b","c","l","sh"], right: [{word:"make", emoji:"🛠️"}, {word:"bake", emoji:"🍞"}, {word:"cake", emoji:"🎂"}, {word:"lake", emoji:"🏞️"}, {word:"shake", emoji:"🥤"}], type: "long a" },
+    { id: 6, center: "ee", left: ["s","tr","b","f","sh"], right: [{word:"see", emoji:"👀"}, {word:"tree", emoji:"🌳"}, {word:"bee", emoji:"🐝"}, {word:"fee", emoji:"💵"}, {word:"sheep", emoji:"🐑"}], type: "long e" },
+    { id: 7, center: "ight", left: ["l","n","r","br","fl"], right: [{word:"light", emoji:"💡"}, {word:"night", emoji:"🌙"}, {word:"right", emoji:"✅"}, {word:"bright", emoji:"✨"}, {word:"flight", emoji:"✈️"}], type: "long i" },
+    { id: 8, center: "ing", left: ["play","go","read","jump","sing"], right: [{word:"playing", emoji:"🎮"}, {word:"going", emoji:"🚶"}, {word:"reading", emoji:"📚"}, {word:"jumping", emoji:"🤾"}, {word:"singing", emoji:"🎤"}], type: "suffix" },
+    { id: 9, center: "ly", left: ["quick","slow","kind","happy","sad"], right: [{word:"quickly", emoji:"⚡"}, {word:"slowly", emoji:"🐢"}, {word:"kindly", emoji:"🙏"}, {word:"happily", emoji:"😊"}, {word:"sadly", emoji:"😢"}], type: "suffix" },
+    { id: 10, center: "tion", left: ["ac","na","sta","va-ca","atten"], right: [{word:"action", emoji:"🎬"}, {word:"nation", emoji:"🌍"}, {word:"station", emoji:"🚉"}, {word:"vacation", emoji:"🏖️"}, {word:"attention", emoji:"❗"}], type: "suffix" }
+  ];
+
+  var ITEMS_PER_SHEET = 2;                                            /* exactly 2 cards per A4 sheet */
+  var SHEET_COUNT = Math.ceil(worksheets.length / ITEMS_PER_SHEET);   /* -> 5 sheets */
+
+  /* Six petals around the flower centre: yellow, green, blue, purple, red, orange */
+  var PETALS = [
+    { x: 0,   y: -47, color: '#FACC15' },   /* yellow */
+    { x: 41,  y: -24, color: '#22C55E' },   /* green  */
+    { x: 41,  y: 24,  color: '#3B82F6' },   /* blue   */
+    { x: 0,   y: 47,  color: '#A855F7' },   /* purple */
+    { x: -41, y: 24,  color: '#EF4444' },   /* red    */
+    { x: -41, y: -24, color: '#F97316' }    /* orange */
+  ];
+
+  function pad2(value) { return String(value).padStart(2, '0'); }
+
+  function esc(value) {
+    return String(value).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+
+  /* ---------------- templates ---------------- */
+  function flowerHtml(center) {
+    var petals = PETALS.map(function (petal) {
+      return '<span class="petal" style="background:' + petal.color + ';transform:translate(' +
+        petal.x + 'px,' + petal.y + 'px)"></span>';
+    }).join('');
+    var isLong = center.replace(/-/g, '').length > 2 ? ' is-long' : '';
+    return '<div class="flower">' + petals +
+      '<span class="flower-center' + isLong + '">' + esc(center) + '</span></div>';
+  }
+
+  function itemHtml(item) {
+    var left = item.left.map(function (chunk) {
+      return '<span class="chunk">' + esc(chunk) + '</span>';
+    }).join('');
+
+    var right = item.right.map(function (entry) {
+      return '<span class="pill"><span class="pill-word">' + esc(entry.word) + '</span>' +
+        '<span class="pill-emoji">' + esc(entry.emoji) + '</span></span>';
+    }).join('');
+
+    return '<article class="item" data-item="' + item.id + '">' +
+        '<div class="item-head">' +
+          '<span class="item-no">' + item.id + '.</span>' +
+          (item.type ? '<span class="item-type">' + esc(item.type) + '</span>' : '') +
+        '</div>' +
+        '<div class="item-grid">' +
+          '<div class="col-left">' + left + '</div>' +
+          '<div class="col-center">' + flowerHtml(item.center) + '</div>' +
+          '<div class="col-right">' + right + '</div>' +
+        '</div>' +
+        '<svg class="connectors" aria-hidden="true" preserveAspectRatio="none"></svg>' +
+      '</article>';
+  }
+
+  function sheetHtml(group, sheetNo) {
+    return '<section class="a4-page" data-sheet="' + sheetNo + '">' +
+        '<header class="sheet-head">' +
+          '<div class="sheet-meta">' +
+            '<span>Name: ____________________</span>' +
+            '<span>Date: ___________</span>' +
+            '<span>Page: ' + pad2(sheetNo) + '</span>' +
+          '</div>' +
+          '<h1 class="sheet-title">PRACTICE WORKSHEET</h1>' +
+          '<p class="sheet-sub">Make new words by joining letters</p>' +
+        '</header>' +
+        '<div class="items">' + group.map(itemHtml).join('') + '</div>' +
+        '<footer class="sheet-foot">' +
+          '<span>SparkKids | Spar Publication</span>' +
+          '<span>Practice Worksheet (Word Making) — Page ' + pad2(sheetNo) + ' of ' + pad2(SHEET_COUNT) + '</span>' +
+        '</footer>' +
+      '</section>';
+  }
+
+  /* ---------------- render: 2 items per A4 sheet ---------------- */
+  var packet = document.getElementById('packet');
+  var sheets = [];
+  for (var s = 0; s < worksheets.length; s += ITEMS_PER_SHEET) {
+    sheets.push(worksheets.slice(s, s + ITEMS_PER_SHEET));
+  }
+  packet.innerHTML = sheets.map(function (group, index) {
+    return sheetHtml(group, index + 1);
+  }).join('');
+
+  /* ---------------- dashed connectors: letters -> flower -> word pills ---------------- */
+  function segments(from, to, startGap, endGap) {
+    var dx = to.x - from.x;
+    var dy = to.y - from.y;
+    var len = Math.sqrt(dx * dx + dy * dy) || 1;
+    var ux = dx / len;
+    var uy = dy / len;
+    return {
+      x1: from.x + ux * startGap,
+      y1: from.y + uy * startGap,
+      x2: to.x - ux * endGap,
+      y2: to.y - uy * endGap
+    };
+  }
+
+  function round1(value) { return Math.round(value * 10) / 10; }
+
+  function drawConnectors() {
+    var items = document.querySelectorAll('.item');
+
+    Array.prototype.forEach.call(items, function (item) {
+      var svg = item.querySelector('.connectors');
+      var flowerEl = item.querySelector('.flower-center');
+      if (!svg || !flowerEl) { return; }
+
+      var box = svg.getBoundingClientRect();
+      if (!box.width || !box.height) { return; }
+
+      var flowerRect = flowerEl.getBoundingClientRect();
+      var flower = {
+        x: flowerRect.left - box.left + flowerRect.width / 2,
+        y: flowerRect.top - box.top + flowerRect.height / 2
+      };
+      var radius = flowerRect.width / 2 + 2;
+      var paths = [];
+
+      /* every left letter / chunk joins the flower centre */
+      Array.prototype.forEach.call(item.querySelectorAll('.chunk'), function (chunk) {
+        var rect = chunk.getBoundingClientRect();
+        paths.push(segments({
+          x: rect.right - box.left,
+          y: rect.top - box.top + rect.height / 2
+        }, flower, 2, radius));
+      });
+
+      /* the flower centre joins every right word pill */
+      Array.prototype.forEach.call(item.querySelectorAll('.pill'), function (pill) {
+        var rect = pill.getBoundingClientRect();
+        paths.push(segments(flower, {
+          x: rect.left - box.left,
+          y: rect.top - box.top + rect.height / 2
+        }, radius, 2));
+      });
+
+      svg.setAttribute('viewBox', '0 0 ' + round1(box.width) + ' ' + round1(box.height));
+      svg.innerHTML = paths.map(function (path) {
+        return '<line x1="' + round1(path.x1) + '" y1="' + round1(path.y1) +
+          '" x2="' + round1(path.x2) + '" y2="' + round1(path.y2) +
+          '" stroke="#90CDF4" stroke-width="2" stroke-dasharray="3,3" stroke-linecap="round"></line>';
+      }).join('');
+    });
+  }
+
+  /* ---------------- keep the fixed action bar from covering the first sheet ---------------- */
+  function syncBarSpacing() {
+    var bar = document.querySelector('.action-bar');
+    if (!bar) { return; }
+    document.body.style.paddingTop = (bar.offsetHeight + 18) + 'px';
+  }
+
+  function refresh() {
+    drawConnectors();
+    syncBarSpacing();
+  }
+
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(refresh, 150);
+  });
+  window.addEventListener('beforeprint', drawConnectors);
+  window.addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(refresh);
+  }
+  refresh();
+})();
+</script>
+
+</body>
+</html>
