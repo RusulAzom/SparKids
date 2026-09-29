@@ -154,12 +154,35 @@ body {
   align-items: center;
   gap: 8px;
   margin-bottom: 6px;
+  flex-wrap: wrap;
 }
 .item-no {
   font-size: 18px;
   font-weight: 800;
   color: #3A86FF;
 }
+/* phonics sound & pronunciation guide banner */
+.phonics-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 auto;
+  padding: 3px 12px;
+  border: 1.5px dashed #7DD3FC;
+  border-radius: 999px;
+  background: #F0F9FF;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #0C4A6E;
+  text-align: center;
+}
+.phonics-badge .ipa {
+  color: #E9407D;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.phonics-badge .bn-sound { color: #0369A1; }
 .item-type {
   margin-left: auto;
   padding: 2px 10px;
@@ -191,7 +214,8 @@ body {
   z-index: 1;
 }
 .col-left { align-items: center; }
-.col-right { align-items: stretch; }
+/* pills hug their content instead of stretching to the column width */
+.col-right { align-items: flex-start; }
 .col-center {
   display: flex;
   align-items: center;
@@ -215,23 +239,39 @@ body {
   letter-spacing: 0.02em;
 }
 
-/* right column: pill shaped word boxes */
+/* right column: pill shaped word boxes — compact, left packed */
 .pill {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 6px 18px;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 4px 14px;
   border: 2px solid #3A86FF;
   border-radius: 999px;
   background: #fff;
   color: #3A86FF;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
   line-height: 1.15;
-  min-height: 38px;
+  min-height: 34px;
 }
-.pill-emoji { font-size: 20px; line-height: 1; }
+.pill-emoji { font-size: 17px; line-height: 1; flex: 0 0 auto; }
+/* highlighted root chunk / word ending (an, it, ake, tion …) */
+.pill-hl {
+  color: #E9407D;
+  font-weight: 800;
+  background: #FDF2F8;
+  border-radius: 6px;
+  padding: 0 2px;
+  box-shadow: inset 0 -2px 0 rgba(233, 64, 125, 0.28);
+}
+/* subtle Bangla meaning beside the word */
+.pill-bn {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748B;
+  white-space: nowrap;
+}
 
 /* ---- center flower anchor ---- */
 .flower {
@@ -313,6 +353,8 @@ body { overflow-x: clip; }
   .item,
   .chunk,
   .pill,
+  .pill-hl,
+  .phonics-badge,
   .flower-center,
   .petal,
   .item-type,
@@ -354,16 +396,116 @@ body { overflow-x: clip; }
      Exact worksheet dataset — 10 items, 2 items per A4 sheet (5 sheets)
   --------------------------------------------------------------- */
   const worksheets = [
-    { id: 1, center: "an", left: ["m","r","p","c","f","v"], right: [{word:"man", emoji:"👨"}, {word:"ran", emoji:"🏃"}, {word:"pan", emoji:"🍳"}, {word:"can", emoji:"🥫"}, {word:"fan", emoji:"🪭"}] },
-    { id: 2, center: "it", left: ["b","f","h","k","s"], right: [{word:"bit", emoji:"🤏"}, {word:"fit", emoji:"💪"}, {word:"hit", emoji:"🥊"}, {word:"kit", emoji:"🧰"}, {word:"sit", emoji:"🪑"}] },
-    { id: 3, center: "op", left: ["m","t","h","p","c"], right: [{word:"mop", emoji:"🧹"}, {word:"top", emoji:"🔝"}, {word:"hop", emoji:"🐰"}, {word:"pop", emoji:"🎈"}, {word:"cop", emoji:"👮"}] },
-    { id: 4, center: "ug", left: ["b","h","m","j","r"], right: [{word:"bug", emoji:"🐛"}, {word:"hug", emoji:"🤗"}, {word:"mug", emoji:"☕"}, {word:"jug", emoji:"🏺"}, {word:"rug", emoji:"🟫"}] },
-    { id: 5, center: "ake", left: ["m","b","c","l","sh"], right: [{word:"make", emoji:"🛠️"}, {word:"bake", emoji:"🍞"}, {word:"cake", emoji:"🎂"}, {word:"lake", emoji:"🏞️"}, {word:"shake", emoji:"🥤"}], type: "long a" },
-    { id: 6, center: "ee", left: ["s","tr","b","f","sh"], right: [{word:"see", emoji:"👀"}, {word:"tree", emoji:"🌳"}, {word:"bee", emoji:"🐝"}, {word:"fee", emoji:"💵"}, {word:"sheep", emoji:"🐑"}], type: "long e" },
-    { id: 7, center: "ight", left: ["l","n","r","br","fl"], right: [{word:"light", emoji:"💡"}, {word:"night", emoji:"🌙"}, {word:"right", emoji:"✅"}, {word:"bright", emoji:"✨"}, {word:"flight", emoji:"✈️"}], type: "long i" },
-    { id: 8, center: "ing", left: ["play","go","read","jump","sing"], right: [{word:"playing", emoji:"🎮"}, {word:"going", emoji:"🚶"}, {word:"reading", emoji:"📚"}, {word:"jumping", emoji:"🤾"}, {word:"singing", emoji:"🎤"}], type: "suffix" },
-    { id: 9, center: "ly", left: ["quick","slow","kind","happy","sad"], right: [{word:"quickly", emoji:"⚡"}, {word:"slowly", emoji:"🐢"}, {word:"kindly", emoji:"🙏"}, {word:"happily", emoji:"😊"}, {word:"sadly", emoji:"😢"}], type: "suffix" },
-    { id: 10, center: "tion", left: ["ac","na","sta","va-ca","atten"], right: [{word:"action", emoji:"🎬"}, {word:"nation", emoji:"🌍"}, {word:"station", emoji:"🚉"}, {word:"vacation", emoji:"🏖️"}, {word:"attention", emoji:"❗"}], type: "suffix" }
+    {
+      id: 1, center: "an", phonics: "🔊 Sound: /æ/ + /n/ = /æn/ (অ্যান)",
+      left: ["m","r","p","c","f","v"],
+      right: [
+        { prefix: "m", chunk: "an", emoji: "👨", bn: "মানুষ" },
+        { prefix: "r", chunk: "an", emoji: "🏃", bn: "দৌড়েছিল" },
+        { prefix: "p", chunk: "an", emoji: "🍳", bn: "কড়াই" },
+        { prefix: "c", chunk: "an", emoji: "🥫", bn: "কৌটা" },
+        { prefix: "f", chunk: "an", emoji: "🪭", bn: "পাখা" }
+      ]
+    },
+    {
+      id: 2, center: "it", phonics: "🔊 Sound: /ɪ/ + /t/ = /ɪt/ (ইট)",
+      left: ["b","f","h","k","s"],
+      right: [
+        { prefix: "b", chunk: "it", emoji: "🤏", bn: "একটু" },
+        { prefix: "f", chunk: "it", emoji: "💪", bn: "ফিট/উপযুক্ত" },
+        { prefix: "h", chunk: "it", emoji: "🥊", bn: "আঘাত করা" },
+        { prefix: "k", chunk: "it", emoji: "🧰", bn: "সরঞ্জাম বাকশো" },
+        { prefix: "s", chunk: "it", emoji: "🪑", bn: "বসা" }
+      ]
+    },
+    {
+      id: 3, center: "op", phonics: "🔊 Sound: /ɒ/ + /p/ = /ɒp/ (অপ)",
+      left: ["m","t","h","p","c"],
+      right: [
+        { prefix: "m", chunk: "op", emoji: "🧹", bn: "ঝাড়ু" },
+        { prefix: "t", chunk: "op", emoji: "🔝", bn: "লাটিম/উপরে" },
+        { prefix: "h", chunk: "op", emoji: "🐰", bn: "লাফ দেওয়া" },
+        { prefix: "p", chunk: "op", emoji: "🎈", bn: "পপ শব্দ" },
+        { prefix: "c", chunk: "op", emoji: "👮", bn: "পুলিশ" }
+      ]
+    },
+    {
+      id: 4, center: "ug", phonics: "🔊 Sound: /ʌ/ + /ɡ/ = /ʌɡ/ (আগ)",
+      left: ["b","h","m","j","r"],
+      right: [
+        { prefix: "b", chunk: "ug", emoji: "🐛", bn: "পোকা" },
+        { prefix: "h", chunk: "ug", emoji: "🤗", bn: "জড়িয়ে ধরা" },
+        { prefix: "m", chunk: "ug", emoji: "☕", bn: "মগ" },
+        { prefix: "j", chunk: "ug", emoji: "🏺", bn: "জগ" },
+        { prefix: "r", chunk: "ug", emoji: "🟫", bn: "পাপোশ" }
+      ]
+    },
+    {
+      id: 5, center: "ake", phonics: "🔊 Sound: /eɪk/ (এইক)",
+      left: ["m","b","c","l","sh"],
+      right: [
+        { prefix: "m", chunk: "ake", emoji: "🛠️", bn: "তৈরি করা" },
+        { prefix: "b", chunk: "ake", emoji: "🍞", bn: "বেক করা" },
+        { prefix: "c", chunk: "ake", emoji: "🎂", bn: "কেক" },
+        { prefix: "l", chunk: "ake", emoji: "🏞️", bn: "হ্রদ" },
+        { prefix: "sh", chunk: "ake", emoji: "🥤", bn: "ঝাঁকানো/শেক" }
+      ]
+    },
+    {
+      id: 6, center: "ee", phonics: "🔊 Sound: /iː/ (দীর্ঘ ই)",
+      left: ["s","tr","b","f","sh"],
+      right: [
+        { prefix: "s", chunk: "ee", emoji: "👀", bn: "দেখা" },
+        { prefix: "tr", chunk: "ee", emoji: "🌳", bn: "গাছ" },
+        { prefix: "b", chunk: "ee", emoji: "🐝", bn: "মৌমাছি" },
+        { prefix: "f", chunk: "ee", emoji: "💵", bn: "ফি/ফি প্রদান" },
+        { prefix: "sh", chunk: "eep", emoji: "🐑", bn: "ভেড়া" }
+      ]
+    },
+    {
+      id: 7, center: "ight", phonics: "🔊 Sound: /aɪt/ (আইট)",
+      left: ["l","n","r","br","fl"],
+      right: [
+        { prefix: "l", chunk: "ight", emoji: "💡", bn: "আলো" },
+        { prefix: "n", chunk: "ight", emoji: "🌙", bn: "রাত" },
+        { prefix: "r", chunk: "ight", emoji: "✅", bn: "সঠিক" },
+        { prefix: "br", chunk: "ight", emoji: "✨", bn: "উজ্জ্বল" },
+        { prefix: "fl", chunk: "ight", emoji: "✈️", bn: "উড্ডয়ন" }
+      ]
+    },
+    {
+      id: 8, center: "ing", phonics: "🔊 Suffix Sound: /ɪŋ/ (ইং)",
+      left: ["play","go","read","jump","sing"],
+      right: [
+        { prefix: "play", chunk: "ing", emoji: "🎮", bn: "খেলছে" },
+        { prefix: "go", chunk: "ing", emoji: "🚶", bn: "যাচ্ছে" },
+        { prefix: "read", chunk: "ing", emoji: "📚", bn: "পড়ছে" },
+        { prefix: "jump", chunk: "ing", emoji: "🤾", bn: "লাফাচ্ছে" },
+        { prefix: "sing", chunk: "ing", emoji: "🎤", bn: "গান গাইছে" }
+      ]
+    },
+    {
+      id: 9, center: "ly", phonics: "🔊 Suffix Sound: /li/ (লি)",
+      left: ["quick","slow","kind","happy","sad"],
+      right: [
+        { prefix: "quick", chunk: "ly", emoji: "⚡", bn: "দ্রুতভাবে" },
+        { prefix: "slow", chunk: "ly", emoji: "🐢", bn: "ধীরে ধীরে" },
+        { prefix: "kind", chunk: "ly", emoji: "🙏", bn: "দয়ার সাথে" },
+        { prefix: "happy", chunk: "ly", emoji: "😊", bn: "আনন্দের সাথে" },
+        { prefix: "sad", chunk: "ly", emoji: "😢", bn: "দুঃখের সাথে" }
+      ]
+    },
+    {
+      id: 10, center: "tion", phonics: "🔊 Suffix Sound: /ʃən/ (শান)",
+      left: ["ac","na","sta","va-ca","atten"],
+      right: [
+        { prefix: "ac", chunk: "tion", emoji: "🎬", bn: "কাজ/অ্যাকশন" },
+        { prefix: "na", chunk: "tion", emoji: "🌍", bn: "জাতি" },
+        { prefix: "sta", chunk: "tion", emoji: "🚉", bn: "স্টেশন" },
+        { prefix: "va-ca", chunk: "tion", emoji: "🏖️", bn: "ছুটি" },
+        { prefix: "atten", chunk: "tion", emoji: "❗", bn: "মনোযোগ" }
+      ]
+    }
   ];
 
   var ITEMS_PER_SHEET = 2;                                            /* exactly 2 cards per A4 sheet */
@@ -398,20 +540,38 @@ body { overflow-x: clip; }
       '<span class="flower-center' + isLong + '">' + esc(center) + '</span></div>';
   }
 
+  /* Phonics guide: "🔊 Sound: /æ/ + /n/ = /æn/ (অ্যান)"
+     Every /.../ IPA segment in accent pink, the trailing (Bangla) in blue. */
+  function phonicsHtml(phonics) {
+    if (!phonics) { return ''; }
+    var text = esc(phonics);
+    var body = text
+      .replace(/\/([^/]+)\//g, function (_, ipa) {
+        return '<span class="ipa">/' + ipa + '/</span>';
+      })
+      .replace(/（([^）]*)）/g, '（<span class="bn-sound">$1</span>）')
+      .replace(/\(([^)]*)\)\s*$/, '(<span class="bn-sound">$1</span>)');
+    return '<span class="phonics-badge">' + body + '</span>';
+  }
+
   function itemHtml(item) {
     var left = item.left.map(function (chunk) {
       return '<span class="chunk">' + esc(chunk) + '</span>';
     }).join('');
 
     var right = item.right.map(function (entry) {
-      return '<span class="pill"><span class="pill-word">' + esc(entry.word) + '</span>' +
-        '<span class="pill-emoji">' + esc(entry.emoji) + '</span></span>';
+      return '<span class="pill">' +
+          '<span class="pill-word">' + esc(entry.prefix) +
+            '<span class="pill-hl">' + esc(entry.chunk) + '</span></span>' +
+          '<span class="pill-emoji">' + esc(entry.emoji) + '</span>' +
+          '<span class="pill-bn">(' + esc(entry.bn) + ')</span>' +
+        '</span>';
     }).join('');
 
     return '<article class="item" data-item="' + item.id + '">' +
         '<div class="item-head">' +
           '<span class="item-no">' + item.id + '.</span>' +
-          (item.type ? '<span class="item-type">' + esc(item.type) + '</span>' : '') +
+          phonicsHtml(item.phonics) +
         '</div>' +
         '<div class="item-grid">' +
           '<div class="col-left">' + left + '</div>' +

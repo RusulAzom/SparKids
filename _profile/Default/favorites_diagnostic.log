@@ -1,0 +1,26 @@
+2026-09-29 12:07:00.313: [INFO] CurrentProfilePath: C:\projects\SparKids\bnWrite\_profile\Default
+2026-09-29 12:07:00.313: [INFO] Profiles total count: 1
+2026-09-29 12:07:00.313: [INFO] Profile: name=Profile 1 path=C:\projects\SparKids\bnWrite\_profile\Default lastActive=null
+2026-09-29 12:07:00.313: [INFO] LastUsedProfileDir: C:\projects\SparKids\bnWrite\_profile\Default
+2026-09-29 12:07:00.313: [INFO] VisibilityChanged: 0
+2026-09-29 12:07:00.352: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.354: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.355: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.356: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.357: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.359: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.360: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.361: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.363: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.364: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:00.374: [INFO] OnDoneLoading sync enabled: 0
+2026-09-29 12:07:00.374: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-09-29 12:07:00.374: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-09-29 12:07:00.374: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-09-29 12:07:00.457: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:04.950: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-09-29 12:07:04.959: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-29 12:07:04.964: [INFO] Primary account changed.
+2026-09-29 12:07:04.964: [INFO] OnPrimaryAccountChanged PrimaryAccountChangeEvent::Type::kSet
+2026-09-29 12:07:04.985: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-09-29 12:07:05.010: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
