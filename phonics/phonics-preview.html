@@ -1,18 +1,9 @@
-/* Page 3: compact spacing so the full banner (incl. phone no.) fits one A4 sheet */
-.page.promo-host .word-card { padding: 2px 5px; }
-.page.promo-host .bangla-pronounce { font-size: 10.5px; }
-.page.promo-host .english-word { font-size: 15px; }
-.page.promo-host .sentence-item { font-size: 13px; margin: 1px 0; line-height: 1.35; }
-.page.promo-host .practice-section { padding: 8px 10px; margin-bottom: 8px; }
-.page.promo-host .summary-box { margin-bottom: 8px; }
-.page.promo-host .rule-box { margin-bottom: 6px; }
-.page.promo-host .section-heading { margin-bottom: 4px; }
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SparKids Phonics Worksheets (CVC, Magic E, Bossy R)</title>
+<title>Phonics Preview (CVC, Magic E, Bossy R) - SparkKids</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
 /* Master phonics template: dynamic column grid */
@@ -55,36 +46,54 @@ body { font-family: 'Hind Siliguri', Arial, sans-serif; background: #f0f0f0; col
 .opt-box { display: inline-block; border: 1.5px solid #222; border-radius: 6px; padding: 2px 8px; font-size: 14px; font-weight: 700; background: #fff; }
 .opt-box.opt-solved { color: #777; font-style: italic; background: #f5f5f5; }
 
-/* ===== Offer & Contact Promo Banner (see PREVIEW_PAGE_RULES.md) ===== */
-.promo-banner {
-  border: 2px dashed #000;
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin-top: 6px;
-  background-color: #fdfdfd;
-  text-align: center;
-}
-.banner-title { font-size: 13.5px; font-weight: 800; line-height: 1.35; margin: 0 0 6px 0; color: #000; }
-.banner-title span { background: #000; color: #fff; padding: 1px 6px; border-radius: 4px; }
-.package-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; text-align: left;
-  font-size: 10.5px; line-height: 1.3; margin-bottom: 6px; }
-.pkg-item { background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; padding: 4px 6px; }
-.banner-cta { font-size: 12px; font-weight: 700; line-height: 1.35; }
-.phone-no { font-size: 15px; font-weight: 800; color: #d90429; margin-top: 2px; }
-.promo-group { font-size: 10.5px; margin: 4px 0 0 0; line-height: 1.3; }
-@media print { .promo-banner, .pkg-item, .banner-title span {
-  -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 
-/* Page 3: compact spacing so the promo banner fits the same A4 sheet */
-.page.promo-host .word-card { padding: 3px 5px; }
-.page.promo-host .bangla-pronounce { font-size: 11px; }
-.page.promo-host .sentence-item { font-size: 13.5px; margin: 2px 0; line-height: 1.4; }
-.page.promo-host .practice-section, .page.promo-host .rule-box, .page.promo-host .summary-box { margin-bottom: 6px; }
-@media print {
-  body { background: #fff; }
-  .no-print { display: none !important; }
-  .page { margin: 0; box-shadow: none; page-break-after: always; border-width: 4px; height: 297mm; max-height: 297mm; page-break-inside: avoid; overflow: hidden; }
+/* ===== Restore 5-Column & 4-Column Grids ===== */
+.phonics-grid {
+  display: grid !important;
+  grid-template-columns: repeat(var(--columns, 5), 1fr) !important;
+  gap: 6px !important;
+  margin-bottom: 8px !important;
 }
+
+/* Generic helpers requested in the spec (kept for future grid variants) */
+.phonics-card { border: 1px solid #000; border-radius: 4px; background: #fff; padding: 4px; }
+.word-list { list-style: none; padding: 0; margin: 0; text-align: center; }
+.word-item { margin-bottom: 4px; }
+
+/* ===== Page 3 Compact Fit Rules (offer banner stays on one A4 sheet) =====
+   Scoped with .promo-host, NOT :nth-of-type(3): body's first child is the
+   .no-print div, so nth-of-type(3) would hit Page 02 instead of Page 03.     */
+.page.promo-host { padding: 8mm 10mm !important; }
+.page.promo-host .rule-box { padding: 4px 8px !important; margin-bottom: 6px !important; }
+.page.promo-host .phonics-grid { gap: 4px !important; margin-bottom: 6px !important; }
+.page.promo-host .word-item { margin-bottom: 2px !important; }
+.page.promo-host .word-card { padding: 2px 4px !important; }
+.page.promo-host .english-word { font-size: 14px !important; }
+.page.promo-host .bangla-pronounce { font-size: 10px !important; }
+.page.promo-host .practice-section { padding: 4px 8px !important; margin-bottom: 6px !important; }
+.page.promo-host .sentence-item { font-size: 12.5px !important; margin-bottom: 2px !important; }
+.page.promo-host .summary-box { padding: 4px 8px !important; margin-bottom: 6px !important; }
+
+@media print {
+  body { background: none; padding: 0; margin: 0; }
+  .no-print, .pdf-btn, .btn-download { display: none !important; }
+  .page {
+    height: auto !important;        /* prevents text clipping in print mode */
+    max-height: none !important;
+    min-height: 297mm;
+    overflow: visible !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  .phonics-grid, .word-card, .promo-banner {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -93,7 +102,7 @@ body { font-family: 'Hind Siliguri', Arial, sans-serif; background: #f0f0f0; col
   <table class="header-table"><tr>
     <td style="width:40%;">CVC Rule Practice</td>
     <td style="width:25%; text-align:center;">তারিখ: _________</td>
-    <td style="width:35%; text-align:right;">Spark Publication | SparKids · পৃষ্ঠা: 01</td>
+    <td style="width:35%; text-align:right;">Spark Publication | SparkKids · পৃষ্ঠা: 01</td>
   </tr></table>
   <div class="ph-title">CVC Rule — Short Vowel Sounds</div>
   <div class="ph-sub">CVC Rule — Short Vowel Sounds (a, e, i, o, u)</div>
@@ -166,14 +175,14 @@ body { font-family: 'Hind Siliguri', Arial, sans-serif; background: #f0f0f0; col
     <h3 class="section-heading">⭐ Remember the sounds! (মনে রেখো!)</h3>
     ✔ a = "অ্যা" (cat) | ✔ e = "এ" (bed) | ✔ i = "ই" (sit) | ✔ o = "অ" (hot) | ✔ u = "আ" (cup)
   </section>
-  <div class="footer">SparKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 01</div>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 01</div>
 </div>
 
 <div class="page" style="--columns: 4;">
   <table class="header-table"><tr>
     <td style="width:40%;">Magic E Practice</td>
     <td style="width:25%; text-align:center;">তারিখ: _________</td>
-    <td style="width:35%; text-align:right;">Spark Publication | SparKids · পৃষ্ঠা: 02</td>
+    <td style="width:35%; text-align:right;">Spark Publication | SparkKids · পৃষ্ঠা: 02</td>
   </tr></table>
   <div class="ph-title">Magic E — Long Vowel Sounds</div>
   <div class="ph-sub">Magic E — Long Vowel Sounds (a_e, i_e, o_e, u_e)</div>
@@ -236,14 +245,14 @@ body { font-family: 'Hind Siliguri', Arial, sans-serif; background: #f0f0f0; col
     <h3 class="section-heading">⭐ Remember the sounds! (মনে রেখো!)</h3>
     ✔ e শেষে থাকলে উচ্চারিত হয় না। &nbsp; ✔ a_e = "এই" (cake) | ✔ i_e = "আই" (bike) | ✔ o_e = "ওউ" (home) | ✔ u_e = "ইউ" (cute)
   </section>
-  <div class="footer">SparKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 02</div>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 02</div>
 </div>
 
 <div class="page promo-host" style="--columns: 5;">
   <table class="header-table"><tr>
     <td style="width:40%;">Bossy R Practice</td>
     <td style="width:25%; text-align:center;">তারিখ: _________</td>
-    <td style="width:35%; text-align:right;">Spark Publication | SparKids · পৃষ্ঠা: 03</td>
+    <td style="width:35%; text-align:right;">Spark Publication | SparkKids · পৃষ্ঠা: 03</td>
   </tr></table>
   <div class="ph-title">Bossy R — ar, er, ir, or, ur</div>
   <div class="ph-sub">R বসের মতো আচরণ করে! স্বরবর্ণের স্বাভাবিক উচ্চারণ বদলে যায়।</div>
@@ -296,6 +305,8 @@ body { font-family: 'Hind Siliguri', Arial, sans-serif; background: #f0f0f0; col
       <div class="word-card"><div class="eng-word">p<span class="hl">ur</span>ple</div><div class="bangla-pronounce">পার্পল</div></div>
       <div class="word-card"><div class="english-word">n<span class="hl">ur</span>se</div><div class="bangla-pronounce">নার্স</div></div>
       <div class="word-card"><div class="english-word">s<span class="hl">ur</span>f</div><div class="bangla-pronounce">সার্ফ</div></div>
+      <div class="word-card"><div class="english-word">h<span class="hl">ur</span>t</div><div class="bangla-pronounce">হার্ট</div></div>
+      <div class="word-card"><div class="english-word">c<span class="hl">ur</span>l</div><div class="bangla-pronounce">কার্ল</div></div>
     </div>
   </section>
   <section class="practice-section">
@@ -306,29 +317,34 @@ body { font-family: 'Hind Siliguri', Arial, sans-serif; background: #f0f0f0; col
       <li class="sentence-item">Her <span class="tgt">mother</span> is a <span class="tgt">teacher</span>. <span class="bn">— হার মাদার ইজ আ টিচার।</span></li>
       <li class="sentence-item"><span class="tgt">Turn</span> left and <span class="tgt">burn</span> the <span class="tgt">corn</span>. <span class="bn">— টার্ন লেফট অ্যান্ড বার্ন দ্য কর্ন।</span></li>
       <li class="sentence-item">The <span class="tgt">nurse</span> gave a <span class="tgt">paper</span> to my <span class="tgt">sister</span>. <span class="bn">— দ্য নার্স গেভ আ পেপার টু মাই সিস্টার।</span></li>
+      <li class="sentence-item">In <span class="tgt">winter</span>, the <span class="tgt">star</span> shines in the <span class="tgt">dark</span>. <span class="bn">— ইন উইন্টার, দ্য স্টার শাইনস ইন দ্য ডার্ক।</span></li>
+      <li class="sentence-item">He ate <span class="tgt">corn</span> with a <span class="tgt">fork</span> in the <span class="tgt">park</span>. <span class="bn">— হি এট কর্ন উইথ আ ফর্ক ইন দ্য পার্ক।</span></li>
     </ol>
   </section>
   <section class="summary-box">
     <h3 class="section-heading">⭐ Remember the sounds! (মনে রেখো!)</h3>
     ✔ ar = "আর" (car) &nbsp; ✔ er / ir / ur = একই "আর্" শব্দ (her = bird = fur) &nbsp; ✔ or = "অর" (for) &nbsp; ✔ R-এর আগের vowel আলাদা পড়বে না!
   </section>
-    <section class="promo-banner">
-      <div class="banner-title">🎁 সম্পূর্ণ ১১ পেজের HD printable PDF + ৩০০+ শিক্ষণীয় PDF বই পেতে মাত্র <span>৯৯ টাকা</span> হাদিয়া পাঠ্য!</div>
-      <div class="package-grid">
-        <div class="pkg-item">১. ক্যামব্রিয়ান স্কুলের নার্সারি, প্লে ও কেজি-র সম্পূর্ণ সিলেবাস ও বই।</div>
-        <div class="pkg-item">২. ব্রিটিশ কাউন্সিলের ১০০+ ওয়ার্কশিট (১০৮টি, প্লে-কেজি)।</div>
-        <div class="pkg-item">৩. Scholastica সহ সেরা ইংলিশ মিডিয়ামের সিলেবাস, প্রশ্ন ও কারিকুলাম।</div>
-        <div class="pkg-item">৪. দেশ সেরা ইংরেজি ও বাংলা মিডিয়ামের সহায়ক গল্পের বই ৫০+ (মোট ৩০০+ ফাইল)।</div>
-      </div>
-      <div class="contact-cta" style="font-size: 14px; font-weight: 800; color: #000; margin-top: 6px;">
-        👉 মাত্র ৯৯ টাকা হাদিয়ার বিনিময়ে সম্পূর্ণ প্যাকেজটি নিতে যোগাযোগ করুন:
-        <span style="display: block; font-size: 16px; color: #d90429; margin-top: 2px;">
-          📱 WhatsApp / Call: 01882834071
-        </span>
-      </div>
-      <p class="promo-group">📌 নিয়মিত ফ্রিতে নতুন কন্টেন্ট পেতে আমাদের অফিশিয়াল ফেসবুক গ্রুপে যুক্ত থাকুন!</p>
-    </section>
-<div class="footer">SparKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 03</div>
+  <div class="promo-banner" style="border: 2px dashed #000; border-radius: 6px; padding: 6px 8px; margin-top: 4px; background-color: #fff8f8; text-align: center;">
+  <div style="font-size: 12.5px; font-weight: 800; color: #000; margin-bottom: 4px;">
+    🎁 সম্পূর্ণ ১১ পেজের HD printable PDF + ৩০০+ শিক্ষণীয় PDF বই পেতে মাত্র <span style="background: #d90429; color: #fff; padding: 1px 5px; border-radius: 3px;">৯৯ টাকা</span> হাদিয়া পাঠ্য!
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3px; text-align: left; font-size: 10px; margin-bottom: 4px;">
+    <div style="background: #fff; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">১. ক্যামব্রিয়ান স্কুলের প্লে-কেজির সম্পূর্ণ সিলেবাস ও বই</div>
+    <div style="background: #fff; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">২. ব্রিটিশ কাউন্সিলের ১০৮টি ওয়ার্কশিট (প্লে-কেজি)</div>
+    <div style="background: #fff; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">৩. Scholastica সহ সেরা ইংলিশ মিডিয়ামের প্রশ্ন ও ফাইল</div>
+    <div style="background: #fff; padding: 2px 4px; border: 1px solid #ddd; border-radius: 3px;">৪. দেশ সেরা সহায়ক গল্পের বই ৫০+ (মোট ৩০০+ ফাইল)</div>
+  </div>
+
+  <div style="font-size: 11.5px; font-weight: bold; color: #111;">
+    👉 মাত্র ৯৯ টাকা হাদিয়ার বিনিময়ে সম্পূর্ণ প্যাকেজটি নিতে যোগাযোগ করুন:
+    <span style="display: block; font-size: 14px; font-weight: 800; color: #d90429; margin-top: 2px;">
+      📱 WhatsApp / Call: 01882834071
+    </span>
+  </div>
+</div>
+<div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 03</div>
 </div>
 
 <div class="no-print"><button class="btn-download" onclick="window.print()">PDF ডাউনলোড</button></div>
