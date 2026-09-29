@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magic E Rule - SparkKids Phonics</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
+/* Master phonics template: dynamic column grid */
+:root { --columns: 4; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Hind Siliguri', Arial, sans-serif; background: #f0f0f0; color: #000; }
+.no-print { text-align: center; padding: 12px; background: #e0e0e0; }
+.btn-download { background: #28a745; color: #fff; font-size: 15px; font-weight: bold; padding: 9px 22px; border: none; border-radius: 6px; cursor: pointer; font-family: 'Hind Siliguri', sans-serif; }
+@page { size: A4 portrait; margin: 0; }
+.page { width: 210mm; height: 297mm; max-height: 297mm; box-sizing: border-box; padding: 10mm 12mm; margin: 10px auto; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,.15); page-break-after: always; page-break-inside: avoid; overflow: hidden; position: relative; border: 5px solid #1976d2; border-radius: 10px; }
+.header-table { width: 100%; margin-bottom: 4px; border-bottom: 2px solid #000; padding-bottom: 3px; border-collapse: collapse; }
+.header-table td { border: none; font-weight: bold; font-size: 13px; }
+.ph-title { text-align: center; font-size: 25px; font-weight: 700; color: #1565c0; margin: 2px 0; }
+.ph-sub { text-align: center; font-size: 12px; color: #d81b60; font-weight: bold; margin-bottom: 8px; }
+.rule-box { border: 2px dashed #1976d2; border-radius: 8px; background: #e3f2fd; padding: 7px 10px; margin-bottom: 12px; }
+.rule-text-bn { font-size: 13.5px; line-height: 1.5; }
+.rule-box b { color: #0d47a1; }
+.phonics-grid { display: grid; grid-template-columns: repeat(var(--columns), 1fr); gap: 8px; margin-bottom: 12px; }
+.sound-col { border: 1.5px solid #000; border-radius: 8px; overflow: hidden; background: #fff; }
+.sound-head { background: #0d47a1; color: #fff; text-align: center; font-size: 21px; font-weight: 700; padding: 3px 0; letter-spacing: 1px; }
+.word-card { text-align: center; padding: 3px 2px; border-top: 1px solid #ccc; }
+.eng-word, .english-word { font-size: 17.5px; font-weight: 700; }
+.eng-word .hl, .english-word .hl { color: #d81b60; }
+.bangla-pronounce { font-size: 12.5px; color: #333; }
+.section-heading { font-size: 16px; font-weight: 700; }
+.practice-section { border: 1.5px solid #000; border-radius: 8px; padding: 7px 10px; margin-bottom: 12px; }
+.practice-section h3 { font-size: 16px; font-weight: 700; color: #0d47a1; margin-bottom: 4px; }
+.practice-section ol { margin-left: 20px; }
+.sentence-item { font-size: 15px; line-height: 1.5; }
+.practice-section .tgt { font-weight: 700; color: #d81b60; }
+.practice-section .bn { color: #333; font-size: 12.5px; }
+.summary-box { border: 2px solid #2e7d32; border-radius: 8px; background: #e8f5e9; padding: 7px 10px; font-size: 13px; line-height: 1.55; margin-bottom: 4px; }
+.summary-box h3 { font-size: 16px; font-weight: 700; color: #1b5e20; margin-bottom: 3px; }
+.footer { text-align: center; font-size: 11px; font-weight: bold; border-top: 2px dashed #1976d2; padding-top: 3px; color: #333; }
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .page { margin: 0; box-shadow: none; border-width: 4px; height: 297mm; max-height: 297mm; page-break-after: always; page-break-inside: avoid; overflow: hidden; }
+}
+</style>
+</head>
+<body>
+<div class="no-print"><button class="btn-download" onclick="window.print()">PDF</button></div>
+<div class="page">
+  <table class="header-table"><tr>
+    <td style="width:40%;">Magic E Practice</td>
+    <td style="width:25%; text-align:center;">তারিখ: _________</td>
+    <td style="width:35%; text-align:right;">Spark Publication | SparkKids · পৃষ্ঠা: 03</td>
+  </tr></table>
+  <div class="ph-title">Magic E — Long Vowel Sounds</div>
+  <div class="ph-sub">Magic E — Long Vowel Sounds (a_e, i_e, o_e, u_e)</div>
+  <section class="rule-box"><p class="rule-text-bn"><b>নিয়ম:</b> শব্দের শেষে 'e' থাকলে তা চুপ (Silent) থাকে, কিন্তু এটি জাদুর মতো আগের Vowel-টিকে তার Long Sound (নিজের নাম উচ্চারণ) করতে বাধ্য করে। <b>a_e = "এই", i_e = "আই", o_e = "ওউ", u_e = "ইউ"।</b></p></section>
+  <section class="phonics-grid">
+    <div class="sound-col"><div class="sound-head">a_e — এই</div>
+      <div class="word-card"><div class="english-word">c<span class="hl">a</span>k<span class="hl">e</span></div><div class="bangla-pronounce">কেইক</div></div>
+      <div class="word-card"><div class="english-word">m<span class="hl">a</span>k<span class="hl">e</span></div><div class="bangla-pronounce">মেইক</div></div>
+      <div class="word-card"><div class="english-word">n<span class="hl">a</span>m<span class="hl">e</span></div><div class="bangla-pronounce">নেইম</div></div>
+      <div class="word-card"><div class="english-word">l<span class="hl">a</span>k<span class="hl">e</span></div><div class="bangla-pronounce">লেইক</div></div>
+      <div class="word-card"><div class="english-word">c<span class="hl">a</span>p<span class="hl">e</span></div><div class="bangla-pronounce">কেইপ</div></div>
+      <div class="word-card"><div class="english-word">g<span class="hl">a</span>t<span class="hl">e</span></div><div class="bangla-pronounce">গেইট</div></div>
+      <div class="word-card"><div class="english-word">w<span class="hl">a</span>v<span class="hl">e</span></div><div class="bangla-pronounce">ওয়েভ</div></div>
+      <div class="word-card"><div class="english-word">b<span class="hl">a</span>k<span class="hl">e</span></div><div class="bangla-pronounce">বেইক</div></div>
+    </div>
+    <div class="sound-col"><div class="sound-head">i_e — আই</div>
+      <div class="word-card"><div class="english-word">b<span class="hl">i</span>k<span class="hl">e</span></div><div class="bangla-pronounce">বাইক</div></div>
+      <div class="word-card"><div class="english-word">k<span class="hl">i</span>t<span class="hl">e</span></div><div class="bangla-pronounce">কাইট</div></div>
+      <div class="word-card"><div class="english-word">sm<span class="hl">i</span>l<span class="hl">e</span></div><div class="bangla-pronounce">স্মাইল</div></div>
+      <div class="word-card"><div class="english-word">t<span class="hl">i</span>m<span class="hl">e</span></div><div class="bangla-pronounce">টাইম</div></div>
+      <div class="word-card"><div class="english-word">r<span class="hl">i</span>d<span class="hl">e</span></div><div class="bangla-pronounce">রাইড</div></div>
+      <div class="word-card"><div class="english-word">l<span class="hl">i</span>n<span class="hl">e</span></div><div class="bangla-pronounce">লাইন</div></div>
+      <div class="word-card"><div class="english-word">f<span class="hl">i</span>n<span class="hl">e</span></div><div class="bangla-pronounce">ফাইন</div></div>
+      <div class="word-card"><div class="english-word">p<span class="hl">i</span>p<span class="hl">e</span></div><div class="bangla-pronounce">পাইপ</div></div>
+    </div>
+    <div class="sound-col"><div class="sound-head">o_e — ওউ</div>
+      <div class="word-card"><div class="english-word">h<span class="hl">o</span>m<span class="hl">e</span></div><div class="bangla-pronounce">হৌম</div></div>
+      <div class="word-card"><div class="english-word">b<span class="hl">o</span>n<span class="hl">e</span></div><div class="bangla-pronounce">বোউন</div></div>
+      <div class="word-card"><div class="english-word">n<span class="hl">o</span>s<span class="hl">e</span></div><div class="bangla-pronounce">নোজ</div></div>
+      <div class="word-card"><div class="english-word">r<span class="hl">o</span>s<span class="hl">e</span></div><div class="bangla-pronounce">রোজ</div></div>
+      <div class="word-card"><div class="english-word">r<span class="hl">o</span>p<span class="hl">e</span></div><div class="bangla-pronounce">রোপ</div></div>
+      <div class="word-card"><div class="english-word">h<span class="hl">o</span>l<span class="hl">e</span></div><div class="bangla-pronounce">হোল</div></div>
+      <div class="word-card"><div class="english-word">st<span class="hl">o</span>n<span class="hl">e</span></div><div class="bangla-pronounce">স্টোন</div></div>
+      <div class="word-card"><div class="english-word">p<span class="hl">o</span>l<span class="hl">e</span></div><div class="bangla-pronounce">পোল</div></div>
+    </div>
+    <div class="sound-col"><div class="sound-head">u_e — ইউ</div>
+      <div class="word-card"><div class="english-word">c<span class="hl">u</span>t<span class="hl">e</span></div><div class="bangla-pronounce">কিউট</div></div>
+      <div class="word-card"><div class="english-word">t<span class="hl">u</span>b<span class="hl">e</span></div><div class="bangla-pronounce">টিউব</div></div>
+      <div class="word-card"><div class="english-word">m<span class="hl">u</span>l<span class="hl">e</span></div><div class="bangla-pronounce">মিউল</div></div>
+      <div class="word-card"><div class="english-word">c<span class="hl">u</span>b<span class="hl">e</span></div><div class="bangla-pronounce">কিউব</div></div>
+      <div class="word-card"><div class="english-word">t<span class="hl">u</span>n<span class="hl">e</span></div><div class="bangla-pronounce">টিউন</div></div>
+      <div class="word-card"><div class="english-word">us<span class="hl">e</span></div><div class="bangla-pronounce">ইউজ</div></div>
+      <div class="word-card"><div class="english-word">Jun<span class="hl">e</span></div><div class="bangla-pronounce">জুন</div></div>
+      <div class="word-card"><div class="english-word">hug<span class="hl">e</span></div><div class="bangla-pronounce">হিউজ</div></div>
+    </div>
+  </section>
+  <section class="practice-section">
+    <h3 class="section-heading">বাক্য অনুশীলন (জোরে পড়ো):</h3>
+    <ol>
+      <li class="sentence-item">I <span class="tgt">bake</span> a <span class="tgt">cake</span> at <span class="tgt">home</span>. <span class="bn">— আই বেইক আ কেইক অ্যাট হৌম।</span></li>
+      <li class="sentence-item">He <span class="tgt">rides</span> a <span class="tgt">bike</span> and flies a <span class="tgt">kite</span>. <span class="bn">— হি রাইডস আ বাইক অ্যান্ড ফ্লাইস আ কাইট।</span></li>
+      <li class="sentence-item">The <span class="tgt">cute</span> <span class="tgt">mule</span> sits by the <span class="tgt">huge</span> <span class="tgt">stone</span>. <span class="bn">— দ্য কিউট মিউল সিটস বাই দ্য হিউজ স্টোন।</span></li>
+      <li class="sentence-item">What is your <span class="tgt">name</span> on the <span class="tgt">line</span>? <span class="bn">— হোয়াট ইজ ইউর নেইম অন দ্য লাইন?</span></li>
+      <li class="sentence-item">She has a <span class="tgt">smile</span> with a red <span class="tgt">rose</span>. <span class="bn">— শী হ্যাজ আ স্মাইল উইথ আ রেড রোজ।</span></li>
+      <li class="sentence-item">Jump over the <span class="tgt">rope</span> at the <span class="tgt">gate</span>. <span class="bn">— জাম্প ওভার দ্য রোপ অ্যাট দ্য গেইট।</span></li>
+      <li class="sentence-item">Play a nice <span class="tgt">tune</span> with the <span class="tgt">pipe</span>. <span class="bn">— প্লে আ নাইস টিউন উইথ দ্য পাইপ।</span></li>
+    </ol>
+  </section>
+  <section class="summary-box">
+    <h3 class="section-heading">⭐ Remember the sounds! (মনে রেখো!)</h3>
+    ✔ e শেষে থাকলে উচ্চারিত হয় না। &nbsp; ✔ a_e = "এই" (cake) | ✔ i_e = "আই" (bike) | ✔ o_e = "ওউ" (home) | ✔ u_e = "ইউ" (cute)
+  </section>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 03</div>
+</div>
+</body>
+</html>

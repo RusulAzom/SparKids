@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Hind Siliguri', 'Noto Naskh Arabic', Arial, sans-serif; background-color: #f0f0f0; color: #000; }
+.no-print { text-align: center; padding: 15px; background-color: #e0e0e0; }
+.btn-download { background-color: #28a745; color: #fff; font-size: 16px; font-weight: bold; padding: 10px 24px; border: none; border-radius: 6px; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: background 0.2s; font-family: 'Hind Siliguri', sans-serif; }
+.btn-download:hover { background-color: #218838; }
+@page { size: A4 portrait; margin: 0; }
+.page { width: 210mm; height: 297mm; padding: 8mm 12mm; margin: 10px auto; background: #fff; display: block; box-shadow: 0 0 10px rgba(0,0,0,0.15); page-break-after: always; page-break-inside: avoid; overflow: hidden; position: relative; }
+.cover-page { padding: 12mm; background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 50%, #fff3e0 100%); display: flex; flex-direction: column; justify-content: space-between; align-items: center; border: 8px solid #1976d2; border-radius: 12px; text-align: center; }
+.cover-badge { background-color: #ff9800; color: #fff; font-size: 15px; font-weight: bold; padding: 6px 20px; border-radius: 20px; display: inline-block; margin-bottom: 8px; }
+.cover-title { font-size: 32px; font-weight: 700; color: #1565c0; line-height: 1.3; margin-bottom: 6px; }
+.cover-subtitle { font-size: 18px; color: #d81b60; font-weight: bold; }
+.cover-image-container { width: 100%; height: 175mm; position: relative; margin: 10px 0; border-radius: 15px; overflow: hidden; border: 3px dashed #1976d2; background-color: #fff; }
+.cover-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+.floating-char { position: absolute; font-weight: bold; z-index: 10; background: rgba(255, 255, 255, 0.85); padding: 6px 12px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 1px solid #ddd; }
+.solid-char { font-size: 32px; color: #2e7d32; }
+.dotted-char-preview { font-size: 32px; color: transparent; -webkit-text-stroke: 1.2px #e91e63; stroke-dasharray: 2; }
+.cover-footer { width: 100%; border-top: 2px dashed #1976d2; padding-top: 8px; }
+.publisher-tag { font-size: 16px; font-weight: bold; color: #333; }
+.publisher-brand { color: #d81b60; font-size: 18px; }
+.header-table { width: 100%; margin-bottom: 6px; border-bottom: 2px solid #000; padding-bottom: 4px; }
+.header-table td { border: none; font-weight: bold; font-size: 14px; }
+.title { font-size: 16px; letter-spacing: 0.5px; }
+table.practice-grid { width: 100%; border-collapse: collapse; table-layout: fixed; direction: rtl; }
+table.practice-grid th, table.practice-grid td { border: 1.5px solid #000; text-align: center; padding: 0; vertical-align: middle; position: relative; }
+table.practice-grid th { background-color: #f5f5f5; font-size: 15px; height: 24px; }
+.guide-row td { font-weight: bold; font-size: 30px; height: 40px!important; background-color: #fff; color: #000; }
+.word-row td { font-size: 13px; font-weight: bold; height: 24px!important; background-color: #fffde7; color: #222; }
+.dot-cell { height: 52px; background: #fff; position: relative; }
+.dual-container { display: flex; width: 100%; height: 100%; justify-content: space-around; align-items: center; }
+.char-svg { width: 48%; height: 100%; display: block; }
+.dotted-text { font-family: 'Noto Naskh Arabic', 'Hind Siliguri', sans-serif; font-size: 46px; font-weight: bold; fill: none; stroke: #000; stroke-width: 1.8; stroke-dasharray: 2,3; stroke-linecap: round; }
+.exercise-section { margin-top: 32px; border: 2px dashed #000; border-radius: 8px; padding: 10px 8px 14px; background-color: #fafafa; }
+.exercise-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+.train-container { display: flex; align-items: flex-end; justify-content: space-between; width: 100%; direction: rtl; }
+.train-engine { width: 12%; text-align: center; font-size: 42px; padding-bottom: 5px; }
+.train-bogie { width: 20%; border: 2px solid #000; border-radius: 6px; background: #fff; position: relative; display: flex; flex-direction: column; align-items: center; }
+.bogie-header { font-size: 12px; font-weight: bold; border-bottom: 1px solid #000; width: 100%; text-align: center; padding: 2px 0; background-color: #eee; }
+.bogie-line-cell { width: 100%; height: 55px; background: #fff; }
+.bogie-wheels { display: flex; justify-content: space-around; width: 70%; margin-top: -3px; margin-bottom: -10px; }
+.wheel { width: 14px; height: 14px; background-color: #000; border-radius: 50%; }
+.train-connector { width: 2%; height: 3px; background-color: #000; margin-bottom: 16px; }
+.footer { text-align: right; font-size: 11px; margin-top: 6px; color: #000; font-weight: bold; }
+/* Section divider page (e.g. ব্যঞ্জনবর্ণ) inserted between vowel & consonant worksheets */
+.divider-page { padding: 15mm; background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 50%, #e3f2fd 100%); display: flex; flex-direction: column; justify-content: space-between; align-items: center; border: 8px solid #2e7d32; border-radius: 12px; text-align: center; }
+.divider-inner { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; }
+.divider-title { font-size: 72px; font-weight: 700; color: #1b5e20; line-height: 1.2; margin: 10px 0 6px; }
+.divider-subtitle { font-size: 20px; color: #1565c0; font-weight: bold; margin-bottom: 18px; }
+.divider-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; width: 100%; max-width: 150mm; margin: 0 auto 18px; }
+.divider-char { font-size: 26px; font-weight: bold; color: #333; background: #fff; border: 1.5px solid #999; border-radius: 8px; padding: 4px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+.divider-note { font-size: 17px; color: #d81b60; font-weight: bold; }
+.ad-page { padding: 20mm; background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%); display: flex; flex-direction: column; justify-content: space-between; align-items: center; border: 6px solid #1976d2; border-radius: 12px; text-align: center; }
+.ad-title { font-size: 28px; color: #0d47a1; margin-bottom: 10px; }
+.ad-subtitle { font-size: 18px; color: #333; margin-bottom: 25px; }
+.ad-box { background-color: #fff; border: 3px dashed #25D366; border-radius: 15px; padding: 25px 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); width: 90%; margin: 0 auto; }
+.ad-box-title { font-size: 20px; font-weight: bold; color: #2e7d32; margin-bottom: 15px; }
+.whatsapp-container { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 15px; background-color: #e8f5e9; padding: 12px 20px; border-radius: 50px; }
+.whatsapp-icon { width: 38px; height: 38px; }
+.phone-number { font-size: 24px; font-weight: bold; color: #128C7E; letter-spacing: 1px; }
+.series-list { text-align: left; margin: 20px auto; width: 80%; font-size: 16px; line-height: 1.8; color: #424242; }
+@media print { body { background: transparent; }.no-print { display: none!important; }.page { margin: 0; padding: 8mm 12mm; width: 210mm; height: 297mm; box-shadow: none; }.cover-page,.ad-page,.divider-page { padding: 15mm; } }

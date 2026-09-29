@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>নার্সারি গণিত অনুশীলনী - SparkKids</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Hind Siliguri', Arial, sans-serif; background: #f0f0f0; color: #000; }
+.no-print { text-align: center; padding: 12px; background: #e0e0e0; }
+.btn-download { background: #28a745; color: #fff; font-size: 15px; font-weight: bold; padding: 9px 22px; border: none; border-radius: 6px; cursor: pointer; font-family: 'Hind Siliguri', sans-serif; }
+@page { size: A4 portrait; margin: 0; }
+.page { width: 210mm; height: 297mm; max-height: 297mm; box-sizing: border-box; padding: 10mm 12mm; margin: 10px auto; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,.15); page-break-after: always; page-break-inside: avoid; overflow: hidden; position: relative; border: 5px solid #1976d2; border-radius: 10px; }
+.header-table { width: 100%; margin-bottom: 4px; border-bottom: 2px solid #000; padding-bottom: 3px; border-collapse: collapse; }
+.header-table td { border: none; font-weight: bold; font-size: 13px; }
+.maths-main-title { text-align: center; font-size: 20px; font-weight: 700; color: #1565c0; margin: 2px 0; }
+.maths-sub { text-align: center; font-size: 11px; color: #d81b60; font-weight: bold; margin-bottom: 5px; }
+.maths-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.maths-card { border: 1.5px solid #000; border-radius: 8px; padding: 8px 12px; background: #fff; }
+.maths-card h3 { font-size: 14px; font-weight: 700; color: #0d47a1; background: #e3f2fd; border-radius: 5px; padding: 4px 6px; margin-bottom: 6px; }
+.num { font-variant-numeric: tabular-nums; }
+.blank-box { display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #222; border-radius: 6px; height: 30px; width: 32px; background: #fff; font-weight: bold; font-size: 16px; flex: none; }
+.choice-box { display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #222; border-radius: 6px; height: 30px; width: 32px; font-weight: bold; font-size: 16px; background: #fff; flex: none; }
+.footer { text-align: center; font-size: 11px; font-weight: bold; margin-top: 4px; border-top: 2px dashed #1976d2; padding-top: 3px; color: #333; }
+/* S1 match */
+.match-wrap { display: flex; justify-content: space-around; align-items: stretch; gap: 6px; }
+.match-col { display: flex; flex-direction: column; gap: 4px; }
+.match-item { display: flex; align-items: center; gap: 5px; font-weight: bold; font-size: 14px; }
+.match-num { border: 1.5px solid #222; border-radius: 6px; height: 30px; width: 32px; display: inline-flex; align-items: center; justify-content: center; background: #fff7e6; font-size: 16px; flex: none; }
+.match-dot { width: 8px; height: 8px; border-radius: 50%; background: #000; display: inline-block; }
+/* S2 circle choices */
+.circle-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 3px 2px; border-bottom: 1px dotted #bbb; }
+.circle-row:last-child { border-bottom: none; }
+.circle-objs { font-size: 17px; line-height: 1.15; letter-spacing: 2px; }
+.circle-choices { display: flex; gap: 5px; }
+/* S3 before/after/between — 3-column sub-grid, labels centered over each column */
+.bab-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.bab-box { border: 1px dashed #555; border-radius: 5px; padding: 5px; font-size: 12px; font-weight: bold; background: #fafafa; display: flex; flex-direction: column; align-items: center; }
+.bab-box .lbl { display: block; font-size: 11px; color: #1565c0; margin-bottom: 3px; text-align: center; }
+.bab-line { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 3px 0; }
+/* S4 caterpillar + S5 sequence + S6 count */
+.cat-row { display: flex; align-items: center; gap: 4px; margin: 4px 0; font-weight: bold; font-size: 13px; flex-wrap: wrap; }
+.cat-node { border: 1.5px solid #222; border-radius: 50%; height: 30px; width: 32px; display: inline-flex; align-items: center; justify-content: center; background: #e8f5e9; font-size: 16px; flex: none; }
+.arrow { font-weight: bold; color: #555; font-size: 14px; }
+/* S5: centered rows, bold larger numbers/arrows, even gaps */
+.seq-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 4px 0; font-weight: bold; font-size: 14px; padding: 4px 0; }
+.seq-row .num { font-size: 14px; font-weight: bold; }
+.seq-row .arrow { font-size: 14px; font-weight: bold; color: #333; }
+/* S6: big icons, neat space-between rows with equal side padding */
+.count-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin: 4px 0; font-weight: bold; padding: 0 4px; }
+.count-objs { font-size: 19px; letter-spacing: 2px; line-height: 1.2; }
+.count-eq { display: flex; align-items: center; gap: 5px; font-size: 16px; font-weight: bold; }
+/* Page 02 — word problem rows */
+.wp-list { display: flex; flex-direction: column; }
+.wp-row { display: flex; align-items: center; gap: 12px; border: 1.5px solid #000; border-radius: 6px; padding: 12px; margin-bottom: 10px; background: #fff; }
+.wp-num { flex: none; width: 38px; height: 38px; border: 2px solid #000; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 18px; font-weight: bold; background: #e3f2fd; }
+.wp-q { flex: 1; font-size: 16px; font-weight: 600; line-height: 1.6; }
+.wp-ans { flex: none; display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: bold; white-space: nowrap; }
+.wp-ansbox { display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #222; border-radius: 6px; width: 90px; height: 36px; background: #fff; font-size: 18px; font-weight: bold; }
+.wp-ansbox.wp-solved { color: #999; font-style: italic; background: #f5f5f5; }
+.wp-quote { border: 2px dashed #1976d2; border-radius: 8px; background: #fff8e1; text-align: center; font-size: 16px; font-weight: bold; color: #0d47a1; padding: 10px; margin-top: 4px; }
+.wp-tag { font-size: 11px; font-weight: bold; color: #2e7d32; background: #e8f5e9; border: 1px solid #2e7d32; border-radius: 10px; padding: 1px 8px; margin-right: 4px; white-space: nowrap; }
+/* Pages 3-7 shared compact components */
+.cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+.cmp-pair { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 3px 0; font-size: 14px; font-weight: bold; }
+.cmp-circ { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #222; border-radius: 50%; height: 34px; min-width: 44px; padding: 0 6px; font-size: 16px; font-weight: bold; background: #fff; }
+.cmp-sq { display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #222; border-radius: 6px; height: 30px; min-width: 40px; padding: 0 6px; font-size: 16px; font-weight: bold; background: #fff; }
+.ex-tag { font-size: 10px; font-weight: bold; color: #2e7d32; background: #e8f5e9; border: 1px solid #2e7d32; border-radius: 8px; padding: 0 6px; white-space: nowrap; }
+.ex-fill { color: #999; font-style: italic; background: #f5f5f5; }
+.ord-row { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 4px 0; font-size: 14px; font-weight: bold; flex-wrap: wrap; }
+.ord-given { letter-spacing: 1px; }
+.ord-box { display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #222; border-radius: 6px; height: 30px; min-width: 34px; padding: 0 4px; font-size: 15px; font-weight: bold; background: #fff; }
+.ord-arrow { color: #555; font-weight: bold; }
+/* Page 04 shapes */
+.shape-pool { border: 2px solid #222; border-radius: 8px; background: #fff; padding: 8px; font-size: 24px; letter-spacing: 6px; line-height: 1.9; text-align: center; margin: 4px 0 6px; }
+.shape-ans { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; font-size: 14px; font-weight: bold; }
+.shape-ans .cell { display: flex; align-items: center; justify-content: center; gap: 5px; }
+.sh-match { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 14px; font-weight: bold; }
+.sh-match .mi { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.sh-match .emo { font-size: 24px; }
+.odd-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 4px 0; font-size: 24px; letter-spacing: 2px; }
+.odd-lbl { font-size: 12px; font-weight: bold; color: #555; }
+/* Page 05 visual add/sub */
+.vis-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 5px 0; font-size: 15px; font-weight: bold; flex-wrap: wrap; }
+.vis-icons { font-size: 19px; letter-spacing: 1px; }
+.vis-eq { display: flex; align-items: center; gap: 4px; }
+.op { font-size: 16px; font-weight: bold; }
+/* Page 06 even/odd + tens */
+.cloud { border: 2px dashed #555; border-radius: 12px; padding: 6px 10px; text-align: center; font-size: 16px; font-weight: bold; letter-spacing: 2px; margin: 4px 0 6px; background: #fafafa; }
+.sort2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.sortbox { border: 1.5px solid #000; border-radius: 8px; padding: 6px; text-align: center; font-size: 13px; font-weight: bold; }
+.sortbox .t { display: block; font-size: 13px; color: #0d47a1; margin-bottom: 4px; }
+.sortslots { display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; }
+.tens-row { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 4px 0; font-size: 15px; font-weight: bold; }
+/* Page 07 domino/measure/pyramid */
+.dom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+.dom-item { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: bold; }
+.domino { display: inline-flex; border: 2px solid #222; border-radius: 6px; overflow: hidden; background: #fff; }
+.dom-half { padding: 3px 10px; font-size: 16px; letter-spacing: 2px; }
+.dom-half + .dom-half { border-left: 2px solid #222; }
+.len-row { display: flex; align-items: center; justify-content: space-around; gap: 8px; margin: 5px 0; }
+.len-pair { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: bold; }
+.len-big { font-size: 26px; letter-spacing: 1px; }
+.pyr-wrap { display: flex; justify-content: space-around; gap: 10px; }
+.pyr { text-align: center; font-weight: bold; font-size: 14px; }
+.pyr .top { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #222; border-radius: 6px; width: 56px; height: 34px; font-size: 16px; margin-bottom: 4px; background: #fff7e6; }
+.pyr .bot { display: flex; gap: 6px; justify-content: center; }
+/* Expansion sections (balanced fill, compact) */
+.sym-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 4px 0; font-size: 15px; font-weight: bold; }
+.sym-circ { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #222; border-radius: 50%; width: 38px; height: 32px; font-size: 17px; font-weight: bold; background: #fff; }
+.dot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; font-size: 13px; font-weight: bold; }
+.dot-cell2 { border: 1px dashed #555; border-radius: 6px; padding: 5px 6px; text-align: center; background: #fafafa; }
+.patt-row { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 4px 0; font-size: 20px; }
+.half-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 12px; font-size: 22px; }
+.half-grid .mi { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.mc-row { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 4px 0; font-size: 14px; font-weight: bold; flex-wrap: wrap; }
+.nline { border: 1px solid #222; border-radius: 6px; padding: 5px 8px; margin: 4px 0; font-size: 13px; font-weight: bold; text-align: center; background: #fafafa; }
+.nline .ticks { letter-spacing: 3px; font-size: 14px; }
+.miss-row { display: flex; align-items: center; justify-content: center; gap: 5px; margin: 4px 0; font-size: 15px; font-weight: bold; }
+.bundle-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 4px 0; font-size: 14px; font-weight: bold; }
+.bundle-box { border: 2px solid #222; border-radius: 6px; padding: 3px 10px; font-size: 14px; background: #fff7e6; }
+.eo-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 4px 0; font-size: 14px; font-weight: bold; }
+.chk { display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #222; border-radius: 4px; width: 24px; height: 24px; font-size: 15px; background: #fff; }
+.clock-row { display: flex; align-items: center; justify-content: space-around; gap: 8px; margin: 4px 0; }
+.clock-item { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: bold; }
+.clock { width: 64px; height: 64px; border: 2.5px solid #222; border-radius: 50%; position: relative; background: #fff; flex: none; }
+.clock .h12, .clock .h3, .clock .h6, .clock .h9 { position: absolute; font-size: 10px; font-weight: bold; }
+.clock .h12 { top: 1px; left: 50%; transform: translateX(-50%); }
+.clock .h6 { bottom: 1px; left: 50%; transform: translateX(-50%); }
+.clock .h3 { right: 3px; top: 50%; transform: translateY(-50%); }
+.clock .h9 { left: 3px; top: 50%; transform: translateY(-50%); }
+.clock .hand { position: absolute; left: 50%; bottom: 50%; transform-origin: bottom center; background: #222; }
+.clock .hh { width: 3px; height: 15px; }
+.clock .mh { width: 2px; height: 21px; }
+.wl-row { display: flex; align-items: center; justify-content: space-around; gap: 8px; margin: 4px 0; font-size: 14px; font-weight: bold; }
+.wl-pair { display: flex; align-items: center; gap: 8px; }
+.wl-big { font-size: 28px; }
+.coin-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 4px 0; font-size: 15px; font-weight: bold; flex-wrap: wrap; }
+.coin { display: inline-flex; align-items: center; justify-content: center; border: 2px solid #222; border-radius: 50%; width: 34px; height: 34px; font-size: 12px; font-weight: bold; background: #fffde7; }
+.ddots { display: flex; justify-content: center; align-items: flex-start; gap: 6px; margin-top: 5px; }
+.ddot { display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid #222; border-radius: 50%; width: 24px; height: 24px; font-size: 12px; font-weight: bold; background: #fff; flex: none; }
+.page-auto { min-height: 297mm; height: auto; max-height: none; overflow: visible; page-break-inside: auto; }
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .page { margin: 0; box-shadow: none; border-width: 4px; height: 297mm; max-height: 297mm; page-break-after: always; page-break-inside: avoid; overflow: hidden; }
+  .page-auto { height: auto; max-height: none; overflow: visible; page-break-inside: auto; }
+  .wp-row { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="no-print"><button class="btn-download" onclick="window.print()">ওয়ার্কশিট ডাউনলোড করুন (PDF)</button></div>
+<div class="page">
+  <table class="header-table"><tr>
+    <td style="width:40%;">নাম: ________________</td>
+    <td style="width:30%; text-align:center;">তারিখ: _________</td>
+    <td style="width:30%; text-align:right;">পৃষ্ঠা: 01</td>
+  </tr></table>
+  <div class="maths-main-title">নার্সারি গণিত অনুশীলনী (Nursery Maths Worksheet)</div>
+  <div class="maths-sub">Spark Publication | SparkKids &nbsp;•&nbsp; সংখ্যা ইংরেজিতে লেখো (1, 2, 3...)</div>
+  <div class="maths-grid">
+    <section class="maths-card">
+      <h3>(১) একই সংখ্যা রেখা টেনে মেলাও:</h3>
+      <div class="match-wrap">
+        <div class="match-col">
+          <div class="match-item"><span class="match-num num">1</span><span class="match-dot"></span></div>
+          <div class="match-item"><span class="match-num num">3</span><span class="match-dot"></span></div>
+          <div class="match-item"><span class="match-num num">5</span><span class="match-dot"></span></div>
+          <div class="match-item"><span class="match-num num">2</span><span class="match-dot"></span></div>
+          <div class="match-item"><span class="match-num num">4</span><span class="match-dot"></span></div>
+        </div>
+        <div class="match-col">
+          <div class="match-item"><span class="match-dot"></span><span class="match-num num">4</span></div>
+          <div class="match-item"><span class="match-dot"></span><span class="match-num num">2</span></div>
+          <div class="match-item"><span class="match-dot"></span><span class="match-num num">5</span></div>
+          <div class="match-item"><span class="match-dot"></span><span class="match-num num">1</span></div>
+          <div class="match-item"><span class="match-dot"></span><span class="match-num num">3</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="maths-card">
+      <h3>(২) গণনাকারে সঠিক সংখ্যাটিতে গোল দাগ (⭕) দাও:</h3>
+      <div class="circle-row"><span class="circle-objs">🍎🍎🍎🍎🍎</span><span class="circle-choices"><span class="choice-box num">5</span><span class="choice-box num">3</span><span class="choice-box num">4</span></span></div>
+      <div class="circle-row"><span class="circle-objs">🪁🪁🪁🪁</span><span class="circle-choices"><span class="choice-box num">4</span><span class="choice-box num">2</span><span class="choice-box num">5</span></span></div>
+      <div class="circle-row"><span class="circle-objs">⭐⭐⭐</span><span class="circle-choices"><span class="choice-box num">3</span><span class="choice-box num">1</span><span class="choice-box num">4</span></span></div>
+      <div class="circle-row"><span class="circle-objs">🌸🌸🌸🌸🌸🌸</span><span class="circle-choices"><span class="choice-box num">6</span><span class="choice-box num">4</span><span class="choice-box num">5</span></span></div>
+      <div class="circle-row"><span class="circle-objs">⚽⚽</span><span class="circle-choices"><span class="choice-box num">1</span><span class="choice-box num">2</span><span class="choice-box num">3</span></span></div>
+    </section>
+    <section class="maths-card">
+      <h3>(৩) আগের, পরের এবং মাঝের খালি ঘর পূরণ করো:</h3>
+      <div class="bab-grid">
+        <div class="bab-box"><span class="lbl">আগের (Before)</span>
+          <div class="bab-line"><span class="blank-box"></span><span class="num">7</span></div>
+          <div class="bab-line"><span class="blank-box"></span><span class="num">3</span></div>
+          <div class="bab-line"><span class="blank-box"></span><span class="num">8</span></div>
+          <div class="bab-line"><span class="blank-box"></span><span class="num">2</span></div>
+        </div>
+        <div class="bab-box"><span class="lbl">পরের (After)</span>
+          <div class="bab-line"><span class="num">3</span><span class="blank-box"></span></div>
+          <div class="bab-line"><span class="num">1</span><span class="blank-box"></span></div>
+          <div class="bab-line"><span class="num">6</span><span class="blank-box"></span></div>
+          <div class="bab-line"><span class="num">0</span><span class="blank-box"></span></div>
+        </div>
+        <div class="bab-box"><span class="lbl">মাঝের (Between)</span>
+          <div class="bab-line"><span class="num">5</span><span class="blank-box"></span><span class="num">9</span></div>
+          <div class="bab-line"><span class="num">1</span><span class="blank-box"></span><span class="num">5</span></div>
+          <div class="bab-line"><span class="num">6</span><span class="blank-box"></span><span class="num">10</span></div>
+          <div class="bab-line"><span class="num">0</span><span class="blank-box"></span><span class="num">4</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="maths-card">
+      <h3>(৪) ক্রমানুসারে খালি ঘরের সংখ্যাগুলো লেখো:</h3>
+      <div class="cat-row">🐛<span class="arrow">→</span><span class="cat-node num">2</span><span class="arrow">→</span><span class="blank-box"></span><span class="arrow">→</span><span class="cat-node num">4</span><span class="arrow">→</span><span class="cat-node num">5</span></div>
+      <div class="cat-row">🐛<span class="arrow">→</span><span class="cat-node num">6</span><span class="arrow">→</span><span class="cat-node num">7</span><span class="arrow">→</span><span class="blank-box"></span><span class="arrow">→</span><span class="cat-node num">9</span></div>
+      <div class="cat-row">🐛<span class="arrow">→</span><span class="cat-node num">1</span><span class="arrow">→</span><span class="blank-box"></span><span class="arrow">→</span><span class="cat-node num">3</span><span class="arrow">→</span><span class="cat-node num">4</span></div>
+      <div class="cat-row">🐛<span class="arrow">→</span><span class="cat-node num">8</span><span class="arrow">→</span><span class="cat-node num">9</span><span class="arrow">→</span><span class="blank-box"></span><span class="arrow">→</span><span class="cat-node num">11</span></div>
+    </section>
+    <section class="maths-card">
+      <h3>(৫) ধারাটি লক্ষ্য করে পরের সংখ্যাটি লেখো:</h3>
+      <div class="seq-row"><span class="num">1</span><span class="arrow">→</span><span class="num">2</span><span class="arrow">→</span><span class="num">3</span><span class="arrow">→</span><span class="blank-box"></span><span class="arrow">→</span><span class="num">5</span></div>
+      <div class="seq-row"><span class="num">5</span><span class="arrow">→</span><span class="num">6</span><span class="arrow">→</span><span class="num">7</span><span class="arrow">→</span><span class="blank-box"></span><span class="arrow">→</span><span class="num">9</span></div>
+      <div class="seq-row"><span class="num">2</span><span class="arrow">→</span><span class="num">4</span><span class="arrow">→</span><span class="num">6</span><span class="arrow">→</span><span class="blank-box"></span><span class="arrow">→</span><span class="num">10</span></div>
+      <div class="seq-row"><span class="num">3</span><span class="arrow">→</span><span class="num">5</span><span class="arrow">→</span><span class="num">7</span><span class="arrow">→</span><span class="blank-box"></span><span class="arrow">→</span><span class="num">11</span></div>
+    </section>
+    <section class="maths-card">
+      <h3>(৬) ছবিগুলো গণনা করো এবং পাশে বক্সে সংখ্যাটি লেখো:</h3>
+      <div class="count-row"><span class="count-objs">🦋🦋🦋🦋🦋🦋🦋</span><span class="count-eq">= <span class="blank-box"></span></span></div>
+      <div class="count-row"><span class="count-objs">✏️✏️✏️✏️✏️✏️✏️✏️</span><span class="count-eq">= <span class="blank-box"></span></span></div>
+      <div class="count-row"><span class="count-objs">🌻🌻🌻🌻🌻🌻</span><span class="count-eq">= <span class="blank-box"></span></span></div>
+      <div class="count-row"><span class="count-objs">🏀🏀🏀🏀</span><span class="count-eq">= <span class="blank-box"></span></span></div>
+      <div class="count-row"><span class="count-objs">⭐⭐⭐⭐⭐⭐⭐⭐⭐</span><span class="count-eq">= <span class="blank-box"></span></span></div>
+    </section>
+  </div>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 01</div>
+</div>
+
+<!-- PAGE 02 : ছোট অঙ্ক (Word Problems) -->
+<div class="page page-auto">
+  <table class="header-table"><tr>
+    <td style="width:40%;">নাম: ________________</td>
+    <td style="width:30%; text-align:center;">তারিখ: _________</td>
+    <td style="width:30%; text-align:right;">পৃষ্ঠা: 02</td>
+  </tr></table>
+  <div class="maths-main-title">নার্সারি গণিত অনুশীলনী (Nursery Maths Worksheet)</div>
+  <div class="maths-sub">ছোট অঙ্ক পড়ো, ভাবো ও উত্তর বক্সে সংখ্যাটি লেখো (1, 2, 3...)</div>
+  <div class="wp-list">
+    <div class="wp-row"><span class="wp-num num">1</span><span class="wp-q"><span class="wp-tag">উদাহরণ</span>🥭 রিমির কাছে 3টি আম আছে। মা তাকে আরও 2টি আম দিলেন। রিমির মোট কয়টি আম হলো?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox wp-solved">5</span></span></div>
+    <div class="wp-row"><span class="wp-num num">2</span><span class="wp-q">🐦 গাছে 5টি পাখি বসেছিল। 2টি পাখি উড়ে গেল। এখন গাছে কয়টি পাখি আছে?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox"></span></span></div>
+    <div class="wp-row"><span class="wp-num num">3</span><span class="wp-q">⚽ সাকিবের 4টি বল আছে। বন্ধু তাকে আরও 3টি বল দিল। সাকিবের মোট কয়টি বল হলো?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox"></span></span></div>
+    <div class="wp-row"><span class="wp-num num">4</span><span class="wp-q">🍌 থালায় 6টি কলা ছিল। রাহাত 1টি কলা খেয়ে নিল। থালায় আর কয়টি কলা রইল?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox"></span></span></div>
+    <div class="wp-row"><span class="wp-num num">5</span><span class="wp-q">🌸 ঝুড়িতে 2টি ফুল আছে। নানু আরও 4টি ফুল এনে রাখলেন। ঝুড়িতে মোট কয়টি ফুল হলো?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox"></span></span></div>
+    <div class="wp-row"><span class="wp-num num">6</span><span class="wp-q">🧸 তানিয়ার 7টি খেলনা আছে। সে বোনকে 3টি খেলনা দিল। তানিয়ার কাছে কয়টি খেলনা রইল?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox"></span></span></div>
+    <div class="wp-row"><span class="wp-num num">7</span><span class="wp-q">🦋 বাগানে 5টি প্রজাপতি ছিল। আরও 2টি প্রজাপতি এলো। এখন বাগানে মোট কয়টি প্রজাপতি?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox"></span></span></div>
+    <div class="wp-row"><span class="wp-num num">8</span><span class="wp-q">✏️ রকির কাছে 6টি পেন্সিল ছিল। সে বন্ধুকে 2টি পেন্সিল দিল। রকির কাছে কয়টি পেন্সিল রইল?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox"></span></span></div>
+    <div class="wp-row"><span class="wp-num num">9</span><span class="wp-q">🦆 পুকুরে 4টি হাঁস সাঁতার কাটছিল। পরে আরও 3টি হাঁস এলো। এখন মোট কয়টি হাঁস হলো?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox"></span></span></div>
+    <div class="wp-row"><span class="wp-num num">10</span><span class="wp-q">🍎 গাছে 8টি আপেল ছিল। বাতাস এসে 3টি আপেল নিচে পড়ে গেল। গাছে কয়টি আপেল রইল?</span><span class="wp-ans">উত্তর: <span class="wp-ansbox"></span></span></div>
+  </div>
+  <div class="wp-quote">⭐ গণিতের ছোট ছোট পদক্ষেপই বড় স্বপ্ন পূরণ করে! ⭐</div>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 02</div>
+</div>
+
+<!-- PAGE 03 : গণনা ও ছোট-বড় -->
+<div class="page">
+  <table class="header-table"><tr>
+    <td style="width:40%;">নাম: ________________</td>
+    <td style="width:25%; text-align:center;">তারিখ: _________</td>
+    <td style="width:35%; text-align:right;">Spark Publication | SparkKids · পৃষ্ঠা: 03</td>
+  </tr></table>
+  <div class="maths-main-title">ছবি দেখে গণনা ও ছোট-বড় সংখ্যা নির্ণয়</div>
+  <div class="maths-sub">সঠিক উত্তরে দাগ দাও ও খালি ঘরে সংখ্যা লেখো (1, 2, 3...)</div>
+  <div class="maths-grid" style="grid-template-columns: 1fr 1fr;">
+    <section class="maths-card">
+      <h3>(১) বড় সংখ্যায় গোল (⭕):</h3>
+      <div class="cmp-grid">
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-circ num">8</span><span class="cmp-circ num">5</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-circ num">12</span><span class="cmp-circ num">19</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-circ num">25</span><span class="cmp-circ num">14</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-circ num">30</span><span class="cmp-circ num">33</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-circ num">56</span><span class="cmp-circ num">51</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-circ num">22</span><span class="cmp-circ num">28</span></div>
+      </div>
+    </section>
+    <section class="maths-card">
+      <h3>(২) ছোট সংখ্যায় টিক (✔):</h3>
+      <div class="cmp-grid">
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-sq num">7</span><span class="cmp-sq num">9</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-sq num">15</span><span class="cmp-sq num">11</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-sq num">20</span><span class="cmp-sq num">18</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-sq num">42</span><span class="cmp-sq num">24</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-sq num">45</span><span class="cmp-sq num">23</span></div>
+        <div class="cmp-pair" style="margin:2px 0;"><span class="cmp-sq num">54</span><span class="cmp-sq num">37</span></div>
+      </div>
+    </section>
+  </div>
+  <section class="maths-card" style="margin-top: 6px;">
+    <h3>(৩) ছোট থেকে বড় সাজাও: <span class="ex-tag">ক উদাহরণ</span></h3>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">5, 2, 8, 1 →</span><span class="ord-box num ex-fill">1</span><span class="ord-arrow">→</span><span class="ord-box num ex-fill">2</span><span class="ord-arrow">→</span><span class="ord-box num ex-fill">5</span><span class="ord-arrow">→</span><span class="ord-box num ex-fill">8</span></div>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">14, 9, 18, 11 →</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span></div>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">25, 20, 30, 15 →</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span></div>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">34, 32, 24, 13 →</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span></div>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">53, 34, 30, 24 →</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span></div>
+  </section>
+  <section class="maths-card" style="margin-top: 6px;">
+    <h3>(৪) বড় থেকে ছোট সাজাও:</h3>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">3, 9, 6, 12 →</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span></div>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">21, 15, 28, 19 →</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span></div>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">35, 23, 13, 64 →</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span></div>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">21, 14, 42, 23 →</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span></div>
+    <div class="ord-row" style="margin:2px 0;"><span class="ord-given num">52, 13, 25, 42 →</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span><span class="ord-arrow">→</span><span class="ord-box"></span></div>
+  </section>
+  <div class="maths-grid" style="margin-top: 6px;">
+    <section class="maths-card">
+      <h3>(৫) সঠিক চিহ্ন (&gt;, &lt;, =) বসাও: <span class="ex-tag">ক উদাহরণ</span></h3>
+      <div class="cmp-grid">
+        <div class="sym-row" style="margin:2px 0;"><span class="num">8</span><span class="sym-circ num ex-fill">&gt;</span><span class="num">5</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">14</span><span class="sym-circ"></span><span class="num">19</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">25</span><span class="sym-circ"></span><span class="num">25</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">30</span><span class="sym-circ"></span><span class="num">27</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">34</span><span class="sym-circ"></span><span class="num">43</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">35</span><span class="sym-circ"></span><span class="num">25</span></div>
+      </div>
+    </section>
+     <section class="maths-card">
+      <h3>(৫) সঠিক চিহ্ন (&gt;, &lt;, =) বসাও: <span class="ex-tag">ক উদাহরণ</span></h3>
+      <div class="cmp-grid">
+        <div class="sym-row" style="margin:2px 0;"><span class="num">২</span><span class="sym-circ num ex-fill">&gt;</span><span class="num">৪</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">২৪</span><span class="sym-circ"></span><span class="num">৩৪</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">৫৩</span><span class="sym-circ"></span><span class="num">৬২</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">২২</span><span class="sym-circ"></span><span class="num">২৩</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">২৫</span><span class="sym-circ"></span><span class="num">২৪</span></div>
+        <div class="sym-row" style="margin:2px 0;"><span class="num">৫৩</span><span class="sym-circ"></span><span class="num">১৪</span></div>
+      </div>
+    </section>
+  </div>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 03</div>
+</div>
+
+<!-- PAGE 04 : আকৃতি -->
+<div class="page">
+  <table class="header-table"><tr>
+    <td style="width:40%;">নাম: ________________</td>
+    <td style="width:25%; text-align:center;">তারিখ: _________</td>
+    <td style="width:35%; text-align:right;">Spark Publication | SparkKids · পৃষ্ঠা: 04</td>
+  </tr></table>
+  <div class="maths-main-title">আকৃতি পরিচিতি ও গণনা</div>
+  <div class="maths-sub">আকৃতি চেনো, গুনে লেখো ও রেখা টেনে মেলাও</div>
+  <section class="maths-card">
+    <h3>(১) আকৃতি গুনে সংখ্যা লেখো:</h3>
+    <div class="shape-pool">○ △ □ ☆ ○ □ ☆ △ ○ ☆ □ △ ○ □ ☆ △ □ ○ ☆ △ ○ □</div>
+    <div class="shape-ans">
+      <div class="cell">△ ত্রিভুজ = <span class="blank-box"></span> টি</div>
+      <div class="cell">○ বৃত্ত = <span class="blank-box"></span> টি</div>
+      <div class="cell">□ বর্গ = <span class="blank-box"></span> টি</div>
+      <div class="cell">☆ তারা = <span class="blank-box"></span> টি</div>
+    </div>
+  </section>
+  <div class="maths-grid" style="margin-top: 6px;">
+    <section class="maths-card">
+      <h3>(২) একই আকৃতি মেলাও:</h3>
+      <div class="sh-match">
+        <div class="mi"><span class="emo">○</span><span class="match-dot"></span></div>
+        <div class="mi"><span class="match-dot"></span><span class="emo">🎁</span></div>
+        <div class="mi"><span class="emo">△</span><span class="match-dot"></span></div>
+        <div class="mi"><span class="match-dot"></span><span class="emo">🕒</span></div>
+        <div class="mi"><span class="emo">□</span><span class="match-dot"></span></div>
+        <div class="mi"><span class="match-dot"></span><span class="emo">🍕</span></div>
+      </div>
+    </section>
+    <section class="maths-card">
+      <h3>(৩) বিজোড়টি খুঁজে গোল দাও:</h3>
+      <div class="odd-row" style="margin:2px 0;"><span class="odd-lbl">ক)</span>○ ○ ● ○</div>
+      <div class="odd-row" style="margin:2px 0;"><span class="odd-lbl">খ)</span>□ □ △ □</div>
+      <div class="odd-row" style="margin:2px 0;"><span class="odd-lbl">গ)</span>☆ ☆ ☆ ★</div>
+      <div class="odd-row" style="margin:2px 0;"><span class="odd-lbl">ঘ)</span>△ △ ▽ △</div>
+    </section>
+  </div>
+  <div class="maths-grid" style="margin-top: 6px;">
+    <section class="maths-card">
+      <h3>(৪) প্যাটার্ন সম্পূর্ণ করো: <span class="ex-tag">ক উদাহরণ</span></h3>
+      <div class="patt-row" style="margin:2px 0;">○ △ ○ △ ○ → <span class="ord-box num ex-fill">△</span></div>
+      <div class="patt-row" style="margin:2px 0;">□ ☆ □ ☆ □ → <span class="ord-box"></span></div>
+      <div class="patt-row" style="margin:2px 0;">○ ○ □ ○ ○ → <span class="ord-box"></span></div>
+    </section>
+    <section class="maths-card">
+      <h3>(৫) অর্ধেক মিলিয়ে দাগ টানো:</h3>
+      <div class="half-grid">
+        <div class="mi">◐<span class="match-dot"></span></div>
+        <div class="mi"><span class="match-dot"></span>◑</div>
+        <div class="mi">◬<span class="match-dot"></span></div>
+        <div class="mi"><span class="match-dot"></span>◭</div>
+        <div class="mi">◧<span class="match-dot"></span></div>
+        <div class="mi"><span class="match-dot"></span>◨</div>
+      </div>
+    </section>
+  </div>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 04</div>
+</div>
+
+<!-- PAGE 05 : চিত্র যোগ-বিয়োগ -->
+<div class="page">
+  <table class="header-table"><tr>
+    <td style="width:40%;">নাম: ________________</td>
+    <td style="width:25%; text-align:center;">তারিখ: _________</td>
+    <td style="width:35%; text-align:right;">Spark Publication | SparkKids · পৃষ্ঠা: 05</td>
+  </tr></table>
+  <div class="maths-main-title">চিত্র ভিত্তিক যোগ ও বিয়োগ</div>
+  <div class="maths-sub">ছবি গণনা করে ফাঁকা ঘরে সঠিক সংখ্যা লেখো এবং যোগ/বিয়োগ ফল বের করো:</div>
+  <section class="maths-card">
+    <h3>(১) চিত্র যোগ: <span class="ex-tag">ক উদাহরণ</span></h3>
+    <div class="vis-row" style="margin:2px 0;"><span class="vis-icons">🍎🍎</span><span class="op">+</span><span class="vis-icons">🍎🍎🍎</span><span class="op">=</span><span class="vis-eq"><span class="ord-box num ex-fill">2</span><span class="op">+</span><span class="ord-box num ex-fill">3</span><span class="op">=</span><span class="ord-box num ex-fill">5</span></span></div>
+    <div class="vis-row" style="margin:2px 0;"><span class="vis-icons">🎈🎈🎈🎈</span><span class="op">+</span><span class="vis-icons">🎈🎈</span><span class="op">=</span><span class="vis-eq"><span class="ord-box"></span><span class="op">+</span><span class="ord-box"></span><span class="op">=</span><span class="ord-box"></span></span></div>
+    <div class="vis-row" style="margin:2px 0;"><span class="vis-icons">🐟🐟🐟</span><span class="op">+</span><span class="vis-icons">🐟🐟🐟🐟</span><span class="op">=</span><span class="vis-eq"><span class="ord-box"></span><span class="op">+</span><span class="ord-box"></span><span class="op">=</span><span class="ord-box"></span></span></div>
+    <div class="vis-row" style="margin:2px 0;"><span class="vis-icons">🚗🚗</span><span class="op">+</span><span class="vis-icons">🚗🚗🚗🚗🚗</span><span class="op">=</span><span class="vis-eq"><span class="ord-box"></span><span class="op">+</span><span class="ord-box"></span><span class="op">=</span><span class="ord-box"></span></span></div>
+  </section>
+  <section class="maths-card" style="margin-top: 6px;">
+    <h3>(২) চিত্র বিয়োগ (কাটা ছবি বাদ দাও): <span class="ex-tag">ক উদাহরণ</span></h3>
+    <div class="vis-row" style="margin:2px 0;"><span class="vis-icons">⭐⭐⭐<s>⭐⭐</s></span><span class="op">→</span><span class="vis-eq"><span class="ord-box num ex-fill">5</span><span class="op">−</span><span class="ord-box num ex-fill">2</span><span class="op">=</span><span class="ord-box num ex-fill">3</span></span></div>
+    <div class="vis-row" style="margin:2px 0;"><span class="vis-icons">🎁🎁🎁<s>🎁🎁🎁</s></span><span class="op">→</span><span class="vis-eq"><span class="ord-box"></span><span class="op">−</span><span class="ord-box"></span><span class="op">=</span><span class="ord-box"></span></span></div>
+    <div class="vis-row" style="margin:2px 0;"><span class="vis-icons">🐝🐝🐝<s>🐝</s></span><span class="op">→</span><span class="vis-eq"><span class="ord-box"></span><span class="op">−</span><span class="ord-box"></span><span class="op">=</span><span class="ord-box"></span></span></div>
+  </section>
+  <div class="maths-grid" style="margin-top: 6px;">
+    <section class="maths-card">
+      <h3>(৩) সঠিক উত্তরে টিক (✔): <span class="ex-tag">ক উদাহরণ</span></h3>
+      <div class="mc-row" style="margin:2px 0;"><span class="vis-icons">🍎🍎🍎+🍎🍎 →</span><span class="ord-box num">4</span><span class="ord-box num ex-fill">5 ✔</span><span class="ord-box num">6</span></div>
+      <div class="mc-row" style="margin:2px 0;"><span class="vis-icons">⭐⭐+⭐⭐⭐ →</span><span class="ord-box num">4</span><span class="ord-box num">5</span><span class="ord-box num">6</span></div>
+      <div class="mc-row" style="margin:2px 0;"><span class="vis-icons">🎈🎈🎈+🎈 →</span><span class="ord-box num">3</span><span class="ord-box num">4</span><span class="ord-box num">5</span></div>
+    </section>
+    <section class="maths-card">
+      <h3>(৪) সংখ্যা রেখায় যোগ:</h3>
+      <div class="nline"><span class="ticks num">0 1 2 3 4 5 6 7 8 9 10</span><br>0 থেকে 3 ঘর, আরও 3 ঘর এগোও → <span class="num">3 + 3 =</span> <span class="ord-box num ex-fill">6</span></div>
+      <div class="miss-row" style="margin:2px 0;"><span class="num">2 +</span><span class="ord-box num ex-fill">3</span><span class="num">= 5,</span><span class="num">4 +</span><span class="ord-box"></span><span class="num">= 7,</span><span class="num">6 +</span><span class="ord-box"></span><span class="num">= 10</span></div>
+    </section>
+  </div>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 05</div>
+</div>
+
+<!-- PAGE 06 : জোড়-বিজোড় -->
+<div class="page">
+  <table class="header-table"><tr>
+    <td style="width:40%;">নাম: ________________</td>
+    <td style="width:25%; text-align:center;">তারিখ: _________</td>
+    <td style="width:35%; text-align:right;">Spark Publication | SparkKids · পৃষ্ঠা: 06</td>
+  </tr></table>
+  <div class="maths-main-title">জোড়-বিজোড় ও ১০-এর বান্ডিল</div>
+  <div class="maths-sub">সংখ্যা আলাদা করো ও দশক-একক ভাঙো (1, 2, 3...)</div>
+  <section class="maths-card">
+    <h3>(১) জোড় ও বিজোড় আলাদা করো:</h3>
+    <div class="cloud num">2, 5, 8, 11, 14, 17, 20, 23, 26, 29</div>
+    <div class="sort2">
+      <div class="sortbox"><span class="t">জোড় সংখ্যা (Even)</span><div class="sortslots"><span class="ord-box num ex-fill">2</span><span class="ord-box"></span><span class="ord-box"></span><span class="ord-box"></span><span class="ord-box"></span></div></div>
+      <div class="sortbox"><span class="t">বিজোড় সংখ্যা (Odd)</span><div class="sortslots"><span class="ord-box num ex-fill">5</span><span class="ord-box"></span><span class="ord-box"></span><span class="ord-box"></span><span class="ord-box"></span></div></div>
+    </div>
+  </section>
+  <section class="maths-card" style="margin-top: 6px;">
+    <h3>(২) দশক ও একক নির্ণয়: <span class="ex-tag">ক উদাহরণ</span></h3>
+    <div class="tens-row" style="margin:2px 0;"><span class="num">15 =</span><span class="ord-box num ex-fill">1</span> দশক + <span class="ord-box num ex-fill">5</span> একক</div>
+    <div class="tens-row" style="margin:2px 0;"><span class="num">24 =</span><span class="ord-box"></span> দশক + <span class="ord-box"></span> একক</div>
+    <div class="tens-row" style="margin:2px 0;"><span class="num">38 =</span><span class="ord-box"></span> দশক + <span class="ord-box"></span> একক</div>
+    <div class="tens-row" style="margin:2px 0;"><span class="num">42 =</span><span class="ord-box"></span> দশক + <span class="ord-box"></span> একক</div>
+    <div class="tens-row" style="margin:2px 0;"><span class="num">50 =</span><span class="ord-box"></span> দশক + <span class="ord-box"></span> একক</div>
+  </section>
+  <div class="maths-grid" style="margin-top: 6px;">
+    <section class="maths-card">
+      <h3>(৩) ১০-এর বান্ডিল: <span class="ex-tag">ক উদাহরণ</span></h3>
+      <div class="bundle-row" style="margin:2px 0;"><span class="bundle-box num">10</span> + <span class="num">🪵🪵🪵 → 10 + 3 =</span> <span class="ord-box num ex-fill">13</span></div>
+      <div class="bundle-row" style="margin:2px 0;"><span class="bundle-box num">10</span> + <span class="num">🪵🪵🪵🪵🪵 → 10 + 5 =</span> <span class="ord-box"></span></div>
+    </section>
+    <section class="maths-card">
+      <h3>(৪) ডমিনো: জোড় না বিজোড়?</h3>
+      <div class="eo-row" style="margin:2px 0;"><span class="domino"><span class="dom-half">●●</span><span class="dom-half">●●</span></span><span class="num">4 →</span><span class="chk ex-fill">✔</span> জোড় <span class="chk"></span> বিজোড়</div>
+      <div class="eo-row" style="margin:2px 0;"><span class="domino"><span class="dom-half">●● ●</span><span class="dom-half">●●</span></span><span class="num">5 →</span><span class="chk"></span> জোড় <span class="chk"></span> বিজোড়</div>
+    </section>
+  </div>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 06</div>
+</div>
+
+<!-- PAGE 07 : পরিমাপ ও ধাঁধা -->
+<div class="page">
+  <table class="header-table"><tr>
+    <td style="width:40%;">নাম: ________________</td>
+    <td style="width:25%; text-align:center;">তারিখ: _________</td>
+    <td style="width:35%; text-align:right;">Spark Publication | SparkKids · পৃষ্ঠা: 07</td>
+  </tr></table>
+  <div class="maths-main-title">পরিমাপ ও মজার ধাঁধা</div>
+  <div class="maths-sub">ডমিনো যোগ করো, লম্বা-খাটো চেনো ও পিরামিড মেলাও</div>
+  <section class="maths-card">
+    <h3>(১) ডমিনো যোগ: <span class="ex-tag">ক উদাহরণ</span></h3>
+    <div class="dom-grid">
+      <div class="dom-item"><span class="domino"><span class="dom-half">●● ●●</span><span class="dom-half">● ●</span></span><span class="num">4 + 2 =</span><span class="ord-box num ex-fill">6</span></div>
+      <div class="dom-item"><span class="domino"><span class="dom-half">●● ●</span><span class="dom-half">●●</span></span><span class="vis-eq"><span class="ord-box"></span> + <span class="ord-box"></span> = <span class="ord-box"></span></span></div>
+      <div class="dom-item"><span class="domino"><span class="dom-half">●</span><span class="dom-half">●● ●</span></span><span class="vis-eq"><span class="ord-box"></span> + <span class="ord-box"></span> = <span class="ord-box"></span></span></div>
+      <div class="dom-item"><span class="domino"><span class="dom-half">●●</span><span class="dom-half">●●</span></span><span class="vis-eq"><span class="ord-box"></span> + <span class="ord-box"></span> = <span class="ord-box"></span></span></div>
+    </div>
+  </section>
+  <section class="maths-card" style="margin-top: 6px;">
+    <h3>(২) লম্বা-খাটো: লম্বায় টিক (✔), খাটোয় গোল (⭕)।</h3>
+    <div class="len-row" style="margin:2px 0;">
+      <div class="len-pair"><span class="len-big">✏️</span><span class="len-big" style="font-size: 34px;">✏️</span><span class="ord-box">✔/⭕</span></div>
+      <div class="len-pair"><span class="len-big">🐍</span><span class="len-big" style="font-size: 34px;">🐍</span><span class="ord-box">✔/⭕</span></div>
+      <div class="len-pair"><span class="len-big">🪜</span><span class="len-big" style="font-size: 18px;">🪜</span><span class="ord-box">✔/⭕</span></div>
+    </div>
+  </section>
+  <section class="maths-card" style="margin-top: 6px;">
+    <h3>(৩) পিরামিড (নিচের দুটি যোগ করে উপরে লেখো): <span class="ex-tag">ক উদাহরণ</span></h3>
+    <div class="pyr-wrap">
+      <div class="pyr"><div class="top ex-fill num">5</div><div class="bot"><span class="ord-box num ex-fill">2</span><span class="ord-box num ex-fill">3</span></div></div>
+      <div class="pyr"><div class="top"></div><div class="bot"><span class="ord-box num">4</span><span class="ord-box"></span></div></div>
+      <div class="pyr"><div class="top"></div><div class="bot"><span class="ord-box"></span><span class="ord-box num">5</span></div></div>
+    </div>
+  </section>
+  <div class="maths-grid" style="margin-top: 6px;">
+    <section class="maths-card">
+      <h3>(৪) ঘড়ি দেখে সময় লেখো: <span class="ex-tag">ক উদাহরণ</span></h3>
+      <div class="clock-row">
+        <div class="clock-item"><span class="clock"><span class="h12">12</span><span class="h3">3</span><span class="h6">6</span><span class="h9">9</span><span class="hand hh" style="transform: translateX(-50%) rotate(90deg);"></span><span class="hand mh" style="transform: translateX(-50%) rotate(0deg);"></span></span><span class="ord-box num ex-fill">3</span> টা</div>
+        <div class="clock-item"><span class="clock"><span class="h12">12</span><span class="h3">3</span><span class="h6">6</span><span class="h9">9</span><span class="hand hh" style="transform: translateX(-50%) rotate(240deg);"></span><span class="hand mh" style="transform: translateX(-50%) rotate(0deg);"></span></span><span class="ord-box"></span> টা</div>
+      </div>
+    </section>
+    <section class="maths-card">
+      <h3>(৫) ভারিটিতে টিক (✔):</h3>
+      <div class="wl-row" style="margin:2px 0;">
+        <div class="wl-pair"><span class="wl-big">🐘</span><span class="ord-box">✔</span><span class="wl-big" style="font-size:20px;">🐭</span><span class="ord-box"></span></div>
+        <div class="wl-pair"><span class="wl-big">🍉</span><span class="ord-box"></span><span class="wl-big" style="font-size:20px;">🍎</span><span class="ord-box"></span></div>
+      </div>
+      <h3 style="margin-top:6px;">(৬) টাকা গণনা: <span class="ex-tag">ক উদাহরণ</span></h3>
+      <div class="coin-row" style="margin:2px 0;"><span class="coin num">1</span> + <span class="coin num">2</span> = <span class="ord-box num ex-fill">3</span> Taka</div>
+      <div class="coin-row" style="margin:2px 0;"><span class="coin num">5</span> + <span class="coin num">2</span> = <span class="ord-box"></span> Taka</div>
+    </section>
+  </div>
+  <div class="footer">SparkKids | শিশু শিক্ষা সিরিজ - পৃষ্ঠা 07</div>
+</div>
+<div class="no-print"><button class="btn-download" onclick="window.print()">ওয়ার্কশিট ডাউনলোড করুন (PDF)</button></div>
+</body>
+</html>
