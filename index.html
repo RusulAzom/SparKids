@@ -62,7 +62,58 @@
     .is-hidden { display: none !important; }
     .card-link:focus-visible,
     .card-link a:focus-visible,
-    .card-link button:focus-visible { outline: 3px solid #f97316; outline-offset: 3px; border-radius: 1rem; }
+    .card-link button:focus-visible,
+    .btn-play:focus-visible,
+    #game-modal button:focus-visible { outline: 3px solid #f97316; outline-offset: 3px; }
+    .btn-play {
+      display: inline-flex;
+      min-height: 48px;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 1rem;
+      background: linear-gradient(110deg, #f97316, #e11d48);
+      padding: 0.75rem 1rem;
+      color: #fff;
+      font: inherit;
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.16);
+      transition: filter 180ms ease, transform 180ms ease;
+    }
+    .btn-play:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    #game-modal {
+      position: fixed;
+      inset: auto;
+      top: 50%;
+      left: 50%;
+      width: min(92vw, 28rem);
+      height: auto;
+      max-height: 94dvh;
+      margin: 0;
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      border-radius: 1.25rem;
+      padding: 0;
+      color: #1e293b;
+      box-shadow: 0 20px 45px -14px rgba(15, 23, 42, 0.35);
+    }
+    #game-modal::backdrop { background: rgba(15, 23, 42, 0.65); }
+    #game-modal.is-archery { width: min(96vw, 64rem); height: min(94dvh, 52rem); }
+    .game-modal-content { display: flex; min-height: 0; flex-direction: column; }
+    #game-modal.is-archery .game-modal-content { height: 100%; }
+    .game-modal-header { display: flex; flex: 0 0 auto; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1rem; }
+    #game-frame-wrap { min-height: 0; flex: 1 1 auto; overflow: hidden; background: #f0fdf4; }
+    #game-frame { display: block; width: 100%; height: 100%; min-height: 15rem; border: 0; }
+    .game-modal-content:fullscreen { width: 100vw; height: 100vh; background: #fff; }
+    .game-modal-content:fullscreen #game-frame { min-height: 0; }
+    @media (max-width: 480px) {
+      #game-modal.is-archery { width: 100vw; height: 100dvh; max-height: 100dvh; border: 0; border-radius: 0; }
+      .game-modal-header { padding: 0.5rem 0.75rem; }
+    }
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     }
@@ -83,6 +134,7 @@
 
       <nav class="flex items-center gap-1.5" aria-label="প্রধান মেনু">
         <a href="#generators" class="hidden rounded-full px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-sky-50 hover:text-sky-700 sm:block">জেনারেটর</a>
+        <a href="#games-zone" class="hidden rounded-full px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-sky-50 hover:text-sky-700 sm:block">গেমস</a>
         <a href="#coming-soon" class="hidden rounded-full px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-sky-50 hover:text-sky-700 sm:block">শীঘ্রই আসছে</a>
         <a href="https://wa.me/8801882834071" target="_blank" rel="noopener" class="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-bold text-white shadow-card transition hover:bg-[#128C7E]">
           <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
@@ -157,6 +209,7 @@
             <button type="button" data-filter="math" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-violet-300 hover:text-violet-700">গণিত</button>
             <button type="button" data-filter="phonics" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-spark-300 hover:text-spark-700">ফোনেটিক্স</button>
             <button type="button" data-filter="practice" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-pink-300 hover:text-pink-700">ওয়ার্ড মেকিং</button>
+            <button type="button" data-filter="games" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-amber-300 hover:text-amber-700">গেমস</button>
             <button type="button" data-filter="soon" aria-pressed="false" class="filter-chip rounded-full border-2 border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 transition hover:border-slate-400">শীঘ্রই আসছে</button>
           </div>
         </div>
@@ -168,7 +221,7 @@
     </section>
     <!-- ============================ GENERATOR CARDS ============================ -->
     <section class="relative mx-auto max-w-7xl px-4 py-6 sm:px-6">
-      <div id="cardGrid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div id="cardGrid" data-card-grid class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
         <!-- ---------- 1. WRITING ---------- -->
         <div data-card data-href="writing/index.html" data-category="writing" data-accent="sky"
@@ -335,6 +388,147 @@
         </button>
       </div>
     </section>
+
+    <!-- ============================ GAMES ZONE ============================ -->
+    <section id="games-zone" data-section class="relative mx-auto max-w-7xl scroll-mt-24 px-4 py-8 sm:px-6">
+      <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/85 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-700 shadow-sm">
+            🎮 Play &amp; Learn
+          </span>
+          <h2 class="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl">SparKids Games Zone</h2>
+          <p class="mt-1 text-sm text-slate-600">খেলার ছলে শেখা — শব্দ, সংখ্যা ও মজার ব্রেইন গেম!</p>
+        </div>
+        <span class="inline-flex w-fit items-center gap-2 rounded-full bg-amber-100 px-3 py-1.5 text-xs font-bold text-amber-800">
+          ✨ Nursery থেকে Age 3–6
+        </span>
+      </div>
+
+      <div data-card-grid class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Word matching / spelling -->
+        <article data-card data-category="games vocabulary spelling"
+                 data-title="Word Match Balloon Pop শব্দ মিলানো বেলুন পপ"
+                 data-keywords="games game word matching balloon pop spelling vocabulary letters pictures শব্দ শব্দভাণ্ডার বানান অক্ষর ছবি"
+                 class="group flex animate-popIn flex-col overflow-hidden rounded-3xl border border-white bg-white shadow-card transition duration-300 hover:-translate-y-1.5 hover:shadow-pop">
+          <div class="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-pink-400 via-rose-500 to-fuchsia-600" aria-hidden="true">
+            <span class="absolute -left-2 bottom-0 text-6xl opacity-40">🎈</span>
+            <span class="text-6xl transition duration-300 group-hover:scale-110">🍎</span>
+            <span class="absolute right-5 top-4 rotate-6 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-rose-700">New</span>
+            <span class="absolute bottom-3 right-5 rounded-xl bg-white/90 px-3 py-1 text-lg font-extrabold text-rose-600">A + p + p</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-rose-600">Vocabulary • Spelling</p>
+            <h3 class="mt-1 text-lg font-bold leading-snug text-slate-900">শব্দ মিলানো <span class="text-slate-500">/ Word Match</span></h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">ছবির সঙ্গে অক্ষর মেলাও, সহজ শব্দ বানাও আর বেলুন পপ করে বানান চর্চা করো।</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="rounded-full bg-rose-50 px-2.5 py-1 text-[11px] font-bold text-rose-700">শব্দভাণ্ডার</span>
+              <span class="rounded-full bg-orange-50 px-2.5 py-1 text-[11px] font-bold text-orange-700">Nursery</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-600">Age 3–6</span>
+            </div>
+            <button type="button" class="btn-play mt-auto" aria-label="শব্দ মিলানোর গেম খেলুন" onclick="openGameModal('word-match')">গেম খেলুন →</button>
+          </div>
+        </article>
+
+        <!-- Counting -->
+        <article data-card data-category="games math counting"
+                 data-title="Count the Apples Number Catch আপেল গুনি"
+                 data-keywords="games game math counting number catch apples গণিত সংখ্যা গণনা আপেল গোনা"
+                 class="group flex animate-popIn flex-col overflow-hidden rounded-3xl border border-white bg-white shadow-card transition duration-300 hover:-translate-y-1.5 hover:shadow-pop">
+          <div class="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600" aria-hidden="true">
+            <span class="absolute left-6 top-5 text-3xl">🍏</span>
+            <span class="absolute bottom-4 left-12 text-3xl">🍎</span>
+            <span class="text-6xl transition duration-300 group-hover:scale-110">🍎</span>
+            <span class="absolute right-5 top-4 -rotate-6 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-emerald-700">Hot</span>
+            <span class="absolute bottom-3 right-5 rounded-xl bg-white/90 px-3 py-1 text-xl font-extrabold text-emerald-700">1 2 3</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-emerald-600">Math • Counting</p>
+            <h3 class="mt-1 text-lg font-bold leading-snug text-slate-900">আপেল গুনি <span class="text-slate-500">/ Count the Apples</span></h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">ফলের সংখ্যা গুনে সঠিক সংখ্যা বেছে নাও — মজায় মজায় গণনা শেখো।</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-bold text-emerald-700">গণনা</span>
+              <span class="rounded-full bg-lime-50 px-2.5 py-1 text-[11px] font-bold text-lime-700">Nursery</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-600">Age 3–6</span>
+            </div>
+            <button type="button" class="btn-play mt-auto" aria-label="আপেল গোনার গেম খেলুন" onclick="openGameModal('count-apples')">গেম খেলুন →</button>
+          </div>
+        </article>
+
+        <!-- Memory and cognition -->
+        <article data-card data-category="games memory cognition"
+                 data-title="Card Flip Memory Game কার্ড ফ্লিপ মেমোরি"
+                 data-keywords="games game card flip memory cognition matching pairs bangla arabic letters shapes স্মৃতি জোড়া মেলানো বাংলা আরবি অক্ষর আকৃতি"
+                 class="group flex animate-popIn flex-col overflow-hidden rounded-3xl border border-white bg-white shadow-card transition duration-300 hover:-translate-y-1.5 hover:shadow-pop">
+          <div class="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-violet-400 via-purple-500 to-indigo-600" aria-hidden="true">
+            <span class="absolute left-6 top-5 rotate-[-10deg] rounded-xl bg-white/90 px-3 py-2 text-2xl font-bold text-violet-700 shadow-card">অ</span>
+            <span class="absolute bottom-4 left-12 rotate-[8deg] rounded-xl bg-white/90 px-3 py-2 text-2xl font-bold text-indigo-700 shadow-card">ا</span>
+            <span class="rounded-xl bg-white px-4 py-3 text-3xl shadow-card transition duration-300 group-hover:rotate-6">🃏</span>
+            <span class="absolute right-5 top-4 rotate-6 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-violet-700">Interactive</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-violet-600">Memory • Cognition</p>
+            <h3 class="mt-1 text-lg font-bold leading-snug text-slate-900">কার্ড ফ্লিপ <span class="text-slate-500">/ Memory Match</span></h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">বাংলা বা আরবি অক্ষর কিংবা জ্যামিতিক আকৃতির জোড়া খুঁজে স্মৃতিশক্তি বাড়াও।</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="rounded-full bg-violet-50 px-2.5 py-1 text-[11px] font-bold text-violet-700">স্মৃতিশক্তি</span>
+              <span class="rounded-full bg-indigo-50 px-2.5 py-1 text-[11px] font-bold text-indigo-700">Nursery</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-600">Age 3–6</span>
+            </div>
+            <button type="button" class="btn-play mt-auto" aria-label="কার্ড ফ্লিপ মেমোরি গেম খেলুন" onclick="openGameModal('card-memory')">গেম খেলুন →</button>
+          </div>
+        </article>
+
+        <!-- Phonics and sound -->
+        <article data-card data-category="games phonics sound"
+                 data-title="Phonics Sound Board ফোনিক্স সাউন্ড বোর্ড"
+                 data-keywords="games game phonics sound board animals letters phonetic audio match ফোনিক্স শব্দ প্রাণী অক্ষর আওয়াজ শুনে মেলানো"
+                 class="group flex animate-popIn flex-col overflow-hidden rounded-3xl border border-white bg-white shadow-card transition duration-300 hover:-translate-y-1.5 hover:shadow-pop">
+          <div class="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-sky-400 via-cyan-500 to-blue-600" aria-hidden="true">
+            <span class="absolute left-8 top-5 text-3xl">🐮</span>
+            <span class="absolute bottom-4 left-12 text-3xl">🐸</span>
+            <span class="text-6xl transition duration-300 group-hover:scale-110">🐥</span>
+            <span class="absolute right-5 top-4 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-sky-700">New</span>
+            <span class="absolute bottom-3 right-5 rounded-xl bg-white/90 px-3 py-1 text-xl font-extrabold text-sky-700">♪ ♫</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-sky-600">Phonics • Sounds</p>
+            <h3 class="mt-1 text-lg font-bold leading-snug text-slate-900">ফোনিক্স সাউন্ড বোর্ড <span class="text-slate-500">/ Sound Board</span></h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">প্রাণী বা অক্ষর ট্যাপ করে শব্দ শোনো, তারপর সঠিক ধ্বনির সঙ্গে মিলিয়ে নাও।</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="rounded-full bg-sky-50 px-2.5 py-1 text-[11px] font-bold text-sky-700">ধ্বনি চেনা</span>
+              <span class="rounded-full bg-cyan-50 px-2.5 py-1 text-[11px] font-bold text-cyan-700">Nursery</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-600">Age 3–6</span>
+            </div>
+            <button type="button" class="btn-play mt-auto" aria-label="ফোনিক্স সাউন্ড গেম খেলুন" onclick="openGameModal('phonics-board')">গেম খেলুন →</button>
+          </div>
+        </article>
+
+        <!-- Match & Shoot Word Archery -->
+        <article data-card data-category="games vocabulary spelling"
+                 data-title="Match Shoot Word Archery শব্দ ও ধনুক খেলা"
+                 data-keywords="games game match shoot archery bow arrow target vocabulary spelling words শব্দ ধনুক তীর লক্ষ্য বানান"
+                 class="group flex animate-popIn flex-col overflow-hidden rounded-3xl border border-white bg-white shadow-card transition duration-300 hover:-translate-y-1.5 hover:shadow-pop">
+          <div class="relative flex h-36 items-center justify-center overflow-hidden bg-gradient-to-br from-orange-400 via-amber-500 to-rose-500" aria-hidden="true">
+            <span class="absolute left-7 top-5 text-4xl">🏹</span>
+            <span class="text-6xl transition duration-300 group-hover:scale-110">🎯</span>
+            <span class="absolute right-4 top-4 rotate-6 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-orange-700">Interactive</span>
+            <span class="absolute bottom-3 right-5 rounded-xl bg-white/90 px-3 py-1 text-lg font-extrabold text-orange-700">SUN ☀️</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-orange-600">Vocabulary • Spelling</p>
+            <h3 class="mt-1 text-lg font-bold leading-snug text-slate-900">শব্দ ও ধনুক খেলা <span class="text-slate-500">/ Match &amp; Shoot Word Archery</span></h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">লক্ষ্য শব্দের সঙ্গে ছবি মিলিয়ে ধনুক ছোড়ো — শব্দ চেনা ও বানান শেখার ইন্টার‌্যাক্টিভ খেলা।</p>
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              <span class="rounded-full bg-orange-50 px-2.5 py-1 text-[11px] font-bold text-orange-700">শব্দভাণ্ডার</span>
+              <span class="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-bold text-amber-700">বানান</span>
+              <span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-600">Age 4–8</span>
+            </div>
+            <button type="button" class="btn-play mt-auto" aria-label="Match &amp; Shoot শব্দ ও ধনুক খেলা শুরু করুন" onclick="openGameModal('archery-game')">গেম খেলুন →</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <!-- ============================ COMING SOON ============================ -->
     <section id="coming-soon" data-section class="relative mx-auto max-w-7xl scroll-mt-24 px-4 pb-6 pt-4 sm:px-6">
       <div class="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -411,6 +605,25 @@
     </section>
   </main>
 
+  <dialog id="game-modal" aria-labelledby="gameModalTitle">
+    <div class="game-modal-content">
+      <div class="game-modal-header">
+        <div class="min-w-0">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-amber-700 sm:text-xs">🎮 SparKids Games Zone</p>
+          <h2 id="gameModalTitle" class="truncate text-sm font-bold text-slate-900 sm:text-lg"></h2>
+        </div>
+        <div class="flex shrink-0 items-center gap-2">
+          <button id="gameFullscreenButton" type="button" class="grid h-10 min-w-10 place-items-center rounded-full bg-slate-100 px-3 text-lg font-bold text-slate-600 transition hover:bg-slate-200" aria-label="পূর্ণ পর্দায় দেখুন" title="Full Screen" onclick="toggleGameFullscreen()">⛶</button>
+          <button type="button" class="grid h-10 w-10 place-items-center rounded-full bg-rose-50 text-lg font-bold text-rose-700 transition hover:bg-rose-100" aria-label="গেম বন্ধ করুন" title="Close" onclick="document.getElementById('game-modal').close()">✖</button>
+        </div>
+      </div>
+      <p id="gameModalMessage" class="is-hidden px-5 pb-5 text-sm leading-relaxed text-slate-600" aria-live="polite">এই গেমটি খুব শীঘ্রই খেলার জন্য প্রস্তুত হবে।</p>
+      <div id="game-frame-wrap" class="is-hidden">
+        <iframe id="game-frame" title="Match &amp; Shoot Word Archery Game" allow="autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+    </div>
+  </dialog>
+
   <!-- ============================ FOOTER ============================ -->
   <footer class="mt-4 border-t border-white/70 bg-white/70">
     <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-8 text-center sm:flex-row sm:px-6 sm:text-left">
@@ -438,7 +651,7 @@
 
       var searchInput = document.getElementById('toolSearch');
       var clearBtn = document.getElementById('clearSearch');
-      var cardGrid = document.getElementById('cardGrid');
+      var cardGrids = Array.prototype.slice.call(document.querySelectorAll('[data-card-grid]'));
       var countEl = document.getElementById('resultCount');
       var emptyEl = document.getElementById('emptyState');
       var resetBtn = document.getElementById('resetFilters');
@@ -497,7 +710,12 @@
           section.classList.toggle('is-hidden', !anyVisible);
         });
 
-        if (cardGrid) { cardGrid.classList.toggle('is-hidden', visible === 0); }
+        cardGrids.forEach(function (grid) {
+          var anyVisible = Array.prototype.some.call(grid.querySelectorAll('[data-card]'), function (card) {
+            return !card.classList.contains('is-hidden');
+          });
+          grid.classList.toggle('is-hidden', !anyVisible);
+        });
         if (countEl) { countEl.textContent = toBn(visible); }
         if (emptyEl) { emptyEl.classList.toggle('is-hidden', visible !== 0); }
         if (clearBtn) { clearBtn.classList.toggle('is-hidden', query === ''); }
@@ -571,14 +789,79 @@
       applyFilters();
     })();
   </script>
+  <script>
+    (function () {
+      'use strict';
+      var gameTitles = {
+        'word-match': 'শব্দ মিলানো / Word Match',
+        'count-apples': 'আপেল গুনি / Count the Apples',
+        'card-memory': 'কার্ড ফ্লিপ / Memory Match',
+        'phonics-board': 'ফোনিক্স সাউন্ড বোর্ড / Phonics Sound Board',
+        'archery-game': 'শব্দ ও ধনুক খেলা / Match & Shoot Word Archery'
+      };
+      var gameModal = document.getElementById('game-modal');
+      var gameFrame = document.getElementById('game-frame');
+      var gameFrameWrap = document.getElementById('game-frame-wrap');
+      var gameMessage = document.getElementById('gameModalMessage');
+      var fullscreenButton = document.getElementById('gameFullscreenButton');
+      var gameModalContent = gameModal.querySelector('.game-modal-content');
+
+      window.openGameModal = function (gameId) {
+        var title = gameTitles[gameId];
+        if (!title) {
+          throw new Error('Unknown game: ' + gameId);
+        }
+        document.getElementById('gameModalTitle').textContent = title;
+        var isArcheryGame = gameId === 'archery-game';
+        gameModal.classList.toggle('is-archery', isArcheryGame);
+        gameFrameWrap.classList.toggle('is-hidden', !isArcheryGame);
+        gameMessage.classList.toggle('is-hidden', isArcheryGame);
+        fullscreenButton.classList.toggle('is-hidden', !isArcheryGame);
+        gameMessage.textContent = 'এই গেমটি খুব শীঘ্রই খেলার জন্য প্রস্তুত হবে।';
+        if (isArcheryGame) {
+          gameFrame.src = 'games/archary/index.html';
+        } else {
+          gameFrame.removeAttribute('src');
+        }
+        gameModal.showModal();
+      };
+
+      window.toggleGameFullscreen = async function () {
+        try {
+          if (document.fullscreenElement === gameModalContent) {
+            await document.exitFullscreen();
+          } else if (gameModalContent.requestFullscreen) {
+            await gameModalContent.requestFullscreen();
+          } else {
+            gameMessage.textContent = 'এই ব্রাউজারে পূর্ণ পর্দা সুবিধা পাওয়া যাচ্ছে না।';
+            gameMessage.classList.remove('is-hidden');
+          }
+        } catch (error) {
+          gameMessage.textContent = 'পূর্ণ পর্দা চালু করা যায়নি। আবার চেষ্টা করুন।';
+          gameMessage.classList.remove('is-hidden');
+          console.error('Unable to toggle game fullscreen:', error);
+        }
+      };
+
+      fullscreenButton.addEventListener('click', function () {
+        var isFullscreen = document.fullscreenElement === gameModalContent;
+        fullscreenButton.setAttribute('aria-label', isFullscreen ? 'পূর্ণ পর্দায় দেখুন' : 'পূর্ণ পর্দা বন্ধ করুন');
+        fullscreenButton.title = isFullscreen ? 'Full Screen' : 'Exit Full Screen';
+      });
+      document.addEventListener('fullscreenchange', function () {
+        var isFullscreen = document.fullscreenElement === gameModalContent;
+        fullscreenButton.setAttribute('aria-label', isFullscreen ? 'পূর্ণ পর্দা বন্ধ করুন' : 'পূর্ণ পর্দায় দেখুন');
+        fullscreenButton.title = isFullscreen ? 'Exit Full Screen' : 'Full Screen';
+        fullscreenButton.textContent = isFullscreen ? '⤢' : '⛶';
+      });
+      gameModal.addEventListener('close', function () {
+        if (document.fullscreenElement === gameModalContent) {
+          document.exitFullscreen();
+        }
+        gameFrame.removeAttribute('src');
+      });
+    })();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 

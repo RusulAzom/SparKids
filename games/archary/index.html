@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f0fdf4">
+  <title>Match &amp; Shoot Word Archery | SparKids</title>
+  <link rel="stylesheet" href="../archary/style.css">
+</head>
+
+<body>
+  <main class="game-shell">
+    <h1>Match &amp; Shoot Game 🎯</h1>
+
+    <section class="game-hud" aria-label="Game progress">
+      <div class="hud-stat"><span>Level</span><strong><span id="levelValue">1</span> / 3</strong></div>
+      <div class="hud-stat"><span>Score</span><strong id="scoreValue">0</strong></div>
+      <div class="hud-stat"><span>Streak</span><strong id="streakValue">0 (1×)</strong></div>
+      <div class="hud-stat hud-lives"><span>Lives</span><strong id="livesValue" aria-label="3 of 3 lives remaining">❤️❤️❤️</strong></div>
+      <div class="hud-stat hud-timer"><span>Time</span><strong id="timerValue">5s</strong></div>
+    </section>
+
+    <div class="target-prompt" id="promptText" aria-live="polite">
+      <span class="prompt-label">Match:</span>
+      <span id="promptEmoji" aria-hidden="true">☀️</span>
+      <strong id="promptWord">SUN</strong>
+      <span id="promptCategory">Nature • সূর্য</span>
+    </div>
+
+    <p class="game-feedback" id="gameFeedback" aria-live="polite">টানুন, লক্ষ্য করুন, ছুড়ুন!</p>
+
+    <div class="game-wrapper">
+      <canvas id="gameCanvas" width="700" height="400" aria-label="Drag the launcher back, then release to shoot the matching word target"></canvas>
+
+      <section class="game-over" id="gameOver" role="dialog" aria-modal="true" aria-labelledby="gameOverTitle" hidden>
+        <div class="game-over-card">
+          <span class="game-over-emoji" aria-hidden="true">🌟</span>
+          <h2 id="gameOverTitle">Game Over!</h2>
+          <p class="game-over-subtitle">দারুণ চেষ্টা! আবার খেলবে?</p>
+          <dl class="game-over-stats">
+            <div><dt>Total score</dt><dd id="finalScore">0</dd></div>
+            <div><dt>Highest level</dt><dd id="finalLevel">1</dd></div>
+            <div><dt>Best streak</dt><dd id="finalStreak">0</dd></div>
+          </dl>
+          <button class="next-btn" id="playAgainButton" type="button">Play Again 🔄</button>
+        </div>
+      </section>
+    </div>
+
+    <p class="game-instructions">লক্ষ্য শব্দের সঙ্গে মেলা বাক্সে ছুড়তে টানুন এবং ছেড়ে দিন।</p>
+  </main>
+
+  <script src="../archary/game.js"></script>
+</body>
+</html>
