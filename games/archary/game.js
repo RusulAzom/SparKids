@@ -4,6 +4,8 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const ui = {
   level: document.getElementById('levelValue'),
+  progress: document.getElementById('levelProgress'),
+  progressLabel: document.getElementById('progressLabel'),
   score: document.getElementById('scoreValue'),
   streak: document.getElementById('streakValue'),
   lives: document.getElementById('livesValue'),
@@ -12,6 +14,9 @@ const ui = {
   promptWord: document.getElementById('promptWord'),
   promptCategory: document.getElementById('promptCategory'),
   feedback: document.getElementById('gameFeedback'),
+  roundAction: document.getElementById('roundAction'),
+  roundMessage: document.getElementById('roundMessage'),
+  roundActionButton: document.getElementById('roundActionButton'),
   gameOver: document.getElementById('gameOver'),
   finalScore: document.getElementById('finalScore'),
   finalLevel: document.getElementById('finalLevel'),
@@ -71,8 +76,11 @@ let roundStartedAt = 0;
 let lastTimerValue = -1;
 let animationFrame = 0;
 let gameRunning = false;
+let roundState = 'playing';
+let roundPausedAt = 0;
 let lastWord = '';
 let audioContext = null;
+const retryQueue = [];
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -98,9 +106,31 @@ function pickTarget(words) {
 function updateHud() {
   ui.level.textContent = String(currentLevel);
   ui.score.textContent = String(score);
-  ui.streak.textContent = `${streak} (${Math.min(3, Math.floor(streak / 3) + 1)}×)`;
-  ui.lives.textContent = '❤️'.repeat(lives) + '🖤'.repeat(3 - lives);
+  const multiplier = Math.min(3, Math.floor(streak / 3) + 1);
+  ui.streak.textContent = `${streak} (${multiplier}×)`;
+  ui.lives.replaceChildren();
+  for (let index = 0; index < 3; index += 1) {
+    const heart = document.createElement('span');
+    const alive = index < lives;
+    heart.className = `life-heart ${alive ? 'is-alive' : 'is-lost'}`;
+    heart.textContent = alive ? '❤️' : '🖤';
+    heart.setAttribute('aria-hidden', 'true');
+    ui.lives.appendChild(heart);
+  }
   ui.lives.setAttribute('aria-label', `${lives} of 3 lives remaining`);
+  const filledStars = currentLevel === levelSettings.length ? 5 : correctHitsInLevel;
+  ui.progress.querySelectorAll('.progress-star').forEach((star, index) => {
+    star.classList.toggle('is-filled', index < filledStars);
+  });
+  ui.progress.setAttribute(
+    'aria-label',
+    currentLevel === levelSettings.length
+      ? `Level ${currentLevel}, maximum level reached`
+      : `${correctHitsInLevel} of 5 hits to level up`
+  );
+  ui.progressLabel.textContent = currentLevel === levelSettings.length
+    ? 'Max Level!'
+    : `${correctHitsInLevel} / 5 Hits to Level Up`;
 }
 
 function resetBall() {
@@ -117,20 +147,30 @@ function startRound(now) {
 
   const settings = levelSettings[currentLevel - 1];
   const eligibleWords = getLevelWords(currentLevel);
-  targetObj = pickTarget(eligibleWords);
+  let retryTarget = null;
+  retryQueue.forEach(entry => { entry.turnsUntil -= 1; });
+  const readyRetry = retryQueue.findIndex(entry => entry.turnsUntil <= 0);
+  if (readyRetry !== -1) {
+    retryTarget = retryQueue.splice(readyRetry, 1)[0].item;
+  }
+  targetObj = retryTarget || pickTarget(eligibleWords);
   ui.promptEmoji.textContent = targetObj.emoji;
   ui.promptWord.textContent = targetObj.word;
   ui.promptCategory.textContent = `${targetObj.category} • ${targetObj.bangla}`;
   roundStartedAt = now;
+  roundPausedAt = 0;
+  roundState = 'playing';
   lastTimerValue = -1;
+  ui.timer.textContent = `${settings.seconds}s`;
   resetBall();
+  ui.roundAction.hidden = true;
+  ui.roundAction.classList.remove('is-success', 'is-miss');
 
-  let distractorPool = eligibleWords.filter(item => item.word !== targetObj.word);
+  let distractorPool = gameData.filter(item => item.word !== targetObj.word);
   if (distractorPool.length < settings.targets - 1) {
-    const fallbackWords = gameData.filter(item =>
+    distractorPool = distractorPool.concat(eligibleWords.filter(item =>
       item.word !== targetObj.word && !distractorPool.some(candidate => candidate.word === item.word)
-    );
-    distractorPool = distractorPool.concat(fallbackWords);
+    ));
   }
   const distractors = shuffleArray(distractorPool).slice(0, settings.targets - 1);
   const choices = shuffleArray([targetObj, ...distractors]);
@@ -206,9 +246,10 @@ canvas.addEventListener('pointerup', release);
 canvas.addEventListener('pointercancel', release);
 
 function update(now) {
+  if (roundState !== 'playing') return;
   const settings = levelSettings[currentLevel - 1];
   const remaining = Math.max(0, settings.seconds - (now - roundStartedAt) / 1000);
-  const shownTime = Math.ceil(remaining);
+  const shownTime = Math.ceil(remaining - 0.001);
   if (shownTime !== lastTimerValue) {
     ui.timer.textContent = `${shownTime}s`;
     lastTimerValue = shownTime;
@@ -235,9 +276,9 @@ function update(now) {
     if (hit && !target.hit) {
       ball.isFlying = false;
       if (target.data.word === targetObj.word) {
-        handleCorrectHit(now);
+        handleCorrectHit(target, now);
       } else {
-        loseLife('ভুল লক্ষ্য! একটি হার্ট কমেছে।');
+        loseLife('ভুল লক্ষ্য! একটি হার্ট কমেছে।', targetObj);
       }
       return;
     }
@@ -248,35 +289,52 @@ function update(now) {
   }
 }
 
-function handleCorrectHit(now) {
+function showRoundAction(state, message, buttonText, buttonClass) {
+  roundState = state;
+  roundPausedAt = performance.now();
+  ui.roundAction.classList.toggle('is-success', state === 'success');
+  ui.roundAction.classList.toggle('is-miss', state === 'miss');
+  ui.roundMessage.textContent = message;
+  ui.roundActionButton.textContent = buttonText;
+  ui.roundActionButton.className = `round-action-button ${buttonClass}`;
+  ui.roundAction.hidden = false;
+  ui.roundActionButton.focus();
+}
+
+function handleCorrectHit(target, now) {
+  target.hit = true;
   playHitSound();
   streak += 1;
   bestStreak = Math.max(bestStreak, streak);
-  const multiplier = Math.min(3, Math.floor((streak - 1) / 3) + 1);
+  const multiplier = Math.min(3, Math.floor(streak / 3) + 1);
   const fastBonus = now - roundStartedAt < 2000 ? 5 : 0;
   const pointsEarned = (10 + fastBonus) * multiplier;
   score += pointsEarned;
   correctHitsInLevel += 1;
-  let leveledUp = false;
-
-  if (correctHitsInLevel >= 5 && currentLevel < levelSettings.length) {
-    currentLevel += 1;
-    highestLevel = Math.max(highestLevel, currentLevel);
-    correctHitsInLevel = 0;
-    leveledUp = true;
-  }
   updateHud();
-  startRound(now);
-  if (leveledUp) {
-    ui.feedback.textContent = `দারুণ! লেভেল ${currentLevel} শুরু হলো!`;
+  const bonusMessage = fastBonus ? ' দ্রুততার +৫ বোনাসসহ' : '';
+  ui.feedback.textContent = `চমৎকার! +${pointsEarned} পয়েন্ট${bonusMessage}`;
+  showRoundAction(
+    'success',
+    `🎯 GREAT MATCH: ${target.data.emoji} + ${target.data.word}! +${pointsEarned}`,
+    'পরবর্তী শব্দ ➔  Next Target',
+    'next-target-button'
+  );
+}
+
+function queueRetry(item) {
+  if (!item) return;
+  const existing = retryQueue.find(entry => entry.item.word === item.word);
+  if (existing) {
+    existing.turnsUntil = 2;
   } else {
-    const bonusMessage = fastBonus ? ' (দ্রুততার +৫ বোনাসসহ)' : '';
-    ui.feedback.textContent = `চমৎকার! +${pointsEarned} পয়েন্ট${bonusMessage}`;
+    retryQueue.push({ item, turnsUntil: 2 });
   }
 }
 
-function loseLife(message) {
+function loseLife(message, failedTarget) {
   if (!gameRunning) return;
+  queueRetry(failedTarget || targetObj);
   lives -= 1;
   streak = 0;
   updateHud();
@@ -287,8 +345,25 @@ function loseLife(message) {
     endGame();
     return;
   }
+  showRoundAction(
+    'miss',
+    `Oops! Let's try ${targetObj.word} again soon! 💡`,
+    'আবার চেষ্টা করি 🔄  Try Again',
+    'try-again-button'
+  );
+}
+
+function continueAfterFeedback() {
+  if (!gameRunning || roundState === 'playing') return;
+
+  if (roundState === 'success' && correctHitsInLevel >= 5 && currentLevel < levelSettings.length) {
+    currentLevel += 1;
+    highestLevel = Math.max(highestLevel, currentLevel);
+    correctHitsInLevel = 0;
+  }
+  updateHud();
   startRound(performance.now());
-  startRound(performance.now());
+  animationFrame = requestAnimationFrame(gameLoop);
 }
 
 function endGame() {
@@ -327,8 +402,31 @@ function draw(now) {
   if (targetObj) ctx.fillText(targetObj.emoji, ball.x, ball.y);
 
   targets.forEach(target => {
-    if (target.hit) return;
-    const rect = getTargetRect(target, now);
+    if (target.hit && roundState !== 'success') return;
+    const frameTime = roundState === 'playing' ? now : roundPausedAt;
+    const rect = getTargetRect(target, frameTime);
+    if (target.hit && roundState === 'success') {
+      ctx.save();
+      ctx.shadowColor = '#22c55e';
+      ctx.shadowBlur = 28;
+      ctx.fillStyle = '#bbf7d0';
+      ctx.strokeStyle = '#16a34a';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.roundRect(rect.x, rect.y, rect.width, rect.height, 12);
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+      ctx.font = '30px "Segoe UI Emoji"';
+      ctx.textAlign = 'center';
+      ctx.fillText(target.data.emoji, rect.x + 38, rect.y + rect.height / 2);
+      ctx.fillStyle = '#14532d';
+      ctx.font = 'bold 20px "Segoe UI", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(target.data.word, rect.x + 72, rect.y + rect.height / 2 + 2);
+      ctx.textAlign = 'center';
+      return;
+    }
     ctx.fillStyle = target.data.word === targetObj.word ? '#fde047' : '#fff7ed';
     ctx.strokeStyle = target.data.word === targetObj.word ? '#ca8a04' : '#fb923c';
     ctx.lineWidth = 3;
@@ -350,7 +448,7 @@ function draw(now) {
 function gameLoop(now) {
   if (!gameRunning) return;
   update(now);
-  draw(now);
+  draw(roundState === 'playing' ? now : roundPausedAt);
   if (gameRunning) animationFrame = requestAnimationFrame(gameLoop);
 }
 
@@ -410,6 +508,7 @@ function startGame() {
   bestStreak = 0;
   correctHitsInLevel = 0;
   lastWord = '';
+  retryQueue.length = 0;
   gameRunning = true;
   ui.gameOver.hidden = true;
   ui.feedback.textContent = 'টানুন, লক্ষ্য করুন, ছুড়ুন!';
@@ -419,4 +518,5 @@ function startGame() {
 }
 
 document.getElementById('playAgainButton').addEventListener('click', startGame);
+ui.roundActionButton.addEventListener('click', continueAfterFeedback);
 startGame();

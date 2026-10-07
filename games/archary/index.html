@@ -13,11 +13,21 @@
     <h1>Match &amp; Shoot Game 🎯</h1>
 
     <section class="game-hud" aria-label="Game progress">
-      <div class="hud-stat"><span>Level</span><strong><span id="levelValue">1</span> / 3</strong></div>
-      <div class="hud-stat"><span>Score</span><strong id="scoreValue">0</strong></div>
-      <div class="hud-stat"><span>Streak</span><strong id="streakValue">0 (1×)</strong></div>
-      <div class="hud-stat hud-lives"><span>Lives</span><strong id="livesValue" aria-label="3 of 3 lives remaining">❤️❤️❤️</strong></div>
-      <div class="hud-stat hud-timer"><span>Time</span><strong id="timerValue">5s</strong></div>
+      <div class="hud-stat hud-progress">
+        <span>⭐ Level <strong id="levelValue">1</strong> / 3</span>
+        <div id="levelProgress" class="progress-stars" role="img" aria-label="0 of 5 hits to level up">
+          <span class="progress-star" aria-hidden="true">★</span>
+          <span class="progress-star" aria-hidden="true">★</span>
+          <span class="progress-star" aria-hidden="true">★</span>
+          <span class="progress-star" aria-hidden="true">★</span>
+          <span class="progress-star" aria-hidden="true">★</span>
+        </div>
+        <strong id="progressLabel" class="progress-label">0 / 5 Hits to Level Up</strong>
+      </div>
+      <div class="hud-stat hud-score"><span>🏆 Score</span><strong id="scoreValue">0</strong></div>
+      <div class="hud-stat hud-streak"><span>🔥 Streak Combo</span><strong id="streakValue">0 (1×)</strong></div>
+      <div class="hud-stat hud-lives"><span>❤️ Hearts</span><strong id="livesValue" aria-label="3 of 3 lives remaining"></strong></div>
+      <div class="hud-stat hud-timer"><span>⏱ Time</span><strong id="timerValue">5s</strong></div>
     </section>
 
     <div class="target-prompt" id="promptText" aria-live="polite">
@@ -28,6 +38,10 @@
     </div>
 
     <p class="game-feedback" id="gameFeedback" aria-live="polite">টানুন, লক্ষ্য করুন, ছুড়ুন!</p>
+    <div class="round-action" id="roundAction" hidden>
+      <p class="round-message" id="roundMessage" role="status"></p>
+      <button class="round-action-button next-target-button" id="roundActionButton" type="button"></button>
+    </div>
 
     <div class="game-wrapper">
       <canvas id="gameCanvas" width="700" height="400" aria-label="Drag the launcher back, then release to shoot the matching word target"></canvas>
