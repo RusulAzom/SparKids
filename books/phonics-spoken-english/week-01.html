@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 01 - SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            background: #ffffff;
+            font-family: 'Hind Siliguri', Arial, sans-serif;
+        }
+        
+        .book-page {
+            width: 210mm;
+            height: 297mm;
+            page-break-after: always;
+            page-break-inside: avoid;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        /* Left Page - Parent Facilitator Guide */
+        .page-left {
+            float: left;
+            width: 105mm;
+            height: 100%;
+            padding: 15mm;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+            border-right: 2px solid #e2e8f0;
+        }
+        
+        /* Right Page - Child Visual Playground */
+        .page-right {
+            float: left;
+            width: 105mm;
+            height: 100%;
+            padding: 15mm;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+        }
+        
+        .page-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Header Badge */
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Lesson Title */
+        .lesson-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 16px;
+            line-height: 1.3;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* Step-by-Step Script Box */
+        .script-box {
+            background: linear-gradient(135deg, #eff6ff, #f0f9ff);
+            border: 2px solid #dbeafe;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+            position: relative;
+        }
+        
+        .script-box::before {
+            content: "📝";
+            position: absolute;
+            top: -8px;
+            left: 16px;
+            background: #eff6ff;
+            padding: 0 8px;
+            font-size: 14px;
+        }
+        
+        .script-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .bangla-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #334155;
+            text-align: justify;
+            margin-bottom: 8px;
+        }
+        
+        /* Pronunciation Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border: 2px solid #fbbf24;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 16px 0;
+            box-shadow: 0 4px 6px rgba(251, 191, 36, 0.2);
+        }
+        
+        .warning-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+        
+        /* Spoken English Routine */
+        .spoken-box {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 2px solid #22c55e;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 16px 0;
+            box-shadow: 0 4px 6px rgba(34, 197, 94, 0.2);
+        }
+        
+        .spoken-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #166534;
+            margin-bottom: 8px;
+        }
+        
+        .english-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #14532d;
+            font-style: italic;
+        }
+        
+        /* Home Activity Box */
+        .activity-box {
+            background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+            border: 2px solid #a855f7;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 16px 0;
+            box-shadow: 0 4px 6px rgba(168, 85, 247, 0.2);
+        }
+        
+        .activity-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #6b21a8;
+            margin-bottom: 8px;
+        }
+        
+        /* QR Code Placeholder */
+        .qr-placeholder {
+            background: #ffffff;
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            margin: 20px 0;
+            color: #64748b;
+            font-size: 11px;
+        }
+        
+        /* Right Page Elements */
+        .visual-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .illustration-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #059669;
+        }
+        
+        .visual-area {
+            background: #ffffff;
+            border: 3px solid #10b981;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 8px 16px rgba(16, 185, 129, 0.15);
+            min-height: 180px;
+            position: relative;
+            background-image: 
+                linear-gradient(45deg, #f0fdf4 25%, transparent 25%),
+                linear-gradient(-45deg, #f0fdf4 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f0fdf4 75%),
+                linear-gradient(-45deg, transparent 75%, #f0fdf4 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+        }
+        
+        .illustration-target {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #10b981;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(240, 253, 244, 0.8);
+        }
+        
+        .item-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .item-box {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .item-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            border-color: #10b981;
+        }
+        
+        .item-icon {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+        
+        .item-label {
+            font-size: 11px;
+            color: #475569;
+            font-weight: 500;
+        }
+        
+        /* SVG Tracing Path */
+        .tracing-area {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .tracing-svg {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            background: #f8fafc;
+            cursor: pointer;
+        }
+        
+        .tracing-path {
+            fill: none;
+            stroke: #10b981;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.8;
+        }
+        
+        /* Footer */
+        .page-footer {
+            position: absolute;
+            bottom: 10mm;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15mm;
+            font-size: 10px;
+            color: #64748b;
+        }
+        
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: #059669;
+        }
+        
+        /* Page Numbers */
+        .page-number {
+            position: absolute;
+            bottom: 10mm;
+            right: 15mm;
+            font-size: 10px;
+            color: #94a3b8;
+        }
+        
+        /* Week Header */
+        .week-header {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            border: 2px solid #38bdf8;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .week-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+        
+        .week-subtitle {
+            font-size: 16px;
+            color: #075985;
+        }
+        
+        /* Illustration Briefs */
+        .illustration-brief {
+            background: #fefefe;
+            border-left: 4px solid #3b82f6;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .brief-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 8px;
+        }
+        
+        .brief-content {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+    <!-- ==========================================
+         WEEK ০১: স্পারকিডস ফোনিক্স - ABC & Playground
+         ========================================== -->
+    
+    <!-- Lesson 01 - A অক্ষর -->
+    <div class="book-page">
+        <div class="page-container">
+            <!-- LEFT PAGE: Parent Facilitator Guide -->
+            <div class="page-left">
+                <!-- Header Badge -->
+                <div class="header-badge">
+                    <span>📚</span>
+                    <span>অভিভাবক সহায়িকা</span>
+                </div>
+                
+                <!-- Week Header -->
+                <div class="week-header">
+                    <h1 class="week-title">সপ্তাহ ০১: ABC & Playground</h1>
+                    <p class="week-subtitle">ভূমিকা, অক্ষর শনাক্তকরণ এবং অনুশীলন</p>
+                </div>
+                
+                <!-- Lesson Title -->
+                <h2 class="lesson-title">
+                    স্পারকিডস ফোনিক্স: ABC & Playground (সপ্তাহ ০১)
+                </h2>
+                
+                <!-- Step-by-Step Script Box -->
+                <div class="script-box">
+                    <div class="script-title">
+                        <span>📝</span>
+                        <span>ধাপে-ধাপে শিক্ষন স্ক্রিপ্ট</span>
+                    </div>
+                    
+                    <div class="bangla-text">
+                        <strong>ধাপ ১: পরিচয় (২ মিনিট)</strong><br>
+                        শিশুকে বলুন: "এই যে, এটি একটি বড় ‘A’ অক্ষর। এটি দেখতে কেমন? তীক্ষ্ণ এবং সরু? এখন আমরা শিখবো কিভাবে এই A অক্ষরটি বলতে হয়। প্রথমে, তুমি এটি আঁকতে পারো!"<br><br>
+                        
+                        <strong>ধাপ ২: অনুকরণ (২ মিনিট)</strong><br>
+                        আমি প্রথমে বলবো, তারপর তুমি আমাকে অনুকরণ করবে: ‘এ’, ‘এ’, ‘এ’ — এখন তুমি চেষ্টা করো! প্রতিবার যখন তুমি A অক্ষরটি দেখবে, মনে মনে ‘এ’ বলো!<br><br>
+                        
+                        <strong>ধাপ ৩: স্পর্শ (৩ মিনিট)</strong><br>
+                        তোমার আঙ্গুল দিয়ে A অক্ষরটি আকাশে লিখে দেখাও, তারপর বড় অক্ষর A দিয়ে প্রিন্ট করো! এখন তুমি এই স্ক্রিপ্টটি মনে রাখতে পারো?
+                    </div>
+                </div>
+                
+                <!-- Pronunciation Warning Box -->
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <span>⚠️</span>
+                        <span>উচ্চারণ সতর্কতা</span>
+                    </div>
+                    <div class="bangla-text" style="font-size: 13px;">
+                        <strong>মনে রাখবেন:</strong> A অক্ষরটি কখনও ‘অ’ শব্দের মত উচ্চারণ করবেন না। এটি একটি ‘এ’ শব্দের উচ্চারণ।
+                        <br><strong>অনুশীলন:</strong> যখনই A অক্ষরটি দেখবেন, মনে মনে ‘এ’ বলুন!
+                    </div>
+                </div>
+                
+                <!-- Spoken English Routine -->
+                <div class="spoken-box">
+                    <div class="spoken-title">
+                        <span>🗣️</span>
+                        <span>স্পোকেন ইংলিশ রুটিন</span>
+                    </div>
+                    <div class="english-text">
+                        <strong>ডেইলি রিভিশন (৩ মিনিট):</strong><br>
+                        Hello! Today's letter is ‘A’. Can you say ‘A’ like in 'Apple'?
+                        Great! Now let's learn the sound of 'A' in 'Cat'. Can you make that sound?
+                        Excellent! Remember: A says its own name 'AY'! Can you spell 'AY'?
+                    </div>
+                </div>
+                
+                <!-- Home Activity Box -->
+                <div class="activity-box">
+                    <div class="activity-title">
+                        <span>🏠</span>
+                        <span>হোম অ্যাকটিভিটি</span>
+                    </div>
+                    <div class="bangla-text" style="font-size: 13px;">
+                        <strong>অক্ষর শনাক্তকরণ (৫ মিনিট):</strong><br>
+                        1. ঘরের বিভিন্ন জায়গা থেকে ৫টি A অক্ষর খুঁজে বের করো<br>
+                        2. প্রতিটি A অক্ষরের সঙ্গে মিলিয়ে ‘এ’ শব্দটি বলো<br>
+                        3. রান্নাঘরে A দিয়ে শুরু হয় এমন ২টি জিনিস খুঁজে বের করো<br>
+                        4. A অক্ষরটি দিয়ে ৩টি শব্দ তৈরি করো (예: Apple, Ant, Arrow)<br>
+                        <br>
+                        <strong>মা/বাবা সাইন-অফ:</strong> _________________________
+                    </div>
+                </div>
+                
+                <!-- QR Code Placeholder -->
+                <div class="qr-placeholder">
+                    📱 QR Code: SK-PH1-W01-L01-AUD
+                    <br>
+                    অডিও লেসন অ্যাক্সেস করতে স্ক্যান করুন
+                </div>
+                
+                <!-- Illustration Briefs -->
+                <div class="illustration-brief">
+                    <div class="brief-title">🎨 Illustration Brief (Designer)</div>
+                    <div class="brief-content">
+                        <strong>দৃশ্য: শিশু রান্নাঘরে বড় A অক্ষরটি খুঁজে বের করছে</strong><br>
+                        <strong>বর্ণনা:</strong> একটি প্রাকৃতিক দৃশ্য, পরিষ্কার ব্যাকগ্রাউন্ড, উচ্চ কনট্রাস্ট
+                    </div>
+                </div>
+            </div>
+            
+            <!-- RIGHT PAGE: Child Visual Playground -->
+            <div class="page-right">
+                <div class="visual-header">
+                    <div class="illustration-title">
+                        🎨 শিশু প্লেয়ারগ্রাউন্ড
+                    </div>
+                    <div class="text-12" style="color: #10b981;">
+                        সপ্তাহ ০১ • লেসন ০১
+                    </div>
+                </div>
+                
+                <!-- Main Visual Area -->
+                <div class="visual-area">
+                    <div class="illustration-target">
+                        <div style="text-align: center;">
+                            <div style="font-size: 48px; margin-bottom: 8px;">🅰</div>
+                            <div style="font-size: 12px; color: #10b981; font-weight: bold;">BIG A</div>
+                            <div style="font-size: 10px; color: #64748b;">প্যাটার্ন ট্রেসিং</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Point-and-Say Items -->
+                <div class="item-container">
+                    <div class="item-box">
+                        <div class="item-icon">🍎</div>
+                        <div class="item-label">আপেল</div>
+                    </div>
+                    <div class="item-box">
+                        <div class="item-icon">🍊</div>
+                        <div class="item-label">কমলা</div>
+                    </div>
+                    <div class="item-box">
+                        <div class="item-icon">⭐</div>
+                        <div class="item-label">তারা</div>
+                    </div>
+                    <div class="item-box">
+                        <div class="item-icon">🎯</div>
+                        <div class="item-label">টার্গেট</div>
+                    </div>
+                </div>
+                
+                <!-- SVG Tracing Path -->
+                <div class="tracing-area">
+                    <div style="font-size: 14px; font-weight: bold; color: #059669; margin-bottom: 12px;">
+                        🖊️ ফিংগার ট্রেসিং প্যাথ
+                    </div>
+                    <svg class="tracing-svg" viewBox="0 0 200 200" onclick="this.classList.toggle('active')">
+                        <path class="tracing-path" d="M50 150 Q100 50 150 150 T250 150" />
+                        <circle cx="50" cy="150" r="4" fill="#10b981" />
+                        <circle cx="150" cy="150" r="4" fill="#10b981" />
+                        <circle cx="250" cy="150" r="4" fill="#10b981" />
+                    </svg>
+                    <div style="font-size: 11px; color: #64748b; margin-top: 8px;">
+                        SVG প্যাথ টি ক্লিক করুন এবং অনুসরণ করুন
+                    </div>
+                </div>
+                
+                <!-- Footer -->
+                <div class="page-footer">
+                    <div class="brand-logo">
+                        <span>📚</span>
+                        <span>SparkKids Phonics</span>
+                    </div>
+                    <div class="page-number">
+                        পৃষ্ঠা ০১
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Lesson 02 - Animal Sounds & M, H Letters -->
+    <div class="book-page">
+        <div class="page-container">
+            <!-- LEFT PAGE: Parent Facilitator Guide -->
+            <div class="page-left">
+                <div class="header-badge">
+                    <span>📚</span>
+                    <span>অভিভাবক সহায়িকা</span>
+                </div>
+                
+                <h2 class="lesson-title">
+                    বানর ও ঘোড়া: M এবং H অক্ষরের অনুশীলন (সপ্তাহ ০১)
+                </h2>
+                
+                <div class="script-box">
+                    <div class="script-title">
+                        <span>📝</span>
+                        <span>ধাপে-ধাপে শিক্ষন স্ক্রিপ্ট</span>
+                    </div>
+                    
+                    <div class="bangla-text">
+                        <strong>ধাপ ১: পরিচয় (২ মিনিট)</strong><br>
+                        শিশুকে দেখাও: “এই যে, একটি বানর (monkey) ও একটি ঘোড়া (horse)।
+                        প্রথমে, বানরটি কে? কেমন? বলে দেখাও।
+                        ঘোড়াটি কে? কেমন? বলে দেখাও।
+                        <br><br>
+                        <strong>ধাপ ২: শব্দ অনুশীলন (২ মিনিট)</strong><br>
+                        নিচের তালিকা থেকে ছবি বেছে নাও:
+                        <strong>বানর = ‘M’</strong>,
+                        <strong>ঘোড়া = ‘H’</strong>,
+                        শিশুকে মৌখিক প্রতিলিপি করতে উৎসাহিত করো!
+                        <br><br>
+                        <strong>ধাপ ৩: স্পর্শ (৩ মিনিট)</strong><br>
+                        শিশুকে আঙ্গুল দিয়ে অক্ষরগুলি আকাশে লিখতে বলো,
+                        তারপর বড় হাতের M এবং H প্রিন্ট করো!
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <div class="warning-header">
+                        <span>⚠️</span>
+                        <span>উচ্চারণ সতর্কতা</span>
+                    </div>
+                    <div class="bangla-text" style="font-size: 13px;">
+                        <strong>M = ‘এম’ মনে রাখুন</strong> (একটি মাংসের কথা মনে করো!)
+                        <strong>H = ‘এইচ’ মনে রাখুন</strong> (এটি একটি ‘হর্ন’ের মত শোনায়!)
+                        শিশুকে প্রতিবার উচ্চারণ করতে উৎসাহিত করো!
+                    </div>
+                </div>
+                
+                <div class="spoken-box">
+                    <div class="spoken-title">
+                        <span>🗣️</span>
+                        <span>স্পোকেন ইংলিশ রুটিন</span>
+                    </div>
+                    <div class="english-text">
+                        <strong>ডেইলি রিভিশন (৩ মিনিট):</strong><br>
+                        Hello! Today's letters are ‘M’ and ‘H’. Can you say ‘M’ like in 'Monkey'?
+                        Great! Now let's try ‘H’ like in 'Horse'. Can you make that sound?
+                        Excellent work! Remember: M sounds like 'Em', H sounds like 'Aych'!
+                    </div>
+                </div>
+                
+                <div class="activity-box">
+                    <div class="activity-title">
+                        <span>🏠</span>
+                        <span>হোম অ্যাকটিভিটি</span>
+                    </div>
+                    <div class="bangla-text" style="font-size: 13px;">
+                        <strong>অক্ষর শনাক্তকরণ (৫ মিনিট):</strong><br>
+                        1. ঘরের বিভিন্ন জায়গা থেকে ৩টি M অক্ষর খুঁজে বের করো<br>
+                        2. প্রতিটি M অক্ষরের সঙ্গে মিলিয়ে ‘মাংস’ শব্দটি বলো<br>
+                        3. ঘরের ৩টি H দিয়ে শুরু হয় এমন জিনিস খুঁজে বের করো<br>
+                        <br>
+                        <strong>মা/বাবা সাইন-অফ:</strong> _________________________
+                    </div>
+                </div>
+                
+                <div class="qr-placeholder">
+                    📱 QR Code: SK-PH1-W02-L01-AUD
+                    <br>
+                    অডিও লেসন অ্যাক্সেস করতে স্ক্যান করুন
+                </div>
+                
+                <div class="illustration-brief">
+                    <div class="brief-title">🎨 Illustration Brief (Designer)</div>
+                    <div class="brief-content">
+                        <strong>দৃশ্য: শিশু বানর (M) এবং ঘোড়া (H) কে সনাক্ত করছে</strong><br>
+                        <strong>বর্ণনা:</strong> একটি প্রাকৃতিক দৃশ্য, পরিষ্কার ব্যাকগ্রাউন্ড, উচ্চ কনট্রাস্ট
+                    </div>
+                </div>
+            </div>
+            
+            <!-- RIGHT PAGE: Child Visual Playground -->
+            <div class="page-right">
+                <div class="visual-header">
+                    <div class="illustration-title">
+                        🎨 শিশু প্লেয়ারগ্রাউন্ড
+                    </div>
+                    <div class="text-12" style="color: #10b981;">
+                        সপ্তাহ ০১ • লেসন ০২
+                    </div>
+                </div>
+                
+                <div class="visual-area">
+                    <div class="illustration-target">
+                        <div style="text-align: center;">
+                            <div style="font-size: 48px; margin-bottom: 8px;">
+                                <span style="color: #10b981;">🐒</span>
+                                <span style="color: #2563eb; margin-left: -10px;">🐴</span>
+                            </div>
+                            <div style="font-size: 12px; color: #10b981; font-weight: bold;">B=M, H=H</div>
+                            <div style="font-size: 10px; color: #64748b;">অক্ষর পরিচয়</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="item-container">
+                    <div class="item-box">
+                        <div class="item-icon">🍎</div>
+                        <div class="item-label">আপেল</div>
+                    </div>
+                    <div class="item-box">
+                        <div class="item-icon">🎯</div>
+                        <div class="item-label">টার্গেট</div>
+                    </div>
+                    <div class="item-box">
+                        <div class="item-icon">⭐</div>
+                        <div class="item-label">তারা</div>
+                    </div>
+                    <div class="item-box">
+                        <div class="item-icon">🏰</div>
+                        <div class="item-label">দুর্গ</div>
+                    </div>
+                </div>
+                
+                <div class="tracing-area">
+                    <div style="font-size: 14px; font-weight: bold; color: #059669; margin-bottom: 12px;">
+                        🖊️ ফিংগার ট্রেসিং প্যাথ
+                    </div>
+                    <svg class="tracing-svg" viewBox="0 0 200 200">
+                        <path class="tracing-path" d="M50 150 Q100 50 150 150 T250 150" />
+                        <circle cx="50" cy="150" r="4" fill="#10b981" />
+                        <circle cx="150" cy="150" r="4" fill="#10b981" />
+                        <circle cx="250" cy="150" r="4" fill="#10b981" />
+                    </svg>
+                    <div style="font-size: 11px; color: #64748b; margin-top: 8px;">
+                        SVG প্যাথ টি ক্লিক করুন এবং অনুসরণ করুন
+                    </div>
+                </div>
+                
+                <div class="page-footer">
+                    <div class="brand-logo">
+                        <span>📚</span>
+                        <span>SparkKids Phonics</span>
+                    </div>
+                    <div class="page-number">
+                        পৃষ্ঠা ০২
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

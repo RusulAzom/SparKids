@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SparKids Smart Book Series - Books Access</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            background: #ffffff;
+            font-family: 'Hind Siliguri', Arial, sans-serif;
+        }
+        
+        .book-page {
+            width: 210mm;
+            height: 297mm;
+            page-break-after: always;
+            page-break-inside: avoid;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+            padding: 60mm 40mm;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Books Grid */
+        .books-grid {
+            padding: 40mm 40mm;
+        }
+        
+        .grid-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+        
+        .section-subtitle {
+            font-size: 16px;
+            color: #64748b;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .books-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .book-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .book-cover {
+            height: 200px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-cover::before {
+            content: '📚';
+            font-size: 60px;
+        }
+        
+        .book-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .book-status.soon {
+            background: #fbbf24;
+            color: #1f2937;
+        }
+        
+        .book-content {
+            padding: 30px;
+        }
+        
+        .book-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+        
+        .book-author {
+            font-size: 14px;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .book-description {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .book-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .meta-tag {
+            background: #f0f9ff;
+            color: #0369a1;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .book-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f8fafc;
+            color: #475569;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .btn-secondary:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+        
+        /* Footer */
+        .page-footer {
+            position: absolute;
+            bottom: 10mm;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40mm;
+            font-size: 10px;
+            color: #64748b;
+        }
+        
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            margin: 40px 0;
+            padding: 0 40mm;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .progress-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        
+        .progress-percentage {
+            font-size: 14px;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3b82f6;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+        
+        /* Helper Classes */
+        .text-center { text-align: center; }
+        .mb-30 { margin-bottom: 30px; }
+        .mt-40 { margin-top: 40px; }
+        .p-40 { padding: 40px; }
+        
+        @media print {
+            body { margin: 0; }
+            .book-page { page-break-after: always; }
+            .nav-menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        <a href="index.html" class="nav-logo">
+            <span>📚</span>
+            <span>SparKids Smart Books</span>
+        </a>
+        
+        <div class="nav-links">
+            <a href="#hero" class="nav-link">হোম</a>
+            <a href="#books" class="nav-link">বইসমূহ</a>
+            <a href="https://wa.me/8801882834071" target="_blank" class="nav-link">সাহায্য</a>
+        </div>
+    </nav>
+    
+    <!-- ==========================================
+         SPARAKIDS SMART BOOK SERIES - BOOKS ACCESS
+         ========================================== -->
+    
+    <!-- PAGE 1: HERO SECTION -->
+    <div class="book-page">
+        <div class="hero-section">
+            <h1 class="hero-title">
+                🌟 SparKids Smart Book Series 🌟
+            </h1>
+            
+            <p class="hero-subtitle">
+                আপনার শিশুর জন্য ডিজিটাল ইন্টারেক্টিভ বইসমূহ - প্রিন্ট-রেডি এইচডি পিডিএফ, অডিও ও অনলাইন গেমস সংবলিত হোম-স্কুলিং বইসমূহ
+            </p>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <div class="progress-title">📊 শিক্ষা প্রগতি</div>
+                    <div class="progress-percentage">২টি বই • ১৮ পৃষ্ঠা</div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%;"></div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#books" class="action-btn btn-primary">
+                    📖 সকল বই দেখুন
+                </a>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div>
+                পৃষ্ঠা ১
+            </div>
+        </div>
+    </div>
+    
+    <!-- PAGE 2: BOOKS GRID -->
+    <div class="book-page" id="books">
+        <div class="books-grid">
+            <div class="grid-header">
+                <h2 class="section-title">📚 উপলব্ধ বইসমূহ</h2>
+                <p class="section-subtitle">আপনার শিশুর শিক্ষার জন্য ডিজাইন করা ইন্টারেক্টিভ বইসমূহ</p>
+            </div>
+            
+            <div class="books-container">
+                <!-- Book 1: Active -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <div class="book-status">Active</div>
+                    </div>
+                    
+                    <div class="book-content">
+                        <h3 class="book-title">SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH</h3>
+                        
+                        <div class="book-author">📖 SparKids Education Ltd.</div>
+                        
+                        <div class="book-description">
+                            12-Week Phonics & Spoken English Program for Preschoolers (3-5 years). 
+                            Complete phonics curriculum with spoken English practice, 
+                            home routines, and interactive games.
+                        </div>
+                        
+                        <div class="book-meta">
+                            <span class="meta-tag">🎯 3-5 Years</span>
+                            <span class="meta-tag">📚 12-Week Roadmap</span>
+                            <span class="meta-tag">📖 Dual-Page Method</span>
+                            <span class="meta-tag">🗣️ Spoken English</span>
+                        </div>
+                        
+                        <div class="book-actions">
+                            <a href="books/phonics-spoken-english/01-front-matter.html" class="action-btn btn-primary">
+                                📖 View Online
+                            </a>
+                            <a href="#" class="action-btn btn-secondary">
+                                📥 Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 2: Upcoming -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <div class="book-status soon">Coming Soon</div>
+                    </div>
+                    
+                    <div class="book-content">
+                        <h3 class="book-title">SparKids General Knowledge & World Explorer</h3>
+                        
+                        <div class="book-author">📖 SparKids Education Ltd.</div>
+                        
+                        <div class="book-description">
+                            Your child's general knowledge and world exploration journey. 
+                            Comprehensive coverage of countries, cultures, and natural phenomena 
+                            with interactive learning activities.
+                        </div>
+                        
+                        <div class="book-meta">
+                            <span class="meta-tag">🌍 General Knowledge</span>
+                            <span class="meta-tag">🗺️ World Explorer</span>
+                            <span class="meta-tag">📱 Interactive</span>
+                        </div>
+                        
+                        <div class="book-actions">
+                            <button class="action-btn btn-secondary" disabled style="cursor: not-allowed; opacity: 0.5;">
+                                🔒 Coming Soon
+                            </button>
+                            <a href="#" class="action-btn btn-secondary">
+                                📥 Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 3: Upcoming -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <div class="book-status soon">Coming Soon</div>
+                    </div>
+                    
+                    <div class="book-content">
+                        <h3 class="book-title">SparKids Early Math & Brain Games</h3>
+                        
+                        <div class="book-author">📖 SparKids Education Ltd.</div>
+                        
+                        <div class="book-description">
+                            Early mathematics foundation with brain games and problem-solving activities. 
+                            Number sense, patterns, and mathematical reasoning for toddlers.
+                        </div>
+                        
+                        <div class="book-meta">
+                            <span class="meta-tag">➕ গণিত</span>
+                            <span class="meta-tag">🧠 Brain Games</span>
+                            <span class="meta-tag">🎮 Interactive</span>
+                        </div>
+                        
+                        <div class="book-actions">
+                            <button class="action-btn btn-secondary" disabled style="cursor: not-allowed; opacity: 0.5;">
+                                🔒 Coming Soon
+                            </button>
+                            <a href="#" class="action-btn btn-secondary">
+                                📥 Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book 4: Upcoming -->
+                <div class="book-card">
+                    <div class="book-cover">
+                        <div class="book-status soon">Coming Soon</div>
+                    </div>
+                    
+                    <div class="book-content">
+                        <h3 class="book-title">SparKids First Encyclopedia for Toddlers</h3>
+                        
+                        <div class="book-author">📖 SparKids Education Ltd.</div>
+                        
+                        <div class="book-description">
+                            Comprehensive first encyclopedia for toddlers featuring animals, 
+                            plants, and nature. Visual learning with simple descriptions.
+                        </div>
+                        
+                        <div class="book-meta">
+                            <span class="meta-tag">📖 Encyclopedia</span>
+                            <span class="meta-tag">🌿 Nature</span>
+                            <span class="meta-tag">👁️ Visual Learning</span>
+                        </div>
+                        
+                        <div class="book-actions">
+                            <button class="action-btn btn-secondary" disabled style="cursor: not-allowed; opacity: 0.5;">
+                                🔒 Coming Soon
+                            </button>
+                            <a href="#" class="action-btn btn-secondary">
+                                📥 Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div>
+                পৃষ্ঠা ২
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH - Front Matter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700;800&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #CBD5E1;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Page 1: Cover Page */
+        .book-page {
+            width: 210mm;
+            height: 297mm;
+            max-height: 297mm;
+            box-sizing: border-box;
+            overflow: hidden;
+            page-break-after: always;
+            break-after: page;
+            background-color: #FDFBF7;
+            position: relative;
+            padding: 14mm 14mm 14mm 22mm;
+        }
+        
+        /* Page 2: Copyright Page */
+        .book-page:nth-child(2) {
+            padding: 14mm 22mm 14mm 14mm;
+        }
+        
+        /* Page 3: How to Use Guide */
+        .book-page:nth-child(3) {
+            padding: 14mm 14mm 14mm 22mm;
+        }
+        
+        /* Page 4: TOC */
+        .book-page:nth-child(4) {
+            padding: 14mm 22mm 14mm 14mm;
+        }
+        
+        /* Cover Page Styling */
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .top-header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .header-pill {
+            background: #1A2B4C;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .title-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .brand-name {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 48px;
+            color: #1A2B4C;
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .star-mascot {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(255,215,0,0.4);
+        }
+        
+        .star-mascot::before {
+            content: '⭐';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+        }
+        
+        .main-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 32px;
+            color: #1A2B4C;
+            margin: 20px 0;
+            line-height: 1.3;
+        }
+        
+        .subtitle {
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 18px;
+            color: #475569;
+            margin: 15px 0;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+        
+        .visual-frame {
+            background: linear-gradient(135deg, #FFF9E6 0%, #FEF3C7 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .visual-frame::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.3), transparent 70%);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -20px) rotate(180deg); }
+        }
+        
+        .mascot-container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .star-mascot-large {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(255,215,0,0.4);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .star-mascot-large::before {
+            content: '⭐';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+        }
+        
+        .characters {
+            display: flex;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .character {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-size: 24px;
+        }
+        
+        .sound-bubbles {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+        }
+        
+        .bubble {
+            background: white;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1A2B4C;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .slide-banner {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #1A2B4C;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            animation: slide 3s ease-in-out infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            50% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .feature-badges {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .badge {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .badge-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .badge-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1A2B4C;
+            margin-bottom: 5px;
+        }
+        
+        .badge-desc {
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+        
+        .publisher-strip {
+            background: #1A2B4C;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: auto;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        /* Copyright Page Styling */
+        .copyright-content {
+            padding: 40px 0;
+        }
+        
+        .copyright-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1A2B4C;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .publisher-info {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 15px;
+        }
+        
+        .info-line {
+            font-size: 14px;
+            color: #475569;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .legal-notice {
+            background: #fef2f2;
+            border: 2px solid #fca5a5;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .isbn-info {
+            background: #f0fdf4;
+            border: 2px solid #22c55e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .edtech-box {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px 0;
+        }
+        
+        /* How to Use Guide Styling */
+        .how-to-use-content {
+            padding: 30px 0;
+        }
+        
+        .dual-page-section {
+            margin: 40px 0;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .page-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+        }
+        
+        .page-card-left {
+            border-left: 4px solid #3b82f6;
+            background: linear-gradient(135deg, #f0f9ff, #eff6ff);
+        }
+        
+        .page-card-right {
+            border-left: 4px solid #22c55e;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A2B4C;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-content {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+        }
+        
+        .routine-flowchart {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .step-box {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            min-width: 150px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0 auto 10px auto;
+        }
+        
+        .golden-tips {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border: 2px solid #fbbf24;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .golden-tips::before {
+            content: '🏆';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 60px;
+            opacity: 0.1;
+        }
+        
+        /* TOC Styling */
+        .toc-content {
+            padding: 30px 0;
+        }
+        
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .month-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .month-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .month-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .month-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        
+        .month-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1A2B4C;
+            flex: 1;
+        }
+        
+        .month-range {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .page-ranges {
+            font-size: 13px;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .appendices-footer {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        /* Footer Styling */
+        .page-footer {
+            position: absolute;
+            bottom: 10mm;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 14mm;
+            font-size: 10px;
+            color: #64748b;
+        }
+        
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+        
+        /* Page Numbers */
+        .page-number {
+            color: #94a3b8;
+        }
+        
+        /* Special Elements */
+        .special-element {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border: 2px solid #fbbf24;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #92400e;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 210mm) {
+            .book-page {
+                font-size: 14px;
+            }
+        }
+        
+        /* Print optimizations */
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+            }
+            
+            .book-page {
+                page-break-after: always;
+                box-shadow: none;
+                margin: 0;
+            }
+            
+            .header-pill {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .header-pill::before {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+        
+        /* Helper Classes */
+        .text-center { text-align: center; }
+        .mb-20 { margin-bottom: 20px; }
+        .mt-30 { margin-top: 30px; }
+        .p-25 { padding: 25px; }
+    </style>
+</head>
+<body>
+    <!-- ==========================================
+         SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH
+         FRONT MATTER - 4 PAGES
+         ========================================== -->
+    
+    <!-- PAGE 1: COVER PAGE -->
+    <div class="book-page" id="SK-PH1-P001-CVR">
+        <div class="cover-page">
+            <div class="top-header">
+                <div class="header-pill">PLAYGROUP • NURSERY • KINDERGARTEN (AGES 3–5)</div>
+            </div>
+            
+            <div class="title-section">
+                <div class="brand-name">
+                    <div class="star-mascot"></div>
+                    SPARKIDS
+                    <div class="star-mascot"></div>
+                </div>
+                
+                <h1 class="main-title">
+                    KIDS PHONICS & SPOKEN ENGLISH
+                </h1>
+                
+                <div class="subtitle">
+                    12-Week Interactive Home-Schooling Program | ১২ সপ্তাহের স্মার্ট হোম-লার্নিং গাইড
+                </div>
+            </div>
+            
+            <div class="visual-frame">
+                <div class="slide-banner">c • a • t -> cat!</div>
+                
+                <div class="mascot-container">
+                    <div class="star-mascot-large"></div>
+                </div>
+                
+                <div class="characters">
+                    <div class="character">👦</div>
+                    <div class="character">👧</div>
+                </div>
+                
+                <div class="sound-bubbles">
+                    <div class="bubble">s</div>
+                    <div class="bubble">a</div>
+                    <div class="bubble">t</div>
+                    <div class="bubble">i</div>
+                    <div class="bubble">p</div>
+                    <div class="bubble">n</div>
+                </div>
+            </div>
+            
+            <div class="feature-badges">
+                <div class="badge">
+                    <div class="badge-icon">📚</div>
+                    <div class="badge-title">Dual-Page Method (ডুয়াল-পেজ পদ্ধতি)</div>
+                    <div class="badge-desc">Left: Parent Guide in Bangla | Right: Child Art</div>
+                </div>
+                
+                <div class="badge">
+                    <div class="badge-icon">🗣️</div>
+                    <div class="badge-title">Spoken English Routines (দৈনন্দিন স্পোকেন)</div>
+                    <div class="badge-desc">Household Action Dialogues with Native Accent</div>
+                </div>
+                
+                <div class="badge">
+                    <div class="badge-icon">📱</div>
+                    <div class="badge-title">QR Smart Audio & Touch Games</div>
+                    <div class="badge-desc">Instant Native Accent Audio Access</div>
+                </div>
+            </div>
+            
+            <div class="publisher-strip">
+                <strong>SparkKids Publishing Ltd.</strong> | First Edition 2026 | Smart Workbook + Free Digital Parent Dashboard
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ১</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 2: COPYRIGHT & PUBLICATION INFO -->
+    <div class="book-page" id="SK-PH1-P002-CPY">
+        <div class="copyright-content">
+            <h2 class="copyright-title">
+                SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH (First Edition - 2026)
+            </h2>
+            
+            <div class="publisher-info">
+                <div class="section-title">📍 Publisher Information</div>
+                <div class="info-line"><strong>SparKids Education Ltd.</strong></div>
+                <div class="info-line">42/A Gulshan Avenue, Dhaka-1212, Bangladesh</div>
+                <div class="info-line">Web: https://sparkids.com</div>
+                <div class="info-line">Email: support@sparkids.com</div>
+            </div>
+            
+            <div class="publisher-info">
+                <div class="section-title">🧠 Curriculum Board</div>
+                <div class="info-line"><strong>Early Childhood Learning Research Team</strong></div>
+                <div class="info-line">Department of Applied English Linguistics, Dhaka</div>
+            </div>
+            
+            <div class="legal-notice">
+                <div class="section-title">⚖️ Legal Notice</div>
+                <div class="info-line"><strong>© 2026 SparKids Education Ltd.</strong> All Rights Reserved.</div>
+                <div class="info-line">Permission granted for non-commercial home-schooling use only.</div>
+                <div class="info-line">Acknowledgment of synthetic phonics sequence courtesy.</div>
+            </div>
+            
+            <div class="isbn-info">
+                <div class="section-title">📚 ISBN Information</div>
+                <div class="info-line"><strong>ISBN: 978-984-98765-0-4</strong> (Hardcover Spiral Edition)</div>
+                <div class="info-line">Printed in Bangladesh by Quality Print Pack Industries Ltd.</div>
+            </div>
+            
+            <div class="edtech-box">
+                <div class="section-title">🔮 EdTech & QR Integration</div>
+                
+                <div class="special-element">
+                    <strong>📱 QR Code Routing</strong><br>
+                    <code>https://sparkids.com/learn/phonics-1</code> (Canonical endpoint verification)
+                </div>
+                
+                <div class="special-element">
+                    <strong>🛡️ Child Privacy Protocols</strong><br>
+                    COPPA & Zero-PII compliance | No child photos, full names, or tracking
+                </div>
+                
+                <div class="special-element">
+                    <strong>📶 Offline Fallback Note</strong><br>
+                    Reassurance that parents can run all lessons 100% offline using the Bengali phonics guides
+                </div>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ২</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 3: HOW TO USE THIS BOOK -->
+    <div class="book-page" id="SK-PH1-P003-HTU">
+        <div class="how-to-use-content">
+            <h2 class="copyright-title">কীভাবে এই বইটি ব্যবহার করবেন? (ডুয়াল-পেজ পদ্ধতি)</h2>
+            
+            <h3 class="subtitle" style="text-align: center; margin-bottom: 30px;">The Revolutionary Dual-Page Architecture for Stress-Free Home Learning</h3>
+            
+            <div class="dual-page-section">
+                <div class="comparison-grid">
+                    <div class="page-card page-card-left">
+                        <div class="card-title">
+                            <span>📖</span>
+                            <span>লেফ্ট পেজ - প্যারেন্ট ফ্যাসিলিটেটর গাইড</span>
+                        </div>
+                        
+                        <div class="card-content">
+                            <strong>সাউন্ড মেকানিক্স (বিশুদ্ধ উচ্চারণ কৌশল)</strong><br>
+                            • বাংলাদেশের স্বনির্ধারিত ফোনেম বিশ্লেষণ<br>
+                            • সাউন্ড-টু-লেটার ম্যাপিং<br>
+                            • অঙ্গভঙ্গি সহায়তা অঙ্গভঙ্গি<br>
+                            <br>
+                            <strong>ধাপে ধাপে প্যারেন্ট স্ক্রিপ্ট (শিশুকে গল্প বলা ও আদর করে শেখানো)</strong><br>
+                            • ধাপ ১: পরিচয় ও আনন্দের সাথে রিভিশন<br>
+                            • ধাপ ২: নতুন সাউন্ডের গল্প বলুন<br>
+                            • ধাপ ৩: শিশুকে গল্প বলতে উৎসাহিত করুন<br>
+                            <br>
+                            <strong>স্পোকেন ইংলিশ রুটিন (দৈনন্দিন ৩টি ইংরেজি বাক্য)</strong><br>
+                            • 'Can you say X like in Y?' রুটিন<br>
+                            • 'Yes, please' প্রশংসা<br>
+                            • 'Good job! Let's try again' উৎসাহ
+                            <br>
+                            <strong>সাধারণ ভুল ও সংশোধন</strong><br>
+                            • 'একে-এক' সম্পর্কিত ভুল<br>
+                            • ডাইগ্রাফ এবং একক অক্ষরের মধ্যে পার্থক্য<br>
+                            • উচ্চারণ-ভিত্তিক ব্যাকরণ ভুল
+                        </div>
+                    </div>
+                    
+                    <div class="page-card page-card-right">
+                        <div class="card-title">
+                            <span>🎨</span>
+                            <span>রাইট পেজ - শিশুর রঙিন পাতা</span>
+                        </div>
+                        
+                        <div class="card-content">
+                            <strong>বড় হরফের সাউন্ড আর্ট (কোনো টেক্সট ক্ল্যাটার ছাড়া)</strong><br>
+                            • বড় অক্ষর ব্যান্ড (হালকা, উজ্জ্বল)r>
+                            • সহজ ভিজ্যুয়াল রিপ্রেজেন্টেশন
+                            <br>
+                            <strong>শারীরিক অ্যাকশন আইকন (হাতে-কলমে অঙ্গভঙ্গি)</strong><br>
+                            • জপমালা গুনতে আঙুল নাড়া<br>
+                            • উচ্চারণের জন্য মুখভঙ্গি<br>
+                            • ছবি ও শব্দ মিলিয়ে খেলা<br>
+                            <br>
+                            <strong>পয়েন্ট-অ্যান্ড-সে গ্যালারি (আঙুল ছুঁয়ে শব্দ খোঁজা)</strong><br>
+                            • ৪ টা আইকন ক diverseক্স ({apple, dog, star, car})
+                            <br>
+                            <strong>ট্যাকটাইল ট্রেসিং ট্র্যাক (মোটা ডটেড লাইন)</strong><br>
+                            • SVG সহজ শব্দ গঠনের জন্য ড্রাইং প্যাথ (যেমন: /k/-/æ/-/t/)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="routine-flowchart">
+                <div class="step-box">
+                    <div class="step-number">১</div>
+                    <div>রিভিশন ও আনন্দ (২ মিনিট)</div>
+                </div>
+                
+                <div style="font-size: 24px;">→</div>
+                
+                <div class="step-box">
+                    <div class="step-number">২</div>
+                    <div>নতুন সাউন্ডের গল্প (৩ মিনিট)</div>
+                </div>
+                
+                <div style="font-size: 24px;">→</div>
+                
+                <div class="step-box">
+                    <div class="step-number">৩</div>
+                    <div>ছবির খেলা ও ট্রেসিং (৪ মিনিট)</div>
+                </div>
+                
+                <div style="font-size: 24px;">→</div>
+                
+                <div class="step-box">
+                    <div class="step-number">৪</div>
+                    <div>স্পোকেন ডায়ালগ (২ মিনিট)</div>
+                </div>
+            </div>
+            
+            <div class="golden-tips">
+                <strong>🏆 গোল্ডেন টিপস: অক্ষরের নাম নয়, আগে সাউন্ড শেখান</strong><br>
+                <br>
+                Explanation of why teaching /k/-/æ/-/t/ enables reading 'cat', whereas 'C-A-T' creates confusion. This approach focuses on sound recognition before letter names, helping children decode words more effectively by connecting sounds directly to written forms.
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৩</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 4: 12-WEEK ROADMAP & TABLE OF CONTENTS -->
+    <div class="book-page" id="SK-PH1-P004-TOC">
+        <div class="toc-content">
+            <h2 class="copyright-title">১২ সপ্তাহের শিখন রোডম্যাপ ও সূচিপত্র | 12-Week Curriculum Map</h2>
+            
+            <div class="months-grid">
+                <div class="month-card">
+                    <div class="month-header">
+                        <div class="month-number">১</div>
+                        <div>
+                            <div class="month-title">MONTH ১ (সপ্তাহ ১–৪)</div>
+                            <div class="month-range">ধ্বনি সচেতনতা, শারীরিক অ্যাকশন ও ঘরের রুটিন</div>
+                        </div>
+                    </div>
+                    
+                    <div class="page-ranges">
+                        পৃষ্ঠা: ৮–৫১
+                    </div>
+                </div>
+                
+                <div class="month-card">
+                    <div class="month-header">
+                        <div class="month-number">২</div>
+                        <div>
+                            <div class="month-title">MONTH ২ (সপ্তাহ ৫–৮)</div>
+                            <div class="month-range">সাউন্ড-স্লাইডিং, CVC শব্দ পরিবার ও ট্রিকি ওয়ার্ড</div>
+                        </div>
+                    </div>
+                    
+                    <div class="page-ranges">
+                        পৃষ্ঠা: ৫২–৯১
+                    </div>
+                </div>
+                
+                <div class="month-card">
+                    <div class="month-header">
+                        <div class="month-number">৩</div>
+                        <div>
+                            <div class="month-title">MONTH ৩ (সপ্তাহ ৯–১২)</div>
+                            <div class="month-range">ডাইগ্রাফ, ডিকোডেবল গল্প ও স্বতঃস্ফূর্ত স্পোকেন</div>
+                        </div>
+                    </div>
+                    
+                    <div class="page-ranges">
+                        পৃষ্ঠা: ৯২–১৩০
+                    </div>
+                </div>
+            </div>
+            
+            <div class="appendices-footer">
+                <div class="section-title">📚 Appendices Overview</div>
+                <div class="info-line"><strong>Appendix A</strong>: ৪২-সাউন্ড চার্ট এবং ফোনেম ম্যাপিং</div>
+                <div class="info-line"><strong>Appendix B</strong>: উচ্চারণ গাইড এবং প্রাকটিস এক্সারসাইজ</div>
+                <div class="info-line"><strong>Appendix C</strong>: ট্রিগার লেবেল এবং এ্যাকসেস কোড সিস্টেম</div>
+                <div class="info-line"><strong>Appendix D</strong>: গ্রাজুয়েশন সার্টিফিকেট এবং প্রগতি ট্র্যাকার</div>
+                <div class="info-line" style="margin-top: 15px;"><strong>কোড: SK-PH1-P004-TOC</strong> | Generated by AI Assistant</div>
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪</div>
+        </div>
+    </div>
+</body>
+</html>
