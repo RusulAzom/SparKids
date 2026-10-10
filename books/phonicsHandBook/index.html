@@ -52,13 +52,17 @@
 
 <script>
   /* ---------------------------------------------------------------
-     Add future chapters to this array — ORDER defines page sequence.
-     Each file must contain <section class="book-page"> blocks and
-     link to assets/style.css. The compiler injects every section
-     here so Ctrl/Cmd + P prints one seamless multi-chapter PDF.
+     Chapter load order — this ORDER defines the page sequence.
+     Each file contains .book-page containers (chapters 2-4 use <div>,
+     chapter 1 uses <section>) and links to assets/style.css. The
+     compiler injects every .book-page here so Ctrl/Cmd + P prints
+     one seamless multi-chapter PDF (56 pages, 1-56).
      --------------------------------------------------------------- */
   const CHAPTERS = [
-    'chapterOne.html'
+    'chapterOne.html',
+    'chapterTwo.html',
+    'chapterThree.html',
+    'chapterFour.html'
   ];
 
   const container = document.getElementById('book-container');
@@ -69,8 +73,8 @@
     if(!res.ok) throw new Error(file + ' → HTTP ' + res.status);
     const text = await res.text();
     const doc = new DOMParser().parseFromString(text, 'text/html');
-    const sections = doc.querySelectorAll('section.book-page');
-    if(sections.length === 0) throw new Error(file + ' → no .book-page sections found');
+    const sections = doc.querySelectorAll('.book-page');
+    if(sections.length === 0) throw new Error(file + ' → no .book-page containers found');
     const frag = document.createDocumentFragment();
     sections.forEach(sec => frag.appendChild(document.importNode(sec, true)));
     return frag;

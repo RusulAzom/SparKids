@@ -171,4 +171,99 @@ body{ counter-reset: pg; }
 .cmp .new .t{ color:#047857; }
 .cmp p{ font-size:12px; margin:0; line-height:1.55; }
 
+/* ============ SHARED WRAPPER ============ */
+.book-container{ width:100%; }
+
+/* ============ CHAPTER 4 : DIGRAPH RULE BAR ============ */
+.rulebar{
+  display:flex; align-items:center; justify-content:center; gap:16px;
+  background:#F8FAFC; border:1.5px solid var(--line); border-radius:12px;
+  padding:8px 12px; margin-bottom:9px; font-size:13px; font-weight:700;
+}
+.rulebar .single{ color:var(--coral); font-size:17px; letter-spacing:2px; }
+.rulebar .pair{ color:#fff; background:var(--sky); border-radius:8px; padding:3px 14px; letter-spacing:3px; }
+
+/* ============ CHAPTER 4 : TRICKY STAR WORDS ============ */
+.tricky-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:10px; }
+.tstar{
+  background:linear-gradient(160deg,#FFF7E6,#FDE68A); border:2px solid var(--gold);
+  border-radius:14px; padding:12px 6px; text-align:center; box-shadow:0 4px 10px rgba(241,196,15,.28);
+}
+.tstar .st{ font-size:30px; color:#C79A00; line-height:1; }
+.tstar .wd{ font-family:'Poppins',sans-serif; font-weight:800; font-size:21px; color:var(--navy); margin-top:6px; }
+.tstar .sp{ font-size:9px; color:#B45309; font-weight:700; letter-spacing:.5px; }
+
+/* ============ CHAPTER 4 : STORY BOXES ============ */
+.story-box{
+  background:var(--card); border:1.5px solid var(--line); border-radius:12px;
+  padding:10px 12px; margin-bottom:10px; box-shadow:0 3px 10px rgba(26,43,76,.08);
+}
+.story-title{ font-family:'Poppins',sans-serif; font-weight:800; font-size:16px; color:var(--coral); margin:0 0 6px; }
+.story-art{ background:#FFFBF0; border-radius:10px; padding:6px; margin-bottom:7px; }
+.story-text{ font-size:15px; line-height:1.85; margin:0; }
+.story-text b{ color:var(--green); }
+
+/* ============ CHAPTER 4 : SPOKEN BADGES ============ */
+.spoke-badges{ display:grid; grid-template-columns:repeat(4,1fr); gap:9px; margin-bottom:9px; }
+.spoke-badge{
+  background:linear-gradient(160deg,var(--skybg),#fff); border:1.5px solid #B6E0FE;
+  border-radius:12px; padding:9px 4px; text-align:center; box-shadow:0 3px 8px rgba(52,152,219,.15);
+}
+.spoke-badge .ic{ font-size:26px; display:block; }
+.spoke-badge .lb{ display:block; font-family:'Poppins',sans-serif; font-weight:700; font-size:12.5px; color:var(--navy); margin-top:3px; line-height:1.2; }
+.spoke-badge .bn{ display:block; font-size:10.5px; color:#475569; }
+
+/* ============ CHAPTER 4 : SOUND INVENTORY (Grand Review) ============ */
+.inv-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:5px; }
+.inv-group{ border-radius:10px; padding:8px 10px; text-align:center; }
+.inv-group:nth-child(1){ background:var(--pink); border:1.5px solid #F7B4B4; }
+.inv-group:nth-child(2){ background:var(--skybg); border:1.5px solid #B6E0FE; }
+.inv-group:nth-child(3){ background:var(--greenbg); border:1.5px solid #A7E9C3; }
+.inv-group.digi{ background:var(--goldbg); border:1.5px solid #F5D97A; }
+.inv-group .gh{ font-family:'Poppins',sans-serif; font-weight:800; font-size:12px; color:var(--navy); }
+.inv-group .gr{ font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; color:var(--coral); letter-spacing:1px; margin-top:3px; }
+
+/* ============ CHAPTER 4 : 20-WORD SAFARI STONES ============ */
+.safari-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:7px; margin-bottom:10px; }
+.stone{
+  background:var(--card); border:1.5px solid var(--line); border-radius:12px;
+  padding:7px 3px; text-align:center; position:relative; box-shadow:0 3px 8px rgba(26,43,76,.08);
+}
+.stone .n{ position:absolute; top:3px; left:5px; font-size:9px; font-weight:800; color:#94a3b8; }
+.stone .ic{ font-size:23px; display:block; line-height:1.1; }
+.stone .w{ font-family:'Poppins',sans-serif; font-weight:800; font-size:14px; color:var(--navy); display:block; }
+.stone .dots{ color:var(--coral); font-size:11px; letter-spacing:1px; }
+.tr-medal{ display:inline-block; vertical-align:middle; margin-right:7px; }
+
+/* ============ CHAPTER 4 : GRADUATION CHECKLIST ============ */
+.chk-list{ display:flex; flex-direction:column; gap:7px; margin-top:5px; }
+.chk{ display:flex; align-items:flex-start; gap:9px; background:#F8FAFC; border:1.5px solid var(--line); border-radius:10px; padding:8px 11px; }
+.chk .box{ font-size:19px; color:var(--sky); line-height:1.2; }
+.chk .bn{ font-size:14px; }
+
+/* ============ CHAPTER 4 : GRADUATION CERTIFICATE ============ */
+.certificate{
+  position:relative; height:100%; background:linear-gradient(180deg,#FFFDF5,#FFF7E6);
+  border:5px solid var(--gold); border-radius:16px; padding:14px 22px; text-align:center;
+  display:flex; flex-direction:column; align-items:center; box-shadow:0 0 0 3px #FDE68A inset;
+}
+.cert-corner{ position:absolute; width:34px; height:34px; }
+.cert-corner.tl{ top:7px; left:7px; } .cert-corner.tr{ top:7px; right:7px; }
+.cert-corner.bl{ bottom:7px; left:7px; } .cert-corner.br{ bottom:7px; right:7px; }
+.cert-star{ margin-top:4px; }
+.cert-academy{ font-family:'Poppins',sans-serif; font-weight:800; font-size:16px; letter-spacing:2px; color:var(--navy); margin-top:5px; }
+.cert-title{ font-family:'Poppins',sans-serif; font-weight:800; font-size:24px; letter-spacing:1px; color:#C79A00; margin-top:3px; }
+.cert-ribbon{
+  display:inline-block; margin-top:7px; background:linear-gradient(90deg,var(--coral),#F59E0B); color:#fff;
+  font-weight:800; font-size:11px; letter-spacing:1.5px; padding:5px 16px; border-radius:20px;
+}
+.cert-sub{ font-family:'Poppins',sans-serif; font-size:13px; color:#475569; margin-top:14px; }
+.cert-name{ font-family:'Comic Neue',cursive; font-size:24px; color:var(--navy); letter-spacing:2px; margin-top:5px; }
+.cert-body{ font-size:14px; line-height:1.75; color:#334155; margin:14px auto 0; max-width:150mm; }
+.cert-body-bn{ font-size:13px; color:#475569; margin:8px auto 0; max-width:150mm; }
+.cert-sign{ display:flex; gap:34px; margin-top:auto; padding-bottom:6px; }
+.cert-sign .sig{ text-align:center; }
+.sig-line{ width:52mm; border-bottom:1.5px solid var(--navy); height:20px; }
+.sig-cap{ font-size:11px; color:#475569; margin-top:3px; }
+
 
