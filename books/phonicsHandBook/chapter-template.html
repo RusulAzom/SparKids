@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SparKids Handbook — Chapter Template</title>
+<!-- Global book & print styles live centrally; do NOT inline styles here -->
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<!-- ==================================================================
+     CHAPTER TEMPLATE — copy this file and rename to chapterTwo.html etc.
+     Rules:
+       • Only <section class="book-page"> blocks go inside <body>.
+       • ODD sections  = Cover / Parent Guide  (gutter on the LEFT)
+       • EVEN sections = Child Playground      (gutter on the RIGHT)
+       • Page numbers & gutters are automatic (CSS nth-child + counter).
+       • index.html injects every .book-page into the master reader.
+     ================================================================== -->
+
+<!-- ===== COVER / SECTION-OPENER (odd) ===== -->
+<section class="book-page cover">
+  <div class="pill">SPARKIDS • CHAPTER TITLE (AGES 3+)</div>
+  <h1 class="title">
+    CHAPTER
+    <svg width="66" height="66" viewBox="0 0 100 100" aria-label="icon"><circle cx="50" cy="50" r="44" fill="#F1C40F"/></svg>
+  </h1>
+  <p class="subtitle">English Subtitle Goes Here</p>
+  <p class="bn bn-subtitle">বাংলা সাব-টাইটেল এখানে</p>
+
+  <div class="showcase"><!-- optional letter / item showcase SVG --></div>
+
+  <div class="badges">
+    <div class="badge"><b>Badge One</b></div>
+    <div class="badge"><b>Badge Two</b></div>
+  </div>
+
+  <div class="pub-strip">SparKids Education • Edition</div>
+</section>
+
+<!-- ===== PARENT FACILITATOR GUIDE (even) ===== -->
+<section class="book-page">
+  <div class="parent-head">
+    <div class="sound-badge s">A</div>
+    <div>
+      <h1>Parent Guide Heading</h1>
+      <div class="bn-sub bn">বাংলা সাব-হেডিং</div>
+    </div>
+  </div>
+
+  <div class="card mech">
+    <span class="label">Sound Mechanics</span>
+    <h3>How to make the sound</h3>
+    <p class="bn">বাংলায় বর্ণনা লিখুন…</p>
+  </div>
+
+  <div class="card action">
+    <span class="label">Physical Action</span>
+    <h3>Gesture</h3>
+    <p class="bn">অঙ্গভঙ্গির বর্ণনা…</p>
+  </div>
+
+  <div class="script">
+    <span class="label">Parent Script</span>
+    <p class="line bn">"প্যারেন্ট স্ক্রিপ্ট এখানে…"</p>
+  </div>
+
+  <div class="routine">
+    <span class="label">Home Spoken Routine</span>
+    <p class="say">"Say this sentence."</p>
+    <p class="bn-say bn">বাংলা অর্থ</p>
+  </div>
+
+  <div class="caution">
+    <span class="label">Note</span>
+    <p class="bn">সতর্কতা / দ্রষ্টব্য…</p>
+  </div>
+</section>
+
+<!-- ===== CHILD VISUAL PLAYGROUND (odd) ===== -->
+<section class="book-page">
+  <div class="child-head">
+    <h1>Child Playground Title</h1>
+    <div class="bn-sub bn">বাংলা শিরোনাম</div>
+  </div>
+
+  <div class="letter-stage">
+    <svg width="200" height="220" viewBox="0 0 200 220" aria-label="letter">
+      <text x="100" y="170" font-size="200" text-anchor="middle" fill="none"
+            stroke="#E74C3C" stroke-width="4" font-family="Poppins">a</text>
+    </svg>
+  </div>
+
+  <div class="pic-grid">
+    <div class="pic-card">
+      <svg viewBox="0 0 40 40" aria-label="item"><circle cx="20" cy="20" r="16" fill="#E74C3C"/></svg>
+      <p class="dots">●</p>
+      <div class="w">word</div>
+      <div class="bn bn">অর্থ</div>
+    </div>
+    <!-- repeat the .pic-card block x4 -->
+  </div>
+
+  <div class="blend-banner">s ──► a = sa<div class="bn bn">ব্লেন্ডিং</div></div>
+
+  <div class="prompt bn">Touch the red dot and say the sound!</div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SparKids Handbook — Master Reader &amp; PDF Compiler</title>
+<!-- Central print & book CSS (shared by all chapters) -->
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* ---- Index-only chrome (never printed) ---- */
+  .toolbar{
+    width:210mm; max-width:96vw; margin:0 auto 20px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    background:var(--navy); color:#fff; border-radius:12px; padding:10px 16px;
+    font-family:'Poppins',sans-serif; box-shadow:0 6px 20px rgba(26,43,76,.25);
+  }
+  .toolbar .brand{ font-weight:800; letter-spacing:1px; font-size:15px; }
+  .toolbar .brand span{ color:var(--gold); }
+  .toolbar .meta{ font-size:12px; opacity:.85; }
+  .toolbar .btn{
+    background:var(--gold); color:var(--navy); border:none; cursor:pointer;
+    font-family:'Poppins',sans-serif; font-weight:800; font-size:13px;
+    padding:8px 16px; border-radius:8px; box-shadow:0 3px 0 #C79A00;
+  }
+  .toolbar .btn:active{ transform:translateY(2px); box-shadow:0 1px 0 #C79A00; }
+  #book-container{ display:flex; flex-direction:column; align-items:center; gap:20px; width:100%; }
+  .loader{
+    width:210mm; max-width:96vw; text-align:center; color:#334155;
+    font-family:'Poppins',sans-serif; font-size:14px; padding:48px 20px;
+    background:#fff; border:1.5px dashed var(--line); border-radius:12px;
+  }
+  .load-error{
+    width:210mm; max-width:96vw; background:#FEE2E2; border:1.5px solid #F7B4B4;
+    border-left:6px solid var(--coral); border-radius:12px; padding:16px 18px;
+    font-family:'Poppins',sans-serif; color:#7f1d1d; font-size:13px; line-height:1.7;
+  }
+  .load-error code{ background:#fff; padding:1px 6px; border-radius:5px; font-size:12px; }
+  @media print{ .no-print{ display:none !important; } }
+</style>
+</head>
+<body>
+
+  <div class="toolbar no-print">
+    <div class="brand">SPARK<span>IDS</span> — Master Reader</div>
+    <div class="meta">Single-Volume Viewer &amp; PDF Compiler</div>
+    <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  </div>
+
+  <main id="book-container">
+    <div class="loader" id="loader">লোড হচ্ছে… Loading chapters…</div>
+  </main>
+
+<script>
+  /* ---------------------------------------------------------------
+     Add future chapters to this array — ORDER defines page sequence.
+     Each file must contain <section class="book-page"> blocks and
+     link to assets/style.css. The compiler injects every section
+     here so Ctrl/Cmd + P prints one seamless multi-chapter PDF.
+     --------------------------------------------------------------- */
+  const CHAPTERS = [
+    'chapterOne.html'
+  ];
+
+  const container = document.getElementById('book-container');
+  const loader = document.getElementById('loader');
+
+  async function loadChapter(file){
+    const res = await fetch(file, { cache:'no-store' });
+    if(!res.ok) throw new Error(file + ' → HTTP ' + res.status);
+    const text = await res.text();
+    const doc = new DOMParser().parseFromString(text, 'text/html');
+    const sections = doc.querySelectorAll('section.book-page');
+    if(sections.length === 0) throw new Error(file + ' → no .book-page sections found');
+    const frag = document.createDocumentFragment();
+    sections.forEach(sec => frag.appendChild(document.importNode(sec, true)));
+    return frag;
+  }
+
+  (async () => {
+    let loaded = 0;
+    for(const file of CHAPTERS){
+      try{
+        const frag = await loadChapter(file);
+        container.appendChild(frag);
+        loaded++;
+      }catch(err){
+        console.error(err);
+        container.insertAdjacentHTML('beforeend',
+          '<div class="load-error">⚠️ <b>Could not load <code>' + file + '</code></b><br>' +
+          'Browsers block <b>fetch()</b> on <code>file://</code> URLs. Serve this folder over HTTP, e.g.:<br>' +
+          '<code>python -m http.server</code> &nbsp;or&nbsp; <code>npx serve</code><br>' +
+          'then open <code>http://localhost:8000/index.html</code> and press Ctrl/Cmd&nbsp;+&nbsp;P.</div>');
+      }
+    }
+    if(loader) loader.remove();
+    if(loaded === 0 && CHAPTERS.length === 0){
+      container.insertAdjacentHTML('beforeend', '<div class="loader">No chapters configured in index.html.</div>');
+    }
+  })();
+</script>
+</body>
+</html>

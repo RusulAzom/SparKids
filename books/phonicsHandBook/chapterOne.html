@@ -4,134 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SPARKIDS: My First Phonics &amp; Spoken English Handbook</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@600;800&display=swap');
-:root{
-  --navy:#1A2B4C; --gold:#F1C40F; --coral:#E74C3C;
-  --green:#2ECC71; --sky:#3498DB; --card:#FFFFFF; --line:#E2E8F0;
-  --pink:#FEE2E2; --skybg:#E0F2FE; --goldbg:#FEF3C7; --greenbg:#D1FAE5;
-}
-@page{ size:A4 portrait; margin:0; }
-*{ box-sizing:border-box; }
-body{
-  margin:0; padding:20px 0; background:#CBD5E1;
-  display:flex; flex-direction:column; align-items:center; gap:20px;
-  font-family:'Poppins','Comic Neue','Segoe UI',cursive,sans-serif;
-  color:var(--navy);
-  -webkit-print-color-adjust:exact; print-color-adjust:exact;
-}
-.bn{ font-family:'Hind Siliguri','Kalpurush','SolaimanLipi',sans-serif; line-height:1.6; }
-.book-page{
-  width:210mm; height:297mm; max-height:297mm;
-  box-sizing:border-box; position:relative; overflow:hidden;
-  background:#FDFBF7; box-shadow:0 6px 26px rgba(0,0,0,.28);
-}
-.book-page:nth-child(odd){ padding:14mm 14mm 14mm 22mm; }
-.book-page:nth-child(even){ padding:14mm 22mm 14mm 14mm; }
-@media print{
-  body{ margin:0; padding:0; background:none; }
-  .book-page{ page-break-after:always; break-after:page; box-shadow:none !important; margin:0 !important; }
-}
-/* ============ SHARED ============ */
-.sound-badge{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:42px; height:42px; border-radius:50%; color:#fff; flex:none;
-  font-weight:800; font-size:24px; background:var(--coral);
-  box-shadow:0 3px 0 rgba(0,0,0,.15);
-}
-.sound-badge.g{background:var(--green)} .sound-badge.s{background:var(--sky)} .sound-badge.y{background:var(--gold); color:var(--navy)}
-.card{
-  background:var(--card); border:1.5px solid var(--line); border-radius:12px;
-  padding:11px 14px; margin-bottom:9px; box-shadow:0 3px 10px rgba(26,43,76,.07);
-}
-.label{
-  display:inline-block; font-weight:700; font-size:11px; letter-spacing:.4px;
-  text-transform:uppercase; color:#fff; background:var(--navy);
-  padding:2px 10px; border-radius:20px; margin-bottom:5px;
-}
-/* ============ PARENT (verso / even) ============ */
-.parent-head{ display:flex; align-items:center; gap:12px; margin-bottom:11px; }
-.parent-head h1{ font-size:23px; margin:0; line-height:1.15; color:var(--navy); }
-.parent-head .bn-sub{ font-size:16px; font-weight:700; color:var(--coral); margin-top:2px; }
-.mech h3, .action h3{ font-size:12px; margin:0 0 4px; color:var(--sky); letter-spacing:.4px; text-transform:uppercase; }
-.mech p, .action p{ font-size:15px; margin:0; }
-.script{
-  background:var(--goldbg); border:1.5px solid #F5D97A; border-left:6px solid var(--gold);
-  border-radius:12px; padding:11px 14px; margin-bottom:9px;
-}
-.script .label{ background:var(--gold); color:var(--navy); }
-.script .line{ font-size:15px; font-weight:600; margin:0; line-height:1.55; }
-.routine{
-  background:var(--greenbg); border:1.5px solid #A7E9C3; border-left:6px solid var(--green);
-  border-radius:12px; padding:11px 14px; margin-bottom:9px;
-}
-.routine .label{ background:var(--green); }
-.routine .say{ font-size:18px; font-weight:700; margin:0; }
-.routine .bn-say{ font-size:14px; margin:2px 0 0; }
-.caution{
-  background:var(--pink); border:1.5px solid #F7B4B4; border-left:6px solid var(--coral);
-  border-radius:12px; padding:10px 14px; margin-bottom:9px; font-size:14px;
-}
-.caution .label{ background:var(--coral); }
-.caution .bn{ font-weight:600; }
-/* ============ CHILD (recto / odd) ============ */
-.child-head{ text-align:center; margin-bottom:7px; }
-.child-head h1{ font-size:25px; margin:0; color:var(--coral); }
-.child-head .bn-sub{ font-size:14px; font-weight:700; color:var(--navy); margin-top:1px; }
-.letter-stage{
-  display:flex; align-items:center; justify-content:center;
-  background:linear-gradient(180deg,#FFFDF5,#FFF7E6);
-  border:2px dashed var(--gold); border-radius:16px; padding:4px; margin-bottom:8px;
-}
-.pic-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:8px; }
-.pic-card{
-  background:var(--card); border:1.5px solid var(--line); border-radius:12px;
-  padding:7px 5px; text-align:center; box-shadow:0 3px 10px rgba(26,43,76,.07);
-}
-.pic-card svg{ width:100%; height:auto; max-height:20mm; }
-.pic-card .dots{ color:var(--coral); font-size:12px; letter-spacing:2px; margin:3px 0 0; }
-.pic-card .w{ font-weight:800; font-size:15px; color:var(--navy); }
-.pic-card .bn{ font-size:10.5px; color:#475569; line-height:1.35; }
-
-/* ============ CHILD (cont) ============ */
-.prompt{
-  background:var(--skybg); border:1.5px solid #B6E0FE; border-radius:12px;
-  padding:8px 12px; text-align:center; font-size:15px; font-weight:700; color:var(--navy);
-}
-.prompt .bn{ font-weight:600; }
-.blend-banner{
-  background:linear-gradient(90deg,var(--coral),var(--gold)); color:#fff;
-  border-radius:12px; padding:8px 12px; text-align:center; font-size:19px; font-weight:800;
-  margin-bottom:8px; box-shadow:0 4px 12px rgba(231,76,60,.3);
-}
-.blend-banner .bn{ font-size:13px; font-weight:600; }
-.blend-row{ display:flex; gap:9px; margin-bottom:8px; }
-.blend-card{ flex:1; background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:8px; text-align:center; }
-.blend-card .w{ font-size:20px; font-weight:800; color:var(--green); }
-.blend-card .phon{ color:var(--coral); font-size:14px; letter-spacing:1px; }
-.blend-card .bn{ font-size:11.5px; color:#475569; }
-/* ============ COVER ============ */
-.cover{ display:flex; flex-direction:column; height:100%; text-align:center; align-items:center; }
-.pill{ display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:11px; letter-spacing:1px; padding:6px 15px; border-radius:30px; margin-top:2mm; }
-.title{ font-size:60px; font-weight:800; letter-spacing:2px; margin:8px 0 0; color:var(--gold); text-shadow:0 3px 0 #C79A00, 0 6px 14px rgba(0,0,0,.18); display:flex; align-items:center; gap:10px; justify-content:center; }
-.subtitle{ font-size:16px; font-weight:700; color:var(--navy); margin:6px 0 0; }
-.bn-subtitle{ font-size:14px; color:#475569; margin:5px 0 0; }
-.showcase{ margin:10px auto 6px; }
-.badges{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:4px; }
-.badge{ background:var(--card); border:1.5px solid var(--line); border-radius:20px; padding:6px 12px; font-size:11.5px; font-weight:700; box-shadow:0 3px 8px rgba(26,43,76,.08); }
-.badge b{ color:var(--coral); }
-.pub-strip{ position:absolute; bottom:0; left:0; right:0; background:var(--navy); color:#fff; text-align:center; padding:7px; font-size:12px; font-weight:600; letter-spacing:.5px; }
-/* ============ CARNIVAL ============ */
-.balloons{ display:flex; justify-content:center; gap:11px; margin:4px 0 7px; }
-.balloon{ width:42px; height:52px; border-radius:50% 50% 50% 50%/60% 60% 40% 40%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:24px; box-shadow:0 6px 12px rgba(0,0,0,.15); position:relative; }
-.balloon::after{ content:""; position:absolute; bottom:-9px; left:50%; width:2px; height:11px; background:#94a3b8; }
-.word-grid{ display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:7px; }
-.dw{ background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:6px 12px; text-align:center; }
-.dw .w{ font-size:19px; font-weight:800; color:var(--green); }
-.dw .dots{ color:var(--coral); font-size:11px; letter-spacing:2px; }
-.trophy{ background:linear-gradient(90deg,var(--gold),#FDE68A); border-radius:12px; text-align:center; padding:8px; font-size:15px; font-weight:800; color:#7A5B00; box-shadow:0 4px 12px rgba(241,196,15,.4); }
-.trophy .bn{ font-size:13px; font-weight:700; }
-</style>
+<link rel="stylesheet" href="assets/style.css">
 
 </head>
 <body>
@@ -238,10 +111,10 @@ body{
     </div>
   </div>
 
-  <div class="card" style="background:var(--goldbg); border:1.5px solid #F5D97A; border-left:6px solid var(--gold);">
+  <div class="card" style="background:var(--goldbg); border:1.5px solid #F5D97A; border-left:6px solid var(--gold); padding:10px 14px;">
     <span class="label" style="background:var(--gold); color:var(--navy);">দ্য গোল্ডেন ফনিক্স রুল</span>
-    <p class="bn" style="font-size:16px; font-weight:700; margin:0 0 6px;">কেন 'A for Apple' বা অক্ষরের নাম শেখাবেন না?</p>
-    <p class="bn" style="font-size:15px; margin:0;">
+    <p class="bn" style="font-size:15px; font-weight:700; margin:0 0 4px;">কেন 'A for Apple' বা অক্ষরের নাম শেখাবেন না?</p>
+    <p class="bn" style="font-size:14px; margin:0; line-height:1.55;">
       <b>C-A-T</b> পড়ানোর সময় শিশু যেন <b>'সি-এ-টি'</b> না পড়ে, বরং
       <b style="color:var(--coral);">/k/ - /æ/ - /t/</b> জুড়ে দিয়ে
       <b style="color:var(--green);">'ক্যাট'</b> পড়তে পারে। আমরা শুধু অক্ষরের
@@ -249,32 +122,85 @@ body{
     </p>
   </div>
 
-  <div class="card">
-    <span class="label">ডেইলি ৫-মিনিট রুটিন</span>
-    <div class="mech" style="margin-top:4px;">
-      <p style="margin-bottom:6px;"><b style="color:var(--sky);">ধাপ ১:</b> ২ মিনিট অঙ্গভঙ্গি ও সাউন্ড গল্প</p>
-      <p style="margin-bottom:6px;"><b style="color:var(--sky);">ধাপ ২:</b> ২ মিনিট বড় অক্ষরে আঙুল ঘোরানো (Finger Tracing)</p>
-      <p style="margin-bottom:0;"><b style="color:var(--sky);">ধাপ ৩:</b> ১ মিনিট ঘরের স্পোকেন ডায়ালগ বলা</p>
+  <!-- METHODOLOGY: A-Z vs Sound Groups -->
+  <div class="cmp">
+    <div class="box old">
+      <div class="t">❌ A-Z প্রথাগত পদ্ধতি</div>
+      <p class="bn">অক্ষরের <b>নাম</b> শেখায় (এ, বি, সি), কিন্তু দ্রুত শব্দ তৈরি শেখাতে পারে না।</p>
+    </div>
+    <div class="box new">
+      <div class="t">✅ SparKids সাউন্ড গ্রুপ পদ্ধতি</div>
+      <p class="bn">বর্ণমালার সাউন্ডকে <b>৬টি</b> সুনির্দিষ্ট গ্রুপে ভাগ করে শেখায়। প্রথম গ্রুপ <b>(s, a, t, i, p, n)</b> শিখলেই শিশু প্রথম <b>২ সপ্তাহেই</b> ২৪টির বেশি ৩-অক্ষরের শব্দ (sat, pat, tap, pin) নিজে নিজে বানিয়ে পড়তে পারে।</p>
     </div>
   </div>
 
-  <div class="card">
+  <!-- A-Z SOUND TABLE -->
+  <div class="az-wrap">
+    <div class="az-title">
+      <div class="en">A to Z Phonetic Sound Reference Table</div>
+      <div class="bn bn-subtitle" style="margin:0;">A to Z সাধারণ সাউন্ড চার্ট</div>
+    </div>
+    <div class="az-grid">
+      <div class="az-cell hi"><div class="L">A</div><div class="S">অ্যা</div></div>
+      <div class="az-cell"><div class="L">B</div><div class="S">ব্</div></div>
+      <div class="az-cell"><div class="L">C</div><div class="S">ক্</div></div>
+      <div class="az-cell"><div class="L">D</div><div class="S">ড্</div></div>
+      <div class="az-cell"><div class="L">E</div><div class="S">এ</div></div>
+      <div class="az-cell"><div class="L">F</div><div class="S">ফ্</div></div>
+      <div class="az-cell"><div class="L">G</div><div class="S">গ্</div></div>
+      <div class="az-cell"><div class="L">H</div><div class="S">হ্</div></div>
+      <div class="az-cell hi"><div class="L">I</div><div class="S">ই</div></div>
+      <div class="az-cell"><div class="L">J</div><div class="S">জ্</div></div>
+      <div class="az-cell"><div class="L">K</div><div class="S">ক্</div></div>
+      <div class="az-cell"><div class="L">L</div><div class="S">ল্</div></div>
+      <div class="az-cell"><div class="L">M</div><div class="S">ম্</div></div>
+      <div class="az-cell hi"><div class="L">N</div><div class="S">ন্</div></div>
+      <div class="az-cell"><div class="L">O</div><div class="S">ও</div></div>
+      <div class="az-cell hi"><div class="L">P</div><div class="S">প্</div></div>
+      <div class="az-cell"><div class="L">Q</div><div class="S">ক্ব</div></div>
+      <div class="az-cell"><div class="L">R</div><div class="S">আর</div></div>
+      <div class="az-cell hi"><div class="L">S</div><div class="S">স্</div></div>
+      <div class="az-cell hi"><div class="L">T</div><div class="S">ট্</div></div>
+      <div class="az-cell"><div class="L">U</div><div class="S">আ</div></div>
+      <div class="az-cell"><div class="L">V</div><div class="S">ভ্</div></div>
+      <div class="az-cell"><div class="L">W</div><div class="S">ওয়া</div></div>
+      <div class="az-cell"><div class="L">X</div><div class="S">ক্স</div></div>
+      <div class="az-cell"><div class="L">Y</div><div class="S">ইয়া</div></div>
+      <div class="az-cell"><div class="L">Z</div><div class="S">য্</div></div>
+    </div>
+  </div>
+
+  <!-- GOLDEN NOTE -->
+  <div class="az-note bn">
+    <b>গুরুত্বপূর্ণ নোট:</b> "ইংরেজি বর্ণমালায় A থেকে Z পর্যন্ত ২৬টি অক্ষরেরই নিজস্ব সাউন্ড রয়েছে। তবে শিশুদের সহজে পড়ার উপযোগী করতে এবং ২য় সপ্তাহ থেকেই শব্দ বানিয়ে পড়ার আনন্দ দিতে আমরা প্রথাগত A-Z না গিয়ে বৈজ্ঞানিকভাবে স্বীকৃত <b>Sound Groups (s, a, t, i, p, n...)</b> সিকোয়েন্স অনুসরণ করেছি।"
+  </div>
+
+  <div class="card" style="padding:9px 12px; margin-bottom:9px;">
+    <span class="label">ডেইলি ৫-মিনিট রুটিন</span>
+    <div style="display:flex; gap:12px; margin-top:4px; font-size:12px; flex-wrap:wrap;">
+      <p class="bn" style="margin:0;"><b style="color:var(--sky);">ধাপ ১:</b> ২ মিনিট অঙ্গভঙ্গি ও সাউন্ড গল্প</p>
+      <p class="bn" style="margin:0;"><b style="color:var(--sky);">ধাপ ২:</b> ২ মিনিট বড় অক্ষরে আঙুল ঘোরানো (Finger Tracing)</p>
+      <p class="bn" style="margin:0;"><b style="color:var(--sky);">ধাপ ৩:</b> ১ মিনিট ঘরের স্পোকেন ডায়ালগ বলা</p>
+    </div>
+  </div>
+
+  <div class="card" style="padding:9px 12px; margin-bottom:9px;">
     <span class="label">লেআউট ও লেজেন্ড</span>
     <div style="display:flex; gap:10px; margin-top:4px;">
-      <div style="flex:1; background:var(--pink); border-radius:10px; padding:9px;">
-        <p class="bn" style="font-weight:800; color:var(--coral); margin:0 0 3px;">⬅️ বাম পাতা</p>
-        <p class="bn" style="font-size:13px; margin:0;">Parent Guide — অভিভাবকের জন্য গাইড, স্ক্রিপ্ট ও সহায়িকা।</p>
+      <div style="flex:1; background:var(--pink); border-radius:10px; padding:8px;">
+        <p class="bn" style="font-weight:800; color:var(--coral); margin:0 0 2px; font-size:13px;">⬅️ বাম পাতা (Parent Guide)</p>
+        <p class="bn" style="font-size:12px; margin:0;">অভিভাবকের জন্য গাইড, স্ক্রিপ্ট ও সহায়িকা।</p>
       </div>
-      <div style="flex:1; background:var(--skybg); border-radius:10px; padding:9px;">
-        <p class="bn" style="font-weight:800; color:var(--sky); margin:0 0 3px;">ডান পাতা ➡️</p>
-        <p class="bn" style="font-size:13px; margin:0;">Child Playground — শিশুর খেলা, ট্রেসিং ও চিত্রের পাতা।</p>
+      <div style="flex:1; background:var(--skybg); border-radius:10px; padding:8px;">
+        <p class="bn" style="font-weight:800; color:var(--sky); margin:0 0 2px; font-size:13px;">ডান পাতা ➡️ (Child Playground)</p>
+        <p class="bn" style="font-size:12px; margin:0;">শিশুর খেলা, ট্রেসিং ও চিত্রের পাতা।</p>
       </div>
     </div>
   </div>
 
-  <div class="caution" style="margin-top:6px;">
+  <div class="caution" style="margin-top:2px; padding:8px 12px;">
     <span class="label">স্মরণীয়</span>
-    <p class="bn" style="margin:0;">প্রতিদিন অল্প সময়, কিন্তু নিয়মিত করুন। আনন্দ ও ভয়-মুক্ত পরিবেশেই শিশু সবচেয়ে ভালো শেখে।</p>
+    <p class="bn" style="margin:0; font-size:13px;">প্রতিদিন অল্প সময়, কিন্তু নিয়মিত করুন। আনন্দ ও ভয়-মুক্ত পরিবেশেই শিশু সবচেয়ে ভালো শেখে।</p>
   </div>
 </section>
 <!-- ============ PAGE 3 : SOUND 1 /s/ — PARENT GUIDE (odd/recto) ============ -->
