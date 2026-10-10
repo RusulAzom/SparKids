@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPARKIDS: My First Phonics &amp; Spoken English Handbook</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@600;800&display=swap');
+:root{
+  --navy:#1A2B4C; --gold:#F1C40F; --coral:#E74C3C;
+  --green:#2ECC71; --sky:#3498DB; --card:#FFFFFF; --line:#E2E8F0;
+  --pink:#FEE2E2; --skybg:#E0F2FE; --goldbg:#FEF3C7; --greenbg:#D1FAE5;
+}
+@page{ size:A4 portrait; margin:0; }
+*{ box-sizing:border-box; }
+body{
+  margin:0; padding:20px 0; background:#CBD5E1;
+  display:flex; flex-direction:column; align-items:center; gap:20px;
+  font-family:'Poppins','Comic Neue','Segoe UI',cursive,sans-serif;
+  color:var(--navy);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+.bn{ font-family:'Hind Siliguri','Kalpurush','SolaimanLipi',sans-serif; line-height:1.6; }
+.book-page{
+  width:210mm; height:297mm; max-height:297mm;
+  box-sizing:border-box; position:relative; overflow:hidden;
+  background:#FDFBF7; box-shadow:0 6px 26px rgba(0,0,0,.28);
+}
+.book-page:nth-child(odd){ padding:14mm 14mm 14mm 22mm; }
+.book-page:nth-child(even){ padding:14mm 22mm 14mm 14mm; }
+@media print{
+  body{ margin:0; padding:0; background:none; }
+  .book-page{ page-break-after:always; break-after:page; box-shadow:none !important; margin:0 !important; }
+}
+/* ============ SHARED ============ */
+.sound-badge{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:50%; color:#fff; flex:none;
+  font-weight:800; font-size:24px; background:var(--coral);
+  box-shadow:0 3px 0 rgba(0,0,0,.15);
+}
+.sound-badge.g{background:var(--green)} .sound-badge.s{background:var(--sky)} .sound-badge.y{background:var(--gold); color:var(--navy)}
+.card{
+  background:var(--card); border:1.5px solid var(--line); border-radius:12px;
+  padding:11px 14px; margin-bottom:9px; box-shadow:0 3px 10px rgba(26,43,76,.07);
+}
+.label{
+  display:inline-block; font-weight:700; font-size:11px; letter-spacing:.4px;
+  text-transform:uppercase; color:#fff; background:var(--navy);
+  padding:2px 10px; border-radius:20px; margin-bottom:5px;
+}
+/* ============ PARENT (verso / even) ============ */
+.parent-head{ display:flex; align-items:center; gap:12px; margin-bottom:11px; }
+.parent-head h1{ font-size:23px; margin:0; line-height:1.15; color:var(--navy); }
+.parent-head .bn-sub{ font-size:16px; font-weight:700; color:var(--coral); margin-top:2px; }
+.mech h3, .action h3{ font-size:12px; margin:0 0 4px; color:var(--sky); letter-spacing:.4px; text-transform:uppercase; }
+.mech p, .action p{ font-size:15px; margin:0; }
+.script{
+  background:var(--goldbg); border:1.5px solid #F5D97A; border-left:6px solid var(--gold);
+  border-radius:12px; padding:11px 14px; margin-bottom:9px;
+}
+.script .label{ background:var(--gold); color:var(--navy); }
+.script .line{ font-size:15px; font-weight:600; margin:0; line-height:1.55; }
+.routine{
+  background:var(--greenbg); border:1.5px solid #A7E9C3; border-left:6px solid var(--green);
+  border-radius:12px; padding:11px 14px; margin-bottom:9px;
+}
+.routine .label{ background:var(--green); }
+.routine .say{ font-size:18px; font-weight:700; margin:0; }
+.routine .bn-say{ font-size:14px; margin:2px 0 0; }
+.caution{
+  background:var(--pink); border:1.5px solid #F7B4B4; border-left:6px solid var(--coral);
+  border-radius:12px; padding:10px 14px; margin-bottom:9px; font-size:14px;
+}
+.caution .label{ background:var(--coral); }
+.caution .bn{ font-weight:600; }
+/* ============ CHILD (recto / odd) ============ */
+.child-head{ text-align:center; margin-bottom:7px; }
+.child-head h1{ font-size:25px; margin:0; color:var(--coral); }
+.child-head .bn-sub{ font-size:14px; font-weight:700; color:var(--navy); margin-top:1px; }
+.letter-stage{
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg,#FFFDF5,#FFF7E6);
+  border:2px dashed var(--gold); border-radius:16px; padding:4px; margin-bottom:8px;
+}
+.pic-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:8px; }
+.pic-card{
+  background:var(--card); border:1.5px solid var(--line); border-radius:12px;
+  padding:7px 5px; text-align:center; box-shadow:0 3px 10px rgba(26,43,76,.07);
+}
+.pic-card svg{ width:100%; height:auto; max-height:20mm; }
+.pic-card .dots{ color:var(--coral); font-size:12px; letter-spacing:2px; margin:3px 0 0; }
+.pic-card .w{ font-weight:800; font-size:15px; color:var(--navy); }
+.pic-card .bn{ font-size:10.5px; color:#475569; line-height:1.35; }
+
+/* ============ CHILD (cont) ============ */
+.prompt{
+  background:var(--skybg); border:1.5px solid #B6E0FE; border-radius:12px;
+  padding:8px 12px; text-align:center; font-size:15px; font-weight:700; color:var(--navy);
+}
+.prompt .bn{ font-weight:600; }
+.blend-banner{
+  background:linear-gradient(90deg,var(--coral),var(--gold)); color:#fff;
+  border-radius:12px; padding:8px 12px; text-align:center; font-size:19px; font-weight:800;
+  margin-bottom:8px; box-shadow:0 4px 12px rgba(231,76,60,.3);
+}
+.blend-banner .bn{ font-size:13px; font-weight:600; }
+.blend-row{ display:flex; gap:9px; margin-bottom:8px; }
+.blend-card{ flex:1; background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:8px; text-align:center; }
+.blend-card .w{ font-size:20px; font-weight:800; color:var(--green); }
+.blend-card .phon{ color:var(--coral); font-size:14px; letter-spacing:1px; }
+.blend-card .bn{ font-size:11.5px; color:#475569; }
+/* ============ COVER ============ */
+.cover{ display:flex; flex-direction:column; height:100%; text-align:center; align-items:center; }
+.pill{ display:inline-block; background:var(--navy); color:#fff; font-weight:700; font-size:11px; letter-spacing:1px; padding:6px 15px; border-radius:30px; margin-top:2mm; }
+.title{ font-size:60px; font-weight:800; letter-spacing:2px; margin:8px 0 0; color:var(--gold); text-shadow:0 3px 0 #C79A00, 0 6px 14px rgba(0,0,0,.18); display:flex; align-items:center; gap:10px; justify-content:center; }
+.subtitle{ font-size:16px; font-weight:700; color:var(--navy); margin:6px 0 0; }
+.bn-subtitle{ font-size:14px; color:#475569; margin:5px 0 0; }
+.showcase{ margin:10px auto 6px; }
+.badges{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:4px; }
+.badge{ background:var(--card); border:1.5px solid var(--line); border-radius:20px; padding:6px 12px; font-size:11.5px; font-weight:700; box-shadow:0 3px 8px rgba(26,43,76,.08); }
+.badge b{ color:var(--coral); }
+.pub-strip{ position:absolute; bottom:0; left:0; right:0; background:var(--navy); color:#fff; text-align:center; padding:7px; font-size:12px; font-weight:600; letter-spacing:.5px; }
+/* ============ CARNIVAL ============ */
+.balloons{ display:flex; justify-content:center; gap:11px; margin:4px 0 7px; }
+.balloon{ width:42px; height:52px; border-radius:50% 50% 50% 50%/60% 60% 40% 40%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:24px; box-shadow:0 6px 12px rgba(0,0,0,.15); position:relative; }
+.balloon::after{ content:""; position:absolute; bottom:-9px; left:50%; width:2px; height:11px; background:#94a3b8; }
+.word-grid{ display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:7px; }
+.dw{ background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:6px 12px; text-align:center; }
+.dw .w{ font-size:19px; font-weight:800; color:var(--green); }
+.dw .dots{ color:var(--coral); font-size:11px; letter-spacing:2px; }
+.trophy{ background:linear-gradient(90deg,var(--gold),#FDE68A); border-radius:12px; text-align:center; padding:8px; font-size:15px; font-weight:800; color:#7A5B00; box-shadow:0 4px 12px rgba(241,196,15,.4); }
+.trophy .bn{ font-size:13px; font-weight:700; }
+</style>
+
+</head>
+<body>
+<!-- ============ PAGE 1 : COVER (odd/recto) ============ -->
+<section class="book-page cover">
+  <div class="pill">PLAYGROUP • NURSERY • KINDERGARTEN (AGES 3+)</div>
+  <h1 class="title">
+    SPARKIDS
+    <svg width="66" height="66" viewBox="0 0 100 100" aria-label="smiling star mascot">
+      <defs>
+        <radialGradient id="starG" cx="50%" cy="35%" r="70%">
+          <stop offset="0%" stop-color="#FFE679"/><stop offset="100%" stop-color="#F1C40F"/>
+        </radialGradient>
+      </defs>
+      <path d="M50 6 L62 38 L96 38 L68 58 L79 92 L50 71 L21 92 L32 58 L4 38 L38 38 Z" fill="url(#starG)" stroke="#C79A00" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="40" cy="52" r="4" fill="#1A2B4C"/><circle cx="60" cy="52" r="4" fill="#1A2B4C"/>
+      <path d="M40 64 Q50 74 60 64" stroke="#1A2B4C" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="28" cy="62" r="4" fill="#E74C3C" opacity=".55"/><circle cx="72" cy="62" r="4" fill="#E74C3C" opacity=".55"/>
+    </svg>
+  </h1>
+  <p class="subtitle">MY FIRST PHONICS &amp; SPOKEN ENGLISH HANDBOOK</p>
+  <p class="bn-subtitle bn">৩+ বছর বয়সী শিশুদের জন্য সহজ ফোনেটিক্স ও স্পোকেন ইংরেজি</p>
+
+  <svg class="showcase" width="620" height="240" viewBox="0 0 620 240" aria-label="Group 1 letters and objects">
+    <g font-family="Poppins,sans-serif" font-weight="800" font-size="58" text-anchor="middle">
+      <circle cx="55" cy="50" r="38" fill="#E0F2FE"/><text x="55" y="64" fill="#3498DB">s</text>
+      <circle cx="155" cy="50" r="38" fill="#FEE2E2"/><text x="155" y="64" fill="#E74C3C">a</text>
+      <circle cx="255" cy="50" r="38" fill="#D1FAE5"/><text x="255" y="64" fill="#2ECC71">t</text>
+      <circle cx="355" cy="50" r="38" fill="#FEF3C7"/><text x="355" y="64" fill="#D4A017">i</text>
+      <circle cx="455" cy="50" r="38" fill="#EDE9FE"/><text x="455" y="64" fill="#8B5CF6">p</text>
+      <circle cx="555" cy="50" r="38" fill="#FCE7F3"/><text x="555" y="64" fill="#EC4899">n</text>
+    </g>
+    <!-- apple -->
+    <g transform="translate(30,110)">
+      <circle cx="20" cy="40" r="26" fill="#E74C3C"/><path d="M20 14 q6 -12 16 -10" stroke="#7C4A21" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="10" cy="30" rx="7" ry="11" fill="#fff" opacity=".35"/>
+      <text x="20" y="96" font-family="Poppins" font-size="15" font-weight="700" fill="#1A2B4C" text-anchor="middle">apple</text>
+    </g>
+    <!-- sun -->
+    <g transform="translate(125,110)">
+      <circle cx="20" cy="40" r="20" fill="#F1C40F"/>
+      <g stroke="#F1C40F" stroke-width="4" stroke-linecap="round">
+        <line x1="20" y1="12" x2="20" y2="2"/><line x1="20" y1="68" x2="20" y2="78"/>
+        <line x1="-2" y1="40" x2="-12" y2="40"/><line x1="42" y1="40" x2="52" y2="40"/>
+        <line x1="6" y1="26" x2="-1" y2="19"/><line x1="34" y1="54" x2="41" y2="61"/>
+        <line x1="34" y1="26" x2="41" y2="19"/><line x1="6" y1="54" x2="-1" y2="61"/>
+      </g>
+      <circle cx="14" cy="38" r="2.5" fill="#1A2B4C"/><circle cx="27" cy="38" r="2.5" fill="#1A2B4C"/>
+      <path d="M13 46 q7 6 14 0" stroke="#1A2B4C" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <text x="20" y="96" font-family="Poppins" font-size="15" font-weight="700" fill="#1A2B4C" text-anchor="middle">sun</text>
+    </g>
+    <!-- tap -->
+    <g transform="translate(220,110)">
+      <rect x="6" y="24" width="30" height="14" rx="4" fill="#3498DB"/>
+      <rect x="14" y="38" width="12" height="20" fill="#94a3b8"/>
+      <path d="M20 58 q0 12 -6 18" stroke="#3498DB" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <circle cx="10" cy="80" r="3" fill="#3498DB"/><circle cx="26" cy="86" r="3" fill="#3498DB"/>
+      <text x="20" y="106" font-family="Poppins" font-size="15" font-weight="700" fill="#1A2B4C" text-anchor="middle">tap</text>
+    </g>
+    <!-- cat -->
+    <g transform="translate(315,110)">
+      <path d="M6 62 q-4 -30 14 -34 q10 -2 10 8 q4 -6 12 -2 q10 4 8 28 z" fill="#9CA3AF"/>
+      <path d="M6 26 l4 10 l-8 0 z" fill="#9CA3AF"/><path d="M40 26 l-4 10 l8 0 z" fill="#9CA3AF"/>
+      <circle cx="18" cy="38" r="2.5" fill="#1A2B4C"/><circle cx="30" cy="38" r="2.5" fill="#1A2B4C"/>
+      <path d="M20 46 q4 3 8 0" stroke="#1A2B4C" stroke-width="2" fill="none"/>
+      <text x="24" y="86" font-family="Poppins" font-size="15" font-weight="700" fill="#1A2B4C" text-anchor="middle">cat</text>
+    </g>
+    <!-- insect -->
+    <g transform="translate(410,110)">
+      <ellipse cx="22" cy="46" rx="12" ry="18" fill="#2ECC71"/>
+      <line x1="22" y1="34" x2="22" y2="12" stroke="#1A2B4C" stroke-width="2.5"/>
+      <circle cx="22" cy="10" r="5" fill="#1A2B4C"/>
+      <g stroke="#2ECC71" stroke-width="3" stroke-linecap="round">
+        <line x1="11" y1="42" x2="1" y2="34"/><line x1="33" y1="42" x2="43" y2="34"/>
+        <line x1="11" y1="52" x2="1" y2="60"/><line x1="33" y1="52" x2="43" y2="60"/>
+      </g>
+      <text x="22" y="82" font-family="Poppins" font-size="15" font-weight="700" fill="#1A2B4C" text-anchor="middle">insect</text>
+    </g>
+    <!-- pig -->
+    <g transform="translate(505,110)">
+      <circle cx="22" cy="44" r="24" fill="#F472B6"/>
+      <circle cx="22" cy="44" r="8" fill="#EC4899"/><circle cx="19" cy="44" r="1.8" fill="#1A2B4C"/><circle cx="25" cy="44" r="1.8" fill="#1A2B4C"/>
+      <circle cx="13" cy="36" r="2.5" fill="#1A2B4C"/><circle cx="31" cy="36" r="2.5" fill="#1A2B4C"/>
+      <path d="M4 30 q-4 -6 2 -8 M40 30 q4 -6 -2 -8" stroke="#F472B6" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <text x="22" y="84" font-family="Poppins" font-size="15" font-weight="700" fill="#1A2B4C" text-anchor="middle">pig</text>
+    </g>
+  </svg>
+
+  <div class="badges">
+    <span class="badge">🔄 Dual-Page Method <b>(সহজ বাংলা সহায়িকা)</b></span>
+    <span class="badge">🎚️ Sound Sliding Blending</span>
+    <span class="badge">💬 Everyday Spoken English</span>
+  </div>
+
+  <div class="pub-strip">SparKids Education &nbsp;•&nbsp; First Edition</div>
+</section>
+<!-- ============ PAGE 2 : PARENT WELCOME (even/verso) ============ -->
+<section class="book-page">
+  <div class="parent-head">
+    <div class="sound-badge s">📖</div>
+    <div>
+      <h1>স্বাগতম অভিভাবক</h1>
+      <div class="bn-sub">কীভাবে এই হ্যান্ডবুকটি পড়াবেন?</div>
+    </div>
+  </div>
+
+  <div class="card" style="background:var(--goldbg); border:1.5px solid #F5D97A; border-left:6px solid var(--gold);">
+    <span class="label" style="background:var(--gold); color:var(--navy);">দ্য গোল্ডেন ফনিক্স রুল</span>
+    <p class="bn" style="font-size:16px; font-weight:700; margin:0 0 6px;">কেন 'A for Apple' বা অক্ষরের নাম শেখাবেন না?</p>
+    <p class="bn" style="font-size:15px; margin:0;">
+      <b>C-A-T</b> পড়ানোর সময় শিশু যেন <b>'সি-এ-টি'</b> না পড়ে, বরং
+      <b style="color:var(--coral);">/k/ - /æ/ - /t/</b> জুড়ে দিয়ে
+      <b style="color:var(--green);">'ক্যাট'</b> পড়তে পারে। আমরা শুধু অক্ষরের
+      <b>সাউন্ড</b> শেখাই — নাম নয়।
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="label">ডেইলি ৫-মিনিট রুটিন</span>
+    <div class="mech" style="margin-top:4px;">
+      <p style="margin-bottom:6px;"><b style="color:var(--sky);">ধাপ ১:</b> ২ মিনিট অঙ্গভঙ্গি ও সাউন্ড গল্প</p>
+      <p style="margin-bottom:6px;"><b style="color:var(--sky);">ধাপ ২:</b> ২ মিনিট বড় অক্ষরে আঙুল ঘোরানো (Finger Tracing)</p>
+      <p style="margin-bottom:0;"><b style="color:var(--sky);">ধাপ ৩:</b> ১ মিনিট ঘরের স্পোকেন ডায়ালগ বলা</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="label">লেআউট ও লেজেন্ড</span>
+    <div style="display:flex; gap:10px; margin-top:4px;">
+      <div style="flex:1; background:var(--pink); border-radius:10px; padding:9px;">
+        <p class="bn" style="font-weight:800; color:var(--coral); margin:0 0 3px;">⬅️ বাম পাতা</p>
+        <p class="bn" style="font-size:13px; margin:0;">Parent Guide — অভিভাবকের জন্য গাইড, স্ক্রিপ্ট ও সহায়িকা।</p>
+      </div>
+      <div style="flex:1; background:var(--skybg); border-radius:10px; padding:9px;">
+        <p class="bn" style="font-weight:800; color:var(--sky); margin:0 0 3px;">ডান পাতা ➡️</p>
+        <p class="bn" style="font-size:13px; margin:0;">Child Playground — শিশুর খেলা, ট্রেসিং ও চিত্রের পাতা।</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="caution" style="margin-top:6px;">
+    <span class="label">স্মরণীয়</span>
+    <p class="bn" style="margin:0;">প্রতিদিন অল্প সময়, কিন্তু নিয়মিত করুন। আনন্দ ও ভয়-মুক্ত পরিবেশেই শিশু সবচেয়ে ভালো শেখে।</p>
+  </div>
+</section>
+<!-- ============ PAGE 3 : SOUND 1 /s/ — PARENT GUIDE (odd/recto) ============ -->
+<section class="book-page">
+  <div class="parent-head">
+    <div class="sound-badge">s</div>
+    <div>
+      <h1>Sound 1: /s/</h1>
+      <div class="bn-sub bn">সাপের হিস্‌-হিস্ আওয়াজ</div>
+    </div>
+  </div>
+
+  <div class="card mech">
+    <span class="label">সাউন্ড মেকানিক্স</span>
+    <p class="bn">দাঁত হালকা বন্ধ রেখে জিভ যেন না ছুঁই, একটানা শ্বাস বেরিয়ে দাও:
+      <b style="color:var(--coral);">"স্-স্-স্"</b> <i>(/ssss/)</i>।</p>
+  </div>
+
+  <div class="card action">
+    <span class="label">শারীরিক অ্যাকশন</span>
+    <p class="bn">হাত সাপের মতো এঁকেবেঁকে সামনে নাড়াও: <b>/s/ - /s/ - /s/!</b></p>
+  </div>
+
+  <div class="script">
+    <span class="label">প্যারেন্ট স্ক্রিপ্ট</span>
+    <p class="line bn">"দেখো বাগানে একটা সাপ এসেছে! সাপ ডাকে <b>/s/ - /s/ - Snake!</b> চল সাপের মতো হাত নাড়ি!"</p>
+  </div>
+
+  <div class="routine">
+    <span class="label">ঘরের স্পোকেন রুটিন</span>
+    <p class="say">"Sit down, please."</p>
+    <p class="bn-say bn">চেয়ার দেখিয়ে বলুন — বসো।</p>
+  </div>
+
+  <div class="caution">
+    <span class="label">সতর্কতা</span>
+    <p class="bn">'এস' (S) অক্ষর <b>ডাকবেন না</b> — শুধু সাউন্ড <b>/s/</b> বলুন।</p>
+  </div>
+</section>
+<!-- ============ PAGE 4 : SOUND 1 /s/ — CHILD PLAYGROUND (even/verso) ============ -->
+<section class="book-page">
+  <div class="child-head">
+    <h1>The Slithering Snake! /s/</h1>
+    <div class="bn-sub bn">সাপের হিস্‌-হিস্ আওয়াজ</div>
+  </div>
+
+  <div class="letter-stage">
+    <svg width="330" height="230" viewBox="0 0 330 230" aria-label="giant hollow letter s with tracing arrows">
+      <!-- giant hollow s -->
+      <path id="Sletter" d="M205 55 C205 40 190 30 170 32 C130 36 120 70 140 92 C158 112 196 108 200 140 C204 176 168 196 130 188 C112 184 100 172 98 158"
+        fill="none" stroke="#CBD5E1" stroke-width="34" stroke-linecap="round"/>
+      <path d="M205 55 C205 40 190 30 170 32 C130 36 120 70 140 92 C158 112 196 108 200 140 C204 176 168 196 130 188 C112 184 100 172 98 158"
+        fill="none" stroke="#fff" stroke-width="26" stroke-linecap="round"/>
+      <!-- red start dot -->
+      <circle cx="205" cy="55" r="13" fill="#E74C3C" stroke="#fff" stroke-width="3"/>
+      <!-- directional arrows -->
+      <g fill="#3498DB">
+        <path d="M150 44 l14 14 l-14 14 z"/>
+        <path d="M205 128 l14 14 l-14 14 z"/>
+        <path d="M96 138 l-2 -15 l12 9 z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="pic-grid">
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="52" r="26" fill="#F1C40F"/><g stroke="#F1C40F" stroke-width="5" stroke-linecap="round"><line x1="50" y1="20" x2="50" y2="6"/><line x1="50" y1="84" x2="50" y2="98"/><line x1="22" y1="52" x2="8" y2="52"/><line x1="78" y1="52" x2="92" y2="52"/><line x1="30" y1="32" x2="20" y2="22"/><line x1="70" y1="72" x2="80" y2="82"/><line x1="70" y1="32" x2="80" y2="22"/><line x1="30" y1="72" x2="20" y2="82"/></g><circle cx="41" cy="48" r="3" fill="#1A2B4C"/><circle cx="59" cy="48" r="3" fill="#1A2B4C"/><path d="M42 60 q8 7 16 0" stroke="#1A2B4C" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      <p class="dots">●</p><p class="w">sun</p><p class="bn bn">সূর্য</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M18 70 q8 -10 14 0 q8 10 14 0 q8 -10 14 0 q8 10 14 0" stroke="#2ECC71" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="20" cy="52" r="4" fill="#E74C3C"/><circle cx="28" cy="55" r="3" fill="#1A2B4C"/><path d="M16 46 l-6 -4 M16 52 l-6 2" stroke="#E74C3C" stroke-width="3" stroke-linecap="round"/></svg>
+      <p class="dots">●</p><p class="w">snake</p><p class="bn bn">সাপ</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M50 12 L60 40 L90 40 L66 58 L76 88 L50 70 L24 88 L34 58 L10 40 L40 40 Z" fill="#FFD53D" stroke="#E0A800" stroke-width="3" stroke-linejoin="round"/><circle cx="44" cy="50" r="3" fill="#1A2B4C"/><circle cx="56" cy="50" r="3" fill="#1A2B4C"/><path d="M44 58 q6 5 12 0" stroke="#1A2B4C" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+      <p class="dots">●</p><p class="w">star</p><p class="bn bn">তারা</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><rect x="34" y="46" width="32" height="30" rx="6" fill="#60A5FA"/><rect x="34" y="40" width="32" height="10" rx="5" fill="#DBEAFE"/><circle cx="44" cy="30" r="9" fill="#fff" stroke="#93C5FD" stroke-width="2"/><circle cx="60" cy="24" r="7" fill="#fff" stroke="#93C5FD" stroke-width="2"/><circle cx="68" cy="36" r="5" fill="#fff" stroke="#93C5FD" stroke-width="2"/></svg>
+      <p class="dots">●</p><p class="w">soap</p><p class="bn bn">সাবান</p>
+    </div>
+  </div>
+
+  <div class="prompt">
+    🔴 Touch the red dot, make the snake hiss: <b>s - s - s!</b>
+    <div class="bn bn">লাল বিন্দুতে আঙুল রাখো, সাপের মতো হিস্ করো!</div>
+  </div>
+</section>
+<!-- ============ PAGE 5 : SOUND 2 /a/ — PARENT GUIDE (odd/recto) ============ -->
+<section class="book-page">
+  <div class="parent-head">
+    <div class="sound-badge">a</div>
+    <div>
+      <h1>Sound 2: /a/</h1>
+      <div class="bn-sub bn">মিষ্টি আপেল খাওয়ার হাঁ</div>
+    </div>
+  </div>
+
+  <div class="card mech">
+    <span class="label">সাউন্ড মেকানিক্স</span>
+    <p class="bn">মুখ দুই পাশে চওড়া করে হাসির ভঙ্গিতে বড় হাঁ টানো:
+      <b style="color:var(--coral);">"অ্যা"</b> <i>(/æ/ as in Ant, Apple)</i>।</p>
+  </div>
+
+  <div class="card action">
+    <span class="label">শারীরিক অ্যাকশন</span>
+    <p class="bn">হাতের ওপর পিঁপড়া হেঁটে ওঠার মতো আঙুল দিয়ে আলতো টোকা দাও: <b>/æ/ - /æ/ - Ants!</b></p>
+  </div>
+
+  <div class="script">
+    <span class="label">প্যারেন্ট স্ক্রিপ্ট</span>
+    <p class="line bn">"হাতে একটা লাল পিঁপড়া হেঁটে উঠছে! চিমটি কাটার আগেই তাড়াই: <b>/æ/ - /æ/ - Apple!</b>"</p>
+  </div>
+
+  <div class="routine">
+    <span class="label">ঘরের স্পোকেন রুটিন</span>
+    <p class="say">"An apple, please!"</p>
+    <p class="bn-say bn">আপেল এগিয়ে দিয়ে বলুন — একটা আপেল দাও প্লিজ।</p>
+  </div>
+
+  <div class="caution">
+    <span class="label">মনে রাখো</span>
+    <p class="bn">এটি <b>ছোট</b> /æ/ — অক্ষরের নাম 'এ' নয়। Ant, Apple, Axe-এ যে হাঁ, সেটাই টার্গেট।</p>
+  </div>
+</section>
+<!-- ============ PAGE 6 : SOUND 2 /a/ — CHILD PLAYGROUND (even/verso) ============ -->
+<section class="book-page">
+  <div class="child-head">
+    <h1>Crawling Ants on the Apple! /a/</h1>
+    <div class="bn-sub bn">আপেলে হেঁটে চলা পিঁপড়ে</div>
+  </div>
+
+  <div class="letter-stage">
+    <svg width="300" height="230" viewBox="0 0 300 230" aria-label="giant hollow letter a with circular arrows">
+      <!-- giant hollow a (single-storey round a) -->
+      <path d="M150 48 C120 48 96 72 96 104 C96 142 124 176 150 182 C176 176 204 142 204 104 C204 72 180 48 150 48 Z" fill="none" stroke="#CBD5E1" stroke-width="34" stroke-linecap="round"/>
+      <path d="M150 48 C120 48 96 72 96 104 C96 142 124 176 150 182 C176 176 204 142 204 104 C204 72 180 48 150 48 Z" fill="none" stroke="#fff" stroke-width="26" stroke-linecap="round"/>
+      <line x1="150" y1="112" x2="150" y2="182" stroke="#CBD5E1" stroke-width="16" stroke-linecap="round"/>
+      <line x1="150" y1="112" x2="150" y2="182" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+      <!-- red start dot at top -->
+      <circle cx="150" cy="48" r="13" fill="#E74C3C" stroke="#fff" stroke-width="3"/>
+      <!-- anti-clockwise arrows -->
+      <g fill="#3498DB">
+        <path d="M96 62 l-16 -6 l10 14 z"/>
+        <path d="M204 150 l16 6 l-10 -14 z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="pic-grid">
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><ellipse cx="50" cy="52" rx="9" ry="20" fill="#E74C3C"/><line cx="50" x1="50" y1="36" x2="50" y2="14" stroke="#1A2B4C" stroke-width="3"/><circle cx="50" cy="12" r="6" fill="#1A2B4C"/><g stroke="#E74C3C" stroke-width="3" stroke-linecap="round"><line x1="41" y1="46" x2="30" y2="38"/><line x1="41" y1="54" x2="30" y2="62"/><line x1="59" y1="46" x2="70" y2="38"/><line x1="59" y1="54" x2="70" y2="62"/></g></svg>
+      <p class="dots">●</p><p class="w">ant</p><p class="bn bn">পিঁপড়ে</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M50 38 C28 38 22 62 34 74 C44 84 56 84 66 74 C78 62 72 38 50 38 Z" fill="#E74C3C"/><path d="M50 38 q4 -12 16 -10" stroke="#7C4A21" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="38" cy="52" rx="7" ry="10" fill="#fff" opacity=".35"/></svg>
+      <p class="dots">●</p><p class="w">apple</p><p class="bn bn">আপেল</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><line x1="30" y1="82" x2="66" y2="30" stroke="#7C4A21" stroke-width="9" stroke-linecap="round"/><path d="M60 24 q18 -6 18 -14 q-12 2 -18 12 z" fill="#94a3b8"/><path d="M60 24 q-4 -12 2 -18" stroke="#94a3b8" stroke-width="4" fill="none"/></svg>
+      <p class="dots">●</p><p class="w">axe</p><p class="bn bn">কুঠার</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><line x1="26" y1="82" x2="66" y2="24" stroke="#7C4A21" stroke-width="7" stroke-linecap="round"/><path d="M66 24 l16 -6 l-6 16 l-10 -4 z" fill="#3498DB"/><path d="M66 24 l-4 6 l10 4 l-2 -10 z" fill="#3498DB"/><path d="M24 84 l16 0 l-6 -8 z" fill="#E74C3C"/></svg>
+      <p class="dots">●</p><p class="w">arrow</p><p class="bn bn">তীর</p>
+    </div>
+  </div>
+
+  <div class="blend-banner">
+    First Sound Slide: &nbsp; s ───► a = <b>sa</b>
+    <div class="bn bn">'স' আর 'অ্যা' জুড়ে হয়ে 'স্যা'!</div>
+  </div>
+</section>
+<!-- ============ PAGE 7 : SOUND 3 /t/ — PARENT GUIDE (odd/recto) ============ -->
+<section class="book-page">
+  <div class="parent-head">
+    <div class="sound-badge g">t</div>
+    <div>
+      <h1>Sound 3: /t/</h1>
+      <div class="bn-sub bn">টেনিস বলের টপ-টপ আওয়াজ</div>
+    </div>
+  </div>
+
+  <div class="card mech">
+    <span class="label">সাউন্ড মেকানিক্স</span>
+    <p class="bn">জিভের ডগা উপরের দাঁতের মাড়িতে ঠেকিয়ে মৃদু বাতাস ছাড়ো:
+      <b style="color:var(--coral);">"ট্"</b> <i>(/t/ — গলায় কোনো কাঁপন হবে না)</i>।</p>
+  </div>
+
+  <div class="card action">
+    <span class="label">শারীরিক অ্যাকশন</span>
+    <p class="bn">টেনিস খেলার বল দেখার মতো মাথা ডানে-বামে ঘোরাও: <b>/t/ - /t/ - /t/!</b></p>
+  </div>
+
+  <div class="script">
+    <span class="label">প্যারেন্ট স্ক্রিপ্ট</span>
+    <p class="line bn">"টেনিস বল লাফায়: <b>/t/ - /t/ - Tennis!</b> পানির কল থেকে ফোঁটা পড়ে: <b>/t/ - /t/ - Tap!</b>"</p>
+  </div>
+
+  <div class="routine">
+    <span class="label">ঘরের স্পোকেন রুটিন</span>
+    <p class="say">"Turn off the tap."</p>
+    <p class="bn-say bn">পানির কল দেখিয়ে বলুন — কল বন্ধ করো।</p>
+  </div>
+
+  <div class="caution">
+    <span class="label">সতর্কতা</span>
+    <p class="bn">গলায় কাঁপন (<b>/d/</b> ডগের মতো) <b>চালাবে না</b> — এটা নিঃস্বর /t/। হাতে গলায় হাত রেখে অনুভব করো।</p>
+  </div>
+</section>
+<!-- ============ PAGE 8 : SOUND 3 /t/ — CHILD PLAYGROUND (even/verso) ============ -->
+<section class="book-page">
+  <div class="child-head">
+    <h1>Tapping Tennis Tap! /t/</h1>
+    <div class="bn-sub bn">টপ-টপ আওয়াজের কল</div>
+  </div>
+
+  <div class="letter-stage">
+    <svg width="300" height="230" viewBox="0 0 300 230" aria-label="giant hollow letter t with stroke arrows">
+      <!-- vertical stem -->
+      <line x1="150" y1="40" x2="150" y2="190" stroke="#CBD5E1" stroke-width="34" stroke-linecap="round"/>
+      <line x1="150" y1="40" x2="150" y2="190" stroke="#fff" stroke-width="26" stroke-linecap="round"/>
+      <!-- horizontal crossbar -->
+      <line x1="90" y1="95" x2="210" y2="95" stroke="#CBD5E1" stroke-width="26" stroke-linecap="round"/>
+      <line x1="90" y1="95" x2="210" y2="95" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+      <!-- red start dot -->
+      <circle cx="150" cy="40" r="13" fill="#E74C3C" stroke="#fff" stroke-width="3"/>
+      <!-- vertical downward arrow then left crossbar arrow -->
+      <g fill="#3498DB">
+        <path d="M150 150 l14 20 l-14 18 l-14 -18 z" transform="scale(1,0.4) translate(0,250)"/>
+        <path d="M96 82 l-16 8 l12 12 z"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="pic-grid">
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><rect x="30" y="30" width="40" height="18" rx="5" fill="#3498DB"/><rect x="44" y="48" width="12" height="22" fill="#94a3b8"/><path d="M50 70 q0 12 -6 18" stroke="#3498DB" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="42" cy="92" r="3" fill="#3498DB"/><circle cx="58" cy="88" r="3" fill="#3498DB"/></svg>
+      <p class="dots">●</p><p class="w">tap</p><p class="bn bn">কল</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M50 20 L84 40 L84 78 L16 78 L16 40 Z" fill="#E74C3C"/><path d="M50 20 L84 40 L50 40 Z" fill="#c0392b"/><path d="M50 52 L50 78" stroke="#FDFBF7" stroke-width="4"/><path d="M50 52 L36 40 L36 78" stroke="#FDFBF7" stroke-width="4"/></svg>
+      <p class="dots">●</p><p class="w">tent</p><p class="bn bn">তাঁবু</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M28 40 L72 40 L66 78 L34 78 Z" fill="#60A5FA"/><ellipse cx="50" cy="40" rx="22" ry="6" fill="#DBEAFE"/><path d="M40 52 q4 -6 8 0" stroke="#fff" stroke-width="3" fill="none"/></svg>
+      <p class="dots">●</p><p class="w">tub</p><p class="bn bn">টাব</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="54" r="26" fill="#F59E0B"/><path d="M30 34 l6 14 l-14 0 z" fill="#F59E0B"/><path d="M70 34 l-6 14 l14 0 z" fill="#F59E0B"/><circle cx="42" cy="50" r="3" fill="#1A2B4C"/><circle cx="58" cy="50" r="3" fill="#1A2B4C"/><path d="M44 62 q6 5 12 0" stroke="#1A2B4C" stroke-width="2.5" fill="none"/><g stroke="#1A2B4C" stroke-width="2"><line x1="46" y1="46" x2="40" y2="44"/><line x1="54" y1="46" x2="60" y2="44"/></g></svg>
+      <p class="dots">●</p><p class="w">tiger</p><p class="bn bn">বাঘ</p>
+    </div>
+  </div>
+
+  <div class="blend-banner">
+    First 3-Sound Blend: &nbsp; s • a • t ──► <b>sat</b>
+    <div class="bn bn">'স-অ্যা-ট' জুড়ে হয়ে 'স্যাট' — মাদুরে বসা বিড়াল!</div>
+  </div>
+</section>
+<!-- ============ PAGE 9 : SOUND 4 /i/ — PARENT GUIDE (odd/recto) ============ -->
+<section class="book-page">
+  <div class="parent-head">
+    <div class="sound-badge y">i</div>
+    <div>
+      <h1>Sound 4: /i/</h1>
+      <div class="bn-sub bn">ইঁদুরছানার গোঁফ</div>
+    </div>
+  </div>
+
+  <div class="card mech">
+    <span class="label">সাউন্ড মেকানিক্স</span>
+    <p class="bn">ঠোঁট সামান্য ফাঁক করে ছোট করে বলো:
+      <b style="color:var(--coral);">"ই"</b> <i>(/ɪ/ as in Inky, Ink)</i>।</p>
+  </div>
+
+  <div class="card action">
+    <span class="label">শারীরিক অ্যাকশন</span>
+    <p class="bn">দুই হাত দিয়ে মুখের দুই পাশে ইঁদুরের গোঁফ আঁকা ভঙ্গি: <b>/ɪ/ - /ɪ/ - Inky!</b></p>
+  </div>
+
+  <div class="script">
+    <span class="label">প্যারেন্ট স্ক্রিপ্ট</span>
+    <p class="line bn">"ইঁদুরছানা দোয়াত ফেলে দিয়েছে! গোঁফে কালি মেখে সে বলছে: <b>/ɪ/ - /ɪ/ - Ink!</b>"</p>
+  </div>
+
+  <div class="routine">
+    <span class="label">ঘরের স্পোকেন রুটিন</span>
+    <p class="say">"Look at this!"</p>
+    <p class="bn-say bn">বই দেখিয়ে বলুন — এদিকে তাকাও।</p>
+  </div>
+
+  <div class="caution">
+    <span class="label">মনে রাখো</span>
+    <p class="bn">এটি <b>ছোট</b> /ɪ/ (ই), লম্বা 'আই' নয়। Ink, Igloo, Insect, In — সবখানে ছোটই টার্গেট।</p>
+  </div>
+</section>
+<!-- ============ PAGE 10 : SOUND 4 /i/ — CHILD PLAYGROUND (even/verso) ============ -->
+<section class="book-page">
+  <div class="child-head">
+    <h1>Inky Mouse &amp; Spilled Ink! /i/</h1>
+    <div class="bn-sub bn">ইঁদুরছানা ও ফোঁটা দোয়াত</div>
+  </div>
+
+  <div class="letter-stage">
+    <svg width="260" height="230" viewBox="0 0 260 230" aria-label="giant hollow letter i with dot">
+      <!-- floating top dot -->
+      <circle cx="130" cy="30" r="16" fill="#CBD5E1"/><circle cx="130" cy="30" r="10" fill="#fff"/>
+      <circle cx="130" cy="30" r="8" fill="#E74C3C"/>
+      <!-- vertical stem -->
+      <line x1="130" y1="70" x2="130" y2="200" stroke="#CBD5E1" stroke-width="34" stroke-linecap="round"/>
+      <line x1="130" y1="70" x2="130" y2="200" stroke="#fff" stroke-width="26" stroke-linecap="round"/>
+      <!-- downward arrow on stem -->
+      <g fill="#3498DB"><path d="M130 150 l16 26 l-16 26 l-16 -26 z" transform="scale(1,0.35) translate(0,225)"/></g>
+    </svg>
+  </div>
+
+  <div class="pic-grid">
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M40 44 L60 44 L54 78 L46 78 Z" fill="#1A2B4C"/><rect x="36" y="34" width="28" height="12" rx="3" fill="#3498DB"/><path d="M64 44 q10 8 0 22" stroke="#1A2B4C" stroke-width="5" fill="none"/><circle cx="46" cy="66" r="4" fill="#3498DB" opacity=".6"/></svg>
+      <p class="dots">●</p><p class="w">ink</p><p class="bn bn">দোয়াত</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M50 26 C24 26 16 50 16 62 C16 74 30 80 40 80 L60 80 C70 80 84 74 84 62 C84 50 76 26 50 26 Z" fill="#BAE6FD"/><path d="M50 26 L50 80" stroke="#7DD3FC" stroke-width="3"/><path d="M50 44 q-14 8 -18 4 M50 60 q14 8 18 4" stroke="#38BDF8" stroke-width="3" fill="none"/></svg>
+      <p class="dots">●</p><p class="w">igloo</p><p class="bn bn">ইগলু</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><ellipse cx="50" cy="54" rx="12" ry="18" fill="#A3E635"/><line x1="50" y1="40" x2="50" y2="18" stroke="#1A2B4C" stroke-width="3"/><circle cx="50" cy="14" r="6" fill="#1A2B4C"/><g stroke="#A3E635" stroke-width="3" stroke-linecap="round"><line x1="38" y1="50" x2="26" y2="40"/><line x1="62" y1="50" x2="74" y2="40"/><line x1="38" y1="60" x2="26" y2="70"/><line x1="62" y1="60" x2="74" y2="70"/></g></svg>
+      <p class="dots">●</p><p class="w">insect</p><p class="bn bn">পোকা</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M22 40 L78 40 L72 84 L28 84 Z" fill="#F59E0B"/><path d="M22 40 L50 40 L50 84 L28 84 Z" fill="#FBBF24" opacity=".5"/><circle cx="40" cy="58" r="9" fill="#7C2D12"/><circle cx="58" cy="58" r="7" fill="#7C2D12"/></svg>
+      <p class="dots">●</p><p class="w">in</p><p class="bn bn">ভেতরে</p>
+    </div>
+  </div>
+
+  <div class="blend-banner">
+    Blending: &nbsp; s • i • t ──► <b>sit</b>
+    <div class="bn bn">'স-ই-ট' জুড়ে হয়ে 'সিট' — চেয়ারে বসা!</div>
+  </div>
+</section>
+<!-- ============ PAGE 11 : SOUND 5 /p/ — PARENT GUIDE (odd/recto) ============ -->
+<section class="book-page">
+  <div class="parent-head">
+    <div class="sound-badge" style="background:#8B5CF6;">p</div>
+    <div>
+      <h1>Sound 5: /p/</h1>
+      <div class="bn-sub bn">জন্মদিনের মোমবাতির ফুঁ</div>
+    </div>
+  </div>
+
+  <div class="card mech">
+    <span class="label">সাউন্ড মেকানিক্স</span>
+    <p class="bn">দুই ঠোঁট চেপে মৃদু ফুঁ দাও:
+      <b style="color:var(--coral);">"প্"</b> <i>(/p/ — গলায় আওয়াজ ছাড়া শুধু বাতাসের ধাক্কা)</i>।</p>
+  </div>
+
+  <div class="card action">
+    <span class="label">শারীরিক অ্যাকশন</span>
+    <p class="bn">আঙুলের সামনে মোমবাতি ফুঁ দিয়ে নেভানোর ভঙ্গি: <b>/p/ - /p/ - /p/!</b></p>
+  </div>
+
+  <div class="script">
+    <span class="label">প্যারেন্ট স্ক্রিপ্ট</span>
+    <p class="line bn">"মোমবাতি জ্বলেছে! চল ফুঁ দিয়ে নিভিয়ে দিই: <b>/p/ - /p/ - Puff!</b> রান্নার কড়াই: <b>/p/ - /p/ - Pan!</b>"</p>
+  </div>
+
+  <div class="routine">
+    <span class="label">ঘরের স্পোকেন রুটিন</span>
+    <p class="say">"This is a pen."</p>
+    <p class="bn-say bn">কলম দেখিয়ে বলুন — এটা একটা কলম।</p>
+  </div>
+
+  <div class="caution">
+    <span class="label">সতর্কতা</span>
+    <p class="bn">গলায় <b>'প্য'</b> নয় — নিঃস্বর /p/। হাতের তল্পে হাত রেখে ফুঁ টের নাও।</p>
+  </div>
+</section>
+<!-- ============ PAGE 12 : SOUND 5 /p/ — CHILD PLAYGROUND (even/verso) ============ -->
+<section class="book-page">
+  <div class="child-head">
+    <h1>Puffing the Pink Candle! /p/</h1>
+    <div class="bn-sub bn">গোলাপি মোমবাতির ফুঁ</div>
+  </div>
+
+  <div class="letter-stage">
+    <svg width="300" height="230" viewBox="0 0 300 230" aria-label="giant hollow letter p with stem and loop">
+      <!-- vertical stem (down) -->
+      <line x1="110" y1="34" x2="110" y2="196" stroke="#CBD5E1" stroke-width="34" stroke-linecap="round"/>
+      <line x1="110" y1="34" x2="110" y2="196" stroke="#fff" stroke-width="26" stroke-linecap="round"/>
+      <!-- rounded loop (bowl) -->
+      <path d="M110 92 C110 92 140 66 178 92 C206 112 196 160 150 162 C122 163 110 140 110 118" fill="none" stroke="#CBD5E1" stroke-width="34" stroke-linecap="round"/>
+      <path d="M110 92 C110 92 140 66 178 92 C206 112 196 160 150 162 C122 163 110 140 110 118" fill="none" stroke="#fff" stroke-width="26" stroke-linecap="round"/>
+      <!-- red start dot at top -->
+      <circle cx="110" cy="34" r="13" fill="#E74C3C" stroke="#fff" stroke-width="3"/>
+      <!-- downward arrow -->
+      <g fill="#3498DB"><path d="M110 150 l14 24 l-14 24 l-14 -24 z" transform="scale(1,0.32) translate(0,290)"/></g>
+      <!-- loop arrow -->
+      <g fill="#3498DB"><path d="M188 100 l16 -8 l-6 16 z"/></g>
+    </svg>
+  </div>
+
+  <div class="pic-grid">
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M26 40 L74 40 L70 50 L30 50 Z" fill="#475569"/><path d="M30 52 L70 52 L66 84 L34 84 Z" fill="#94a3b8"/><rect x="52" y="34" width="26" height="7" rx="3" fill="#1A2B4C"/></svg>
+      <p class="dots">●</p><p class="w">pan</p><p class="bn bn">কড়াই</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M64 26 L40 62 L54 62 L50 84 L76 46 L60 46 Z" fill="#F1C40F" stroke="#C79A00" stroke-width="2"/><rect x="34" y="20" width="14" height="8" rx="2" fill="#3498DB"/><rect x="72" y="52" width="14" height="8" rx="2" fill="#3498DB"/></svg>
+      <p class="dots">●</p><p class="w">pen</p><p class="bn bn">কলম</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><path d="M28 44 L72 44 L66 84 L34 84 Z" fill="#B45309"/><ellipse cx="50" cy="44" rx="22" ry="6" fill="#D97706"/><path d="M74 50 q10 6 0 14" stroke="#B45309" stroke-width="4" fill="none"/><path d="M40 58 q4 -6 8 0 M52 58 q4 -6 8 0" stroke="#78350F" stroke-width="3" fill="none"/></svg>
+      <p class="dots">●</p><p class="w">pot</p><p class="bn bn">পাত্র</p>
+    </div>
+    <div class="pic-card">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="56" r="26" fill="#F472B6"/><ellipse cx="50" cy="56" rx="9" ry="7" fill="#EC4899"/><circle cx="46" cy="56" r="1.8" fill="#1A2B4C"/><circle cx="54" cy="56" r="1.8" fill="#1A2B4C"/><circle cx="41" cy="47" r="3" fill="#1A2B4C"/><circle cx="59" cy="47" r="3" fill="#1A2B4C"/><path d="M28 42 q-5 -8 2 -10 M72 42 q5 -8 -2 -10" stroke="#F472B6" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
+      <p class="dots">●</p><p class="w">pig</p><p class="bn bn">শূকর</p>
+    </div>
+  </div>
+
+  <div class="blend-row">
+    <div class="blend-card">
+      <div class="phon">p • a • n</div>
+      <div class="w">pan</div>
+      <div class="bn bn">কড়াই</div>
+    </div>
+    <div class="blend-card">
+      <div class="phon">p • a • t</div>
+      <div class="w">pat</div>
+      <div class="bn bn">টোকা</div>
+    </div>
+  </div>
+</section>
+<!-- ============ PAGE 13 : SOUND 6 /n/ + CH1 REVIEW — PARENT (odd/recto) ============ -->
+<section class="book-page">
+  <div class="parent-head">
+    <div class="sound-badge" style="background:#EC4899;">n</div>
+    <div>
+      <h1>Sound 6: /n/</h1>
+      <div class="bn-sub bn">উড়োজাহাজের ডানার গুঞ্জন</div>
+    </div>
+  </div>
+
+  <div class="card mech">
+    <span class="label">সাউন্ড মেকানিক্স</span>
+    <p class="bn">জিভ তালুতে ঠেকিয়ে নাক দিয়ে গুঞ্জন তোলো:
+      <b style="color:var(--coral);">"ন্-ন্-ন্"</b> <i>(/nnnn/)</i>।</p>
+  </div>
+
+  <div class="card action">
+    <span class="label">শারীরিক অ্যাকশন</span>
+    <p class="bn">দুই হাত দুই পাশে বিমানের ডানার মতো ছড়িয়ে ওড়া: <b>/nnnnn/!</b></p>
+  </div>
+
+  <div class="script">
+    <span class="label">প্যারেন্ট স্ক্রিপ্ট</span>
+    <p class="line bn">"উড়োজাহাজ আকাশে উড়ছে! ডানা মেলে আওয়াজ করো: <b>/n/ - /n/ - Net!</b> <b>/n/ - /n/ - Nest!</b>"</p>
+  </div>
+
+  <div class="card" style="background:var(--skybg); border:1.5px solid #B6E0FE; border-left:6px solid var(--sky);">
+    <span class="label" style="background:var(--sky);">চ্যাপ্টার ১ মাস্টারি চেক</span>
+    <p class="bn" style="font-size:15px; margin:4px 0 0;">
+      ✅ বাচ্চা কি ৬টি সাউন্ড শুনে অঙ্গভঙ্গি করতে পারছে?<br>
+      ✅ ৫টি CVC শব্দ কি নিজে নিজে পড়ছে — <b>sat, pat, tap, pan, tin?</b>
+    </p>
+  </div>
+
+  <div class="caution">
+    <span class="label">মনে রাখো</span>
+    <p class="bn">শেষ ৬ষ্ঠ সাউন্ড /n/ — এবার ছয়টি মিলিয়ে <b>Group 1</b> সম্পূর্ণ। ডান পাতার কার্নিভাল খেলিয়ে উৎসব করে তুলুন!</p>
+  </div>
+</section>
+<!-- ============ PAGE 14 : SOUND 6 /n/ + 6-SOUND CARNIVAL — CHILD (even/verso) ============ -->
+<section class="book-page">
+  <div class="child-head" style="margin-bottom:4px;">
+    <h1 style="font-size:22px;">Soaring Airplane &amp; 6-Sound Carnival! /n/</h1>
+    <div class="bn-sub bn">উড়োজাহাজ ও ছয়টি ম্যাজিক সাউন্ডের উৎসব</div>
+  </div>
+
+  <!-- TOP: letter n + 4 n-pictures -->
+  <div style="display:flex; gap:10px; align-items:center; margin-bottom:6px;">
+    <div class="letter-stage" style="margin:0; padding:2px; flex:none;">
+      <svg width="120" height="120" viewBox="0 0 260 230" aria-label="giant hollow letter n">
+        <line x1="70" y1="34" x2="70" y2="196" stroke="#CBD5E1" stroke-width="34" stroke-linecap="round"/>
+        <line x1="70" y1="34" x2="70" y2="196" stroke="#fff" stroke-width="26" stroke-linecap="round"/>
+        <path d="M70 60 L70 118 C110 60 150 130 190 60 L190 196" fill="none" stroke="#CBD5E1" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M70 60 L70 118 C110 60 150 130 190 60 L190 196" fill="none" stroke="#fff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="70" cy="34" r="13" fill="#E74C3C" stroke="#fff" stroke-width="3"/>
+        <g fill="#3498DB"><path d="M130 120 l16 12 l-16 12 z"/></g>
+      </svg>
+    </div>
+    <div class="pic-grid" style="margin:0; grid-template-columns:repeat(4,1fr); gap:6px; flex:1;">
+      <div class="pic-card" style="padding:5px 3px;">
+        <svg viewBox="0 0 100 100"><path d="M20 40 L80 40 L80 74 L20 74 Z" fill="none" stroke="#B45309" stroke-width="5"/><g stroke="#B45309" stroke-width="3"><line x1="35" y1="40" x2="35" y2="74"/><line x1="50" y1="40" x2="50" y2="74"/><line x1="65" y1="40" x2="65" y2="74"/></g><circle cx="50" cy="57" r="7" fill="#A3E635"/></svg>
+        <p class="dots" style="margin:2px 0 0;">●</p><p class="w" style="font-size:13px;">net</p><p class="bn bn">জাল</p>
+      </div>
+      <div class="pic-card" style="padding:5px 3px;">
+        <svg viewBox="0 0 100 100"><ellipse cx="50" cy="58" rx="30" ry="22" fill="#A16207"/><ellipse cx="50" cy="50" rx="24" ry="14" fill="#CA8A04"/><circle cx="40" cy="52" r="6" fill="#A3E635"/><circle cx="58" cy="48" r="5" fill="#A3E635"/></svg>
+        <p class="dots" style="margin:2px 0 0;">●</p><p class="w" style="font-size:13px;">nest</p><p class="bn bn">বাসা</p>
+      </div>
+      <div class="pic-card" style="padding:5px 3px;">
+        <svg viewBox="0 0 100 100"><path d="M40 40 C34 54 34 66 40 76 C50 80 60 78 62 66 C64 52 60 42 52 38 Z" fill="#B45309"/><path d="M52 38 q6 -8 14 -4" stroke="#7C2D12" stroke-width="4" fill="none"/></svg>
+        <p class="dots" style="margin:2px 0 0;">●</p><p class="w" style="font-size:13px;">nut</p><p class="bn bn">বাদাম</p>
+      </div>
+      <div class="pic-card" style="padding:5px 3px;">
+        <svg viewBox="0 0 100 100"><line x1="32" y1="82" x2="62" y2="28" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/><circle cx="64" cy="26" r="9" fill="#94a3b8"/><rect x="60" y="16" width="9" height="6" rx="2" fill="#64748B"/></svg>
+        <p class="dots" style="margin:2px 0 0;">●</p><p class="w" style="font-size:13px;">nail</p><p class="bn bn">পেরেক</p>
+      </div>
+    </div>
+  </div>
+  <!-- BOTTOM: 6-Sound Carnival -->
+  <div class="card" style="background:linear-gradient(135deg,#FDF2F8,#F5F3FF); border:1.5px solid #E9D5FF; margin-bottom:7px;">
+    <p class="bn" style="text-align:center; font-weight:800; font-size:17px; color:#7C3AED; margin:0 0 2px;">
+      🎪 My First 6 Magic Sounds Carnival! 🎪
+    </p>
+    <p class="bn" style="text-align:center; font-size:12px; color:#6D28D9; margin:0 0 2px;">আমার প্রথম ৬টি ম্যাজিক সাউন্ডের উৎসব</p>
+    <div class="balloons">
+      <div class="balloon" style="background:#3498DB;">s</div>
+      <div class="balloon" style="background:#E74C3C;">a</div>
+      <div class="balloon" style="background:#2ECC71;">t</div>
+      <div class="balloon" style="background:#F1C40F; color:#1A2B4C;">i</div>
+      <div class="balloon" style="background:#8B5CF6;">p</div>
+      <div class="balloon" style="background:#EC4899;">n</div>
+    </div>
+
+    <p class="bn" style="text-align:center; font-weight:700; font-size:13px; color:var(--navy); margin:4px 0 2px;">
+      My First 5 Decodable Words · আমার প্রথম ৫টি পড়া শব্দ
+    </p>
+    <div class="word-grid">
+      <div class="dw"><div class="dots">●●●</div><div class="w">sat</div><div class="bn bn" style="font-size:10px;">বসা</div></div>
+      <div class="dw"><div class="dots">●●●</div><div class="w">pat</div><div class="bn bn" style="font-size:10px;">টোকা</div></div>
+      <div class="dw"><div class="dots">●●●</div><div class="w">tap</div><div class="bn bn" style="font-size:10px;">কল</div></div>
+      <div class="dw"><div class="dots">●●●</div><div class="w">pan</div><div class="bn bn" style="font-size:10px;">কড়াই</div></div>
+      <div class="dw"><div class="dots">●●●</div><div class="w">tin</div><div class="bn bn" style="font-size:10px;">টিন</div></div>
+    </div>
+
+    <div class="trophy">
+      🏆 Chapter 1 Super Sound Champion!
+      <div class="bn bn">অধ্যায় ১ — সুপার সাউন্ড চ্যাম্পিয়ন!</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

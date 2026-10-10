@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH - Weeks 1-2 (Pages 8-29)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700;800&display=swap');
+
+        @page { size: A4 portrait; margin: 0; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #CBD5E1;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== A4 Page Container ===== */
+        .book-page {
+            width: 210mm;
+            height: 297mm;
+            max-height: 297mm;
+            box-sizing: border-box;
+            overflow: hidden;
+            page-break-after: always;
+            break-after: page;
+            background: #FDFBF7;
+            position: relative;
+        }
+
+        /* Dual-Page Padding (by PAGE NUMBER parity) */
+        .book-page.verso { padding: 14mm 22mm 14mm 14mm; }
+        .book-page.recto { padding: 14mm 14mm 14mm 22mm; }
+
+        /* ===== QR Code Placeholder (18mm x 18mm) ===== */
+        .qr-block { display: flex; align-items: center; gap: 10px; margin: 14px 0; }
+        .qr-placeholder {
+            width: 18mm; height: 18mm; min-width: 18mm; min-height: 18mm;
+            background: #ffffff; border: 2px dashed #94a3b8; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            font-size: 9px; font-weight: 700; color: #475569; position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .qr-placeholder::after { content: "SCAN ME"; font-size: 7px; color: #94a3b8; position: absolute; bottom: 4px; letter-spacing: 1px; }
+        .qr-caption { font-size: 9px; line-height: 1.5; color: #475569; word-break: break-all; max-width: 92mm; }
+        .qr-caption strong { color: #1d4ed8; font-family: 'Courier New', monospace; font-size: 10px; }
+
+        /* ===== Titles ===== */
+        .page-title { font-size: 23px; font-weight: 700; color: #1e293b; line-height: 1.35; border-bottom: 3px solid #3b82f6; padding-bottom: 8px; margin: 0 0 14px 0; }
+        .section-title { font-size: 18px; font-weight: 700; color: #1e293b; margin: 18px 0 10px 0; }
+        .subsection-title { font-size: 16px; font-weight: 700; color: #1e293b; margin: 0 0 6px 0; }
+
+        /* ===== Content Boxes ===== */
+        .content-box { background: #ffffff; border-radius: 12px; padding: 14px 16px; margin: 12px 0; box-shadow: 0 3px 8px rgba(0,0,0,0.08); border-left: 5px solid #3b82f6; }
+        .bangla-text { font-family: 'Hind Siliguri', sans-serif; font-size: 15px; line-height: 1.9; color: #334155; margin: 0; }
+        .english-text { font-size: 14px; line-height: 1.7; color: #1e293b; margin: 0; }
+
+        .spoken-routine { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 2px solid #22c55e; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+        .action-command { background: linear-gradient(135deg, #fef3c7, #fed7aa); border: 2px solid #fbbf24; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+        .home-activity { background: linear-gradient(135deg, #f3e8ff, #e9d5ff); border: 2px solid #a855f7; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+        .checklist { font-family: 'Hind Siliguri', sans-serif; font-size: 15px; line-height: 1.9; color: #334155; margin: 0; padding-left: 20px; }
+        .checklist li { margin-bottom: 3px; }
+
+        /* ===== Illustration (Child) Pages ===== */
+        .illustration-frame { background: #ffffff; border: 2px solid #e2e8f0; border-radius: 12px; padding: 14px; margin: 12px 0; box-shadow: 0 3px 8px rgba(0,0,0,0.06); }
+        .illustration-title { font-size: 16px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0; }
+        .illustration-description { font-family: 'Hind Siliguri', sans-serif; font-size: 14px; color: #475569; line-height: 1.8; margin: 0 0 10px 0; }
+
+        .tracing-area { background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 10px; padding: 14px; text-align: center; }
+        .tracing-area p { font-family: 'Hind Siliguri', sans-serif; font-size: 13px; color: #475569; margin: 8px 0 0 0; }
+        .tracing-path { stroke: #10b981; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* ===== Footer ===== */
+        .page-footer { position: absolute; bottom: 10mm; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 0 14mm; font-size: 11px; color: #64748b; }
+        .brand-logo { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #3b82f6; }
+        .page-number { font-family: 'Hind Siliguri', sans-serif; }
+
+        .text-center { text-align: center; }
+
+        @media print {
+            body { margin: 0; background: #fff; gap: 0; }
+            .book-page { page-break-after: always; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ================= PAGE 8 : VERSO (EVEN) — Lesson 1.1 ================= -->
+    <div class="book-page verso" id="P008-PAR">
+        <div class="page-title">পাঠ ১.১ — পরিবেশিক শব্দ ও অভিবাদন</div>
+
+        <div class="content-box">
+            <div class="subsection-title">শোনার খেলা (Listening Games)</div>
+            <p class="bangla-text">
+                শিশুকে ঘরের পরিবেশিক শব্দ শোনান — চামচের খনখন শব্দ, দরজার ঘণ্টার শব্দ,
+                আর জানালার পাশে চড়ুইয়ের ডাক। প্রতিটি শব্দের সঙ্গে একটি অঙ্গভঙ্গি দেখান,
+                যেমন ঘণ্টা বাজলে তালি দিতে পারেন। শিশু যখন শব্দ চিনতে শেখে, তার শ্রবণ
+                ক্ষমতা দ্রুত বাড়ে। প্রতিদিন সকালে ৫–৭ মিনিট এই খেলা করুন।
+            </p>
+        </div>
+
+        <div class="spoken-routine">
+            <div class="subsection-title">স্পোকেন রুটিন (Spoken Routine)</div>
+            <p class="english-text">
+                Good morning, baby! (শুভ সকাল, বেবি!)<br>
+                Can you hear the spoon? (তুই কি চামচের শব্দ শুনতে পারছ?)<br>
+                Listen to the doorbell! (ঘণ্টার শব্দ শোনো!)<br>
+                Well done! (দারুণ হয়েছে!)
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                আজকের কাজ: ঘরে পাঁচটি ভিন্ন শব্দ খুঁজে বার করুন। প্রতিটি শব্দের সঙ্গে
+                একটি হাবি ভাব বানান। সকালের দশ মিনিট এই খেলায় সময় কাটান।
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-L01-AUD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/l01
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ৮</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 9 : RECTO (ODD) — Lesson 1.1 ================= -->
+    <div class="book-page recto" id="P009-CHD">
+        <div class="page-title">পাঠ ১.১ — শিশুর খেলার পাতা</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">ঘুম ভাঙার ঘরের দৃশ্য (Waking Bedroom Scene)</div>
+            <div class="illustration-description">
+                সকালের রোদে ভরা একটি প্রাণবন্ত শোবার ঘর। খুঁজে বার করুন: জানালার পাশে
+                ডাক পড়া চড়ুই, রাতের টেবিলের উপর টিক-টিক ঘড়ি, আর বিছানা থেকে জানালা
+                পর্যন্ত ঢেউয়াল আঙুল-ট্রেসিং পথ।
+            </div>
+            <div class="tracing-area">
+                <svg width="240" height="120" viewBox="0 0 240 120">
+                    <path class="tracing-path" d="M20 90 Q60 20 100 90 T180 90 T260 90"/>
+                </svg>
+                <p>বিছানা থেকে জানালা পর্যন্ত ঢেউয়াল রেখাটি আঙুল দিয়ে অনুসরণ করো!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-L01-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/l01/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ৯</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 10 : VERSO (EVEN) — Lesson 1.2 ================= -->
+    <div class="book-page verso" id="P010-PAR">
+        <div class="page-title">পাঠ ১.২ — সূক্ষ্ম-হাতের চাল ও ত্রিভুজ পেনসিল গ্রিপ</div>
+
+        <div class="content-box">
+            <div class="subsection-title">অ্যালিগেটর-চোঁখ গ্রিপ (Alligator Beak Grip)</div>
+            <p class="bangla-text">
+                শিশুর হাতে পেনসিল ধরানোর সঠিক নিয়ম শেখান। বোঁটা ও তর্জনী অঙ্গুল মিলে
+                একটি ছোট বল্ট বানাবে — যেন অ্যালিগেটর-চোঁখ। মধ্যমা অঙ্গুল নিচ থেকে
+                সাপোর্ট করবে, আর অনামিকা ও কনিষ্ঠা হালকা করে তালুর ভেতরে গুটিয়ে যাবে।
+                এই ত্রিভুজ গ্রিপ অক্ষর আঁকতে নিয়ন্ত্রণ দেয়। লবণের থালায় (salt tray)
+                অক্ষর ট্রেস করান — ভুল মুছে দেওয়াও সহজ ও কাঠি-মুক্ত।
+            </p>
+        </div>
+
+        <div class="action-command">
+            <div class="subsection-title">স্পোকেন কমান্ড (Spoken Command)</div>
+            <p class="english-text">
+                Look at me! (আমার দিকে তাকাও!)<br>
+                Show me your beak! (তোর চোঁখ-বল্টটা দেখাও!)<br>
+                Hold it gently. (হালকা করে ধরো।)<br>
+                Well done! (দারুণ হয়েছে!)
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                একটি প্লেটে পাতলা লবণ ছড়িয়ে বড়-বড় 'c' ও লাইনে আঙুল দিয়ে ট্রেস করান।
+                প্রতিদিন ৫ মিনিট, কাঠি-হাত-আঙুলের অনুভূতি গড়তে সাহায্য করে।
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-L02-GAM01</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/l02
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১০</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 11 : RECTO (ODD) — Lesson 1.2 ================= -->
+    <div class="book-page recto" id="P011-CHD">
+        <div class="page-title">কার্লি ক্যাটারপিলারের সঙ্গে পরিচয়!</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">হাসিমুখের শুঁয়োপোকা (Cheerful Caterpillar)</div>
+            <div class="illustration-description">
+                একটি উজ্জ্বল, হাসিমুখের শুঁয়োপোকা তিনটি বোল্ড ডটেড ট্রেসিং ট্র্যাক ধরছে।
+                প্রতিটি ট্র্যাক একটি বড় অ্যান্টি-ক্লকওয়াইজ 'c' বক্ররেখা। আঙুল দিয়ে
+                প্রতিটি 'c' অনুসরণ করো — এটাই তোমার প্রথম বক্ররেখা!
+            </div>
+            <div class="tracing-area">
+                <svg width="240" height="160" viewBox="0 0 240 160">
+                    <path class="tracing-path" d="M70 30 A40 40 0 1 0 70 110"/>
+                    <path class="tracing-path" d="M150 30 A40 40 0 1 0 150 110"/>
+                    <path class="tracing-path" d="M60 55 A40 40 0 1 0 60 135"/>
+                </svg>
+                <p>প্রতিটি বক্ররেখা অ্যান্টি-ক্লকওয়াইজ ঘুরে আঙুল দিয়ে ট্রেস করো!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-L02-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/l02/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১১</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 12 : VERSO (EVEN) — Lesson 1.3 ================= -->
+    <div class="book-page verso" id="P012-PAR">
+        <div class="page-title">পাঠ ১.৩ — উঁচু/নিচু ও জোরে/আস্তে শ্রুতিবোধ</div>
+
+        <div class="content-box">
+            <div class="subsection-title">ঘরোয়া তালি-খেলা (Home Clapping Game)</div>
+            <p class="bangla-text">
+                মা বা বাবাকে আলাদা সুরে তালি পড়তে বলেন। উঁচু সুরে হাত তাড়াতাড়ি পড়ুন,
+                নিচু সুরে ধীরে। জোরে শব্দে জোরে তালি, আস্তে শব্দে হালকা তালি। শিশুকে
+                জিজ্ঞাসা করুন — "উঁচু না নিচু?" "জোরে না আস্তে?" এটি শ্রবণ-বিভাজন
+                দক্ষতা গড়ে, যা ফনিক্সের ভিত্তি। প্রতিদিন ৫ মিনিট ঘরের বিভিন্ন জিনিসের
+                সঙ্গে অভ্যাস করুন।
+            </p>
+        </div>
+
+        <div class="spoken-routine">
+            <div class="subsection-title">স্পোকেন বাক্য (Spoken Phrase)</div>
+            <p class="english-text">
+                Listen to Mama. (মায়ের কথা শোনো।)<br>
+                Is it high or low? (উঁচু না নিচু?)<br>
+                Is it loud or soft? (জোরে না আস্তে?)<br>
+                Great listening! (দারুণ শ্রবণ!)
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                রান্নাঘরের চামচ, বাক্স, বোতল দিয়ে দ্রুত-ধীর ও জোরে-আস্তে ছন্দে তালি
+                পড়ুন। পরিবারের সবাই মিলে একটা মজার খেলা বানান!
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-L03-AUD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/l03
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১২</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 13 : RECTO (ODD) — Lesson 1.3 ================= -->
+    <div class="book-page recto" id="P013-CHD">
+        <div class="page-title">বড় ঢাক বনাম ছোট ঘণ্টা</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">শব্দ-তীব্রতা মেলানোর রেখা (Sound Intensity Lines)</div>
+            <div class="illustration-description">
+                বড় ঢাক = জোরে শব্দ (মোটা উল্লম্ব রেখা)। ছোট ঘণ্টা = আস্তে শব্দ
+                (সূক্ষ্ম ডটেড রেখা)। বাম থেকে ডান কলামে রেখা টেনে শিশু শব্দের তীব্রতা
+                মেলাতে শেখে। এটি শব্দের ধর্ম বোঝার প্রথম ধাপ।
+            </div>
+            <div class="tracing-area" style="display: flex; justify-content: space-around; align-items: flex-end;">
+                <div style="text-align: center;">
+                    <div style="font-size: 26px;">🥁</div>
+                    <div style="width: 70px; height: 90px; border: 3px solid #ef4444; border-radius: 8px; margin: 6px auto;"></div>
+                    <p>BIG DRUM<br>LOUD</p>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 26px;">🔔</div>
+                    <div style="width: 70px; height: 40px; border: 3px dashed #10b981; border-radius: 8px; margin: 6px auto;"></div>
+                    <p>TINY BELL<br>SOFT</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-L03-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/l03/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১৩</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 14 : VERSO (EVEN) — Lesson 1.4 ================= -->
+    <div class="book-page verso" id="P014-PAR">
+        <div class="page-title">পাঠ ১.৪ — কমান্ড মেনে শারীরিক সাড়া</div>
+
+        <div class="content-box">
+            <div class="subsection-title">শারীরিক প্রতিক্রিয়া শেখানো</div>
+            <p class="bangla-text">
+                শিশুকে নির্দেশ শুনে শারীরিক সাড়া দিতে শেখান। প্রথমে আপনি নিজে দেখান,
+                তারপর হাত ধরে সঙ্গে সঙ্গে করুন, শেষে নিজে করতে দিন। "Stand up" (দাঁড়াও),
+                "Sit down" (বসো), "Turn around" (ঘুরে ফেরো), "Touch your toes"
+                (পায়ের আঙুল ছোঁ)। ভুল হলে ধৈর্য ধরুন, চেষ্টার প্রশংসা করুন।
+            </p>
+        </div>
+
+        <div class="action-command">
+            <div class="subsection-title">অ্যাকশন কমান্ড (Action Command)</div>
+            <p class="english-text">
+                Stand up! (দাঁড়াও!)<br>
+                Sit down! (বসো!)<br>
+                Turn around! (ঘুরে ফেরো!)<br>
+                Touch your toes! (পায়ের আঙুল ছোঁ!)<br>
+                Well done! (বাহ, দারুণ!)
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                "সাইমন Says" খেলা খেলুন — কেবল "Simon says" দিয়ে শুরু নির্দেশ মানবেন।
+                এটি শ্রবণ ও আত্ম-নিয়ন্ত্রণ দুটোই গড়ে তোলে।
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-L04-GAM01</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/l04
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১৪</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 15 : RECTO (ODD) — Lesson 1.4 ================= -->
+    <div class="book-page recto" id="P015-CHD">
+        <div class="page-title">কাজ করছে টডলার চরিত্রগুলো</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">দিকনির্দেশ গতি-পথ (Directional Motion Trails)</div>
+            <div class="illustration-description">
+                চারজন টডলার চরিত্র কাজ দেখাচ্ছে, প্রত্যেকের সঙ্গে ডটেড গতি-রেখা:
+                (১) লাফিয়ে উঠছে মেয়ে (stand up), (২) বেঞ্চে বসছে ছেলে (sit down),
+                (৩) বৃত্তে ঘুরছে শিশু (turn around), (৪) পায়ের আঙুল ছুঁছে বাচ্চা
+                (touch toes)। শিশুরা দেখে নকল করে সাড়া দেবে।
+            </div>
+            <div class="tracing-area">
+                <div style="display: flex; justify-content: space-around; align-items: center; font-size: 34px;">
+                    <span>🙋 ↑</span>
+                    <span>🧘 ↓</span>
+                    <span>🔄 ↺</span>
+                    <span>🦶 ↘</span>
+                </div>
+                <p>প্রতিটি চরিত্রের গতি-রেখা আঙুল দিয়ে অনুসরণ করো!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-L04-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/l04/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১৫</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 16 : VERSO (EVEN) — Lesson 1.5 ================= -->
+    <div class="book-page verso" id="P016-PAR">
+        <div class="page-title">পাঠ ১.৫ — সপ্তাহ ১ পুনরালোচনা ও শ্রবণ-পরীক্ষা</div>
+
+        <div class="content-box">
+            <div class="subsection-title">অভিভাবক পর্যবেক্ষণ-চেকলিস্ট (Parent Checklist)</div>
+            <ul class="checklist">
+                <li>☐ নাম ডাকলে সাড়া দেয়</li>
+                <li>☐ সহজ ধ্বনি অনুকরণ করে (আ, ও, মমম)</li>
+                <li>☐ ঘরোয়া শব্দের প্রতি আগ্রহ দেখায়</li>
+                <li>☐ দেখানো কিরক্তি নকল করতে চেষ্টা করে</li>
+                <li>☐ শব্দ-খেলায় পালাক্রমে জবাব দেয়</li>
+                <li>☐ শব্দ-খেলায় আনন্দ প্রকাশ করে</li>
+            </ul>
+            <p class="bangla-text mt-8">
+                প্রতি সপ্তাহের পর্যবেক্ষণ শেখার অগ্রগতি মাপতে সাহায্য করে। ছোট জয়
+                উদযাপন করুন ও চেষ্টা করে উৎসাহ দিন।
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                শব্দ-খোঁজে খেলা: ৩টি উঁচু শব্দের জিনিস (শিস, ঘণ্টা, চামচ), ৩টি নিচু
+                শব্দের জিনিস (ঢাক, বাক্স, বালতি), ২টি জোরে শব্দ (ভ্যাকুয়াম, সংগীত),
+                ২টি আস্তে শব্দ (বালিশ, কাপড়) খুঁজুন। পার্থক্য নিয়ে একসঙ্গে আলোচনা করুন!
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-REV</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/review
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১৬</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 17 : RECTO (ODD) — Lesson 1.5 ================= -->
+    <div class="book-page recto" id="P017-CHD">
+        <div class="page-title">শ্রবণ সাফারি বোর্ড গেম</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">শব্দ-চেকপয়েন্ট ও পুরস্কার তারা</div>
+            <div class="illustration-description">
+                সাফারি জিপের আকারের একটি রঙিন খেলার বোর্ড। ৫টি শব্দ-চেকপয়েন্ট:
+                (১) চড়ুইয়ের ডাক (উঁচু), (২) ঢাকের বাজা (নিচু), (৩) ঘণ্টার রিং (আস্তে),
+                (৪) শিসের বাজা (জোরে), (৫) বৃষ্টির ফোঁটা (মাঝারি)। শিশু সঠিক শব্দ চিনে
+                সামনে এগোয়। চেকপয়েন্টে পৌঁছালে একটি পুরস্কার তারা পাওয়া যায়। ৫টি তারা
+                পেলে জেতা!
+            </div>
+            <div class="tracing-area">
+                <div style="display: flex; justify-content: space-around; font-size: 28px;">
+                    <span>🐦</span><span>🥁</span><span>🔔</span><span>📯</span><span>💧</span>
+                </div>
+                <div style="display: flex; justify-content: space-around; font-size: 20px; color:#f59e0b; margin-top:6px;">
+                    <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                </div>
+                <p>সক্রিয় শ্রবণ ও শব্দ-বিভাজন খেলার সঙ্গে গড়ে উঠে!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W01-REV-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w01/review/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১৭</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 18 : VERSO (EVEN) — Lesson 2.1 ================= -->
+    <div class="book-page verso" id="P018-PAR">
+        <div class="page-title">পাঠ ২.১ — /s/ শব্দ (সাপের সাড়া)</div>
+
+        <div class="content-box">
+            <div class="subsection-title">/ssss/ সাপের সাড়া (Snake Action)</div>
+            <p class="bangla-text">
+                সাপের মতো ফিসফিস শব্দ করুন — "/ssss/"। দাঁত একসঙ্গে রাখুন, জিহ্বা দাঁতের
+                পেছনে, বায়ু অবিরত বইয়ে দিন। এটি একটি বিশুদ্ধ অনবোজ ফ্রিকেটিভ শব্দ।
+                বেজে এমন /z/ (মৌমাছির গুনগুন) সঙ্গে তুলনা করুন — সেখানে স্বরযন্ত্র
+                কম্পন করে। হাত মুখের সামনে রেখে বায়ু অনুভব করুন।
+            </p>
+        </div>
+
+        <div class="spoken-routine">
+            <div class="subsection-title">স্পোকেন রুটিন (Spoken Routine)</div>
+            <p class="english-text">
+                Sit down, please. (দয়া করে বসো।)<br>
+                Can you hear the snake? (সাপের শব্দ শুনতে পাচ্ছ?)<br>
+                Listen for the /ssss/ sound! (ফিসফিস শব্দটা শোনো!)<br>
+                Excellent listening! (দারুণ শ্রবণ!)
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                /ssss/ শনাক্ত করুন: পাতায় বৃষ্টির শব্দ, কেটলির বাষ্প, গাছের মধে বাতাস,
+                ব্যালুনের বাতাস বের হওয়া। প্রতিদিনের শ্রবণ-খেলায় সাপ শনাক্ত করুন!
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L01-AUD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l01
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১৮</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 19 : RECTO (ODD) — Lesson 2.1 ================= -->
+    <div class="book-page recto" id="P019-CHD">
+        <div class="page-title">বড় ছোট হাতের 's' ও সরু সাপ</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">সাপ-থিম /s/ খেলার পাতা</div>
+            <div class="illustration-description">
+                পাতার বড় অংশ জুড়ে একটি বড় ছোট হাতের 's' অক্ষর। এর বক্ররেখার ভেতরে:
+                সরু সাপ, হাসিমুখ সূর্য, বুড়বুড় সাবান, আর ফলো 's' আঙুল-ট্রেসিং পথ।
+                উজ্জ্বল হলুদ পটভূমি ও সবুজ রঙের সাজসজ্জা। ট্রেসিং ও শব্দ-সংযোগ উৎসাহ দেয়।
+            </div>
+            <div class="tracing-area">
+                <svg width="220" height="140" viewBox="0 0 220 140">
+                    <path class="tracing-path" d="M150 40 C150 20 60 20 60 70 C60 120 150 120 150 100"/>
+                    <path d="M80 70 Q100 50 120 70 Q140 90 120 90" stroke="#8b5cf6" stroke-width="3" fill="none"/>
+                </svg>
+                <p>সাপের সরু পথটি 's' অক্ষরের ভেতরে আঙুল দিয়ে ট্রেস করো!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L01-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l01/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ১৯</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 20 : VERSO (EVEN) — Lesson 2.2 ================= -->
+    <div class="book-page verso" id="P020-PAR">
+        <div class="page-title">পাঠ ২.২ — ছোট /æ/ (অ্যা) শব্দ (পিঁপড়ের সাড়া)</div>
+
+        <div class="content-box">
+            <div class="subsection-title">ছোট /æ/ (অ্যা) শব্দের সাড়া</div>
+            <p class="bangla-text">
+                মুখ খুলে ছোট, খোলা /æ/ (অ্যা) শব্দ করুন — "অ্যা অ্যা"।
+                জিহ্বা সামনে-নিচু, চোয়াল টান ও মুখ তুলনাত্মকভাবে খোলা। এটি 'A' অক্ষরের
+                নাম 'এ' নয় — এটি /æ/ (অ্যা) শব্দ।
+                পিঁপড়ের সঙ্গে চার দিকে হাঁটা নকল করুন।
+            </p>
+        </div>
+
+        <div class="spoken-routine">
+            <div class="subsection-title">স্পোকেন বাক্য (Spoken Phrase)</div>
+            <p class="english-text">
+                An apple, please. (একটি আপেল, দাও।)<br>
+                Can you see the ants? (পিঁপড়ে দেখতে পাচ্ছ?)<br>
+                The ants are crawling. (পিঁপড়ে রেঁখছে।)<br>
+                Come here! (এখানে এসো!)
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                বাড়ির /æ/ শব্দের জিনিস খুঁজুন: আপেল (apple), খাটুনি (axe), ব্যাক
+                (back), ব্যাগ (bag), ব্যাড (bad), চ্যাট (cat), ক্যাপ (cap)। প্রতি শব্দ
+                উচ্চারণ করে আঙুল দিয়ে /æ/ সাড়া দেখান!
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L02-AUD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l02
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২০</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 21 : RECTO (ODD) — Lesson 2.2 ================= -->
+    <div class="book-page recto" id="P021-CHD">
+        <div class="page-title">চকচকে লাল আপেল ও পিঁপড়ে</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">ছোট হাতের 'a' ট্রেসিং তীর</div>
+            <div class="illustration-description">
+                চকচকে লাল একটি আপেল, তার চারদিকে হাতে রেঁখছে কার্টুন-পিঁপড়ে, আর বাক্সে
+                একটি বড় ছোট হাতের 'a' — তীরচিহ্ন দিয়ে সঠিক ট্রেসিং ক্রম দেখানো হয়েছে।
+                আঙুল দিয়ে আপেল ঘুরে, তারপর 'a' ট্রেস করো!
+            </div>
+            <div class="tracing-area">
+                <svg width="220" height="150" viewBox="0 0 220 150">
+                    <path class="tracing-path" d="M60 140 L60 60 A40 40 0 1 1 140 60 L140 140"/>
+                </svg>
+                <p>আপেলের চারপাশে তীরের দিকে 'a' ট্রেস করো!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L02-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l02/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২১</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 22 : VERSO (EVEN) — Lesson 2.3 ================= -->
+    <div class="book-page verso" id="P022-PAR">
+        <div class="page-title">পাঠ ২.৩ — অনবোজ /t/ টেনিস-ম্যাচ সাড়া</div>
+
+        <div class="content-box">
+            <div class="subsection-title">অনবোজ /t/ টেনিস-ম্যাচ সাড়া</div>
+            <p class="bangla-text">
+                টেনিস বল টোকা দেওয়ার মতো ছোট, ঝটকা /t/ শব্দ করুন। জিহ্বা দাঁতের
+                পেছনে তালুর ছোঁয়ায় ছোঁয়, তারপর অল্প বায়ু নিয়ে ছেড়ে দিন। স্বরযন্ত্র
+                কম্পন করে না (অনবোজ)। বেজে এমন /d/ (dog) সঙ্গে তুলনা করুন।
+                <strong>প্রথম ব্লেন্ডিং:</strong> /æ/ + /t/ -> at। /æ/ (ant-এর মতো)
+                বলুন, সঙ্গে সঙ্গে /t/ (tap-এর মতো) যোগ করে শব্দ "at" গড়ুন। এটি
+                শব্দ জুড়ানোর ভিত্তি।
+            </p>
+        </div>
+
+        <div class="action-command">
+            <div class="subsection-title">স্পোকেন কমান্ড (Spoken Command)</div>
+            <p class="english-text">
+                Tap the table. (টেবিলে টোকা দাও।)<br>
+                Touch your toe! (পায়ের আঙুল ছোঁ!)<br>
+                /æ/ + /t/ = at! (অ্যা + ট = অ্যাট!)<br>
+                Well done! (বাহ, দারুণ!)
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                টেবিল, বই, জানালা, দরজায় টোকা দিয়ে ঝাঁকে /t/ শব্দ শুনুন। /d/ শব্দের
+                সঙ্গে তুলনা করুন (dog, drum, bed)। জিহ্বার অবস্থানের পার্থক্য অনুভব করুন।
+                প্রতিদিন ৫ বার করে দুই সপ্তাহ অভ্যাস।
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L03-GAM01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l03
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২২</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 23 : RECTO (ODD) — Lesson 2.3 ================= -->
+    <div class="book-page recto" id="P023-CHD">
+        <div class="page-title">টেনিস-র‍্যাকেট, লাফানো বল ও ধাতব কল</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">'a' থেকে 't' শব্দ-স্লাইড</div>
+            <div class="illustration-description">
+                টেনিস-র‍্যাকেট ও লাফানো বল /t/ সাড়া দেখায়। ধাতব জল-কল /t/ শব্দের
+                উৎস দেখায়। খেলার-মাঠের শব্দ-স্লাইড: অক্ষর 'a' (শুরু প্ল্যাটফর্ম) থেকে
+                স্লাইড করে নামুন অক্ষর 't' (অবতরণ প্যাড)-এ — এটি ব্লেন্ড /æ/ + /t/ -> at
+                বোঝায়। শিশু চিহ্ন টেনে 'a' থেকে 't' স্লাইড করে শব্দ বলবে।
+            </div>
+            <div class="tracing-area">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 14px; font-size: 30px;">
+                    <span style="color:#ef4444; font-weight:800;">a</span>
+                    <span>➜</span>
+                    <span style="color:#3b82f6; font-weight:800;">t</span>
+                    <span>=</span>
+                    <span style="color:#16a34a; font-weight:800;">at</span>
+                </div>
+                <p>চিহ্ন টেনে 'a' থেকে 't' স্লাইড করে "at" বলো!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L03-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l03/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২৩</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 24 : VERSO (EVEN) — Lesson 2.4 ================= -->
+    <div class="book-page verso" id="P024-PAR">
+        <div class="page-title">পাঠ ২.৪ — ছোট /ɪ/ (ই) শব্দ (কালি ইঁদুরের সাড়া)</div>
+
+        <div class="content-box">
+            <div class="subsection-title">ছোট /ɪ/ (ই) সাড়া — কালি ইঁদুর</div>
+            <p class="bangla-text">
+                হালকা, ছোট, দ্রুত /ɪ/ (ই) শব্দ করুন — "ই-ই-ই"। মুখ সামান্য খোলা,
+                জিহ্বা সামনে-উঁচুতে, ঠোঁট একটু চার দিকে ছড়ানো — যেন ইঁদুরের সূক্ষ্ম
+                গোঁফ। এটি 'I' অক্ষরের নাম (আই) নয়, এটি ছোট /ɪ/ (ই) শব্দ।
+                <strong>ব্লেন্ডিং:</strong> it, sit। i + t -> it; s + it -> sit।
+            </p>
+        </div>
+
+        <div class="spoken-routine">
+            <div class="subsection-title">স্পোকেন বাক্য (Spoken Phrase)</div>
+            <p class="english-text">
+                Listen to me. (আমার কথা শোনো।)<br>
+                The ink is black. (কালিটা কালো।)<br>
+                The igloo is icy! (ইগলুটা বরফে ভরা!)<br>
+                i + t = it, s + it = sit! (ই+ট=ইট, এস+ইট=সিট!)
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                /ɪ/ শব্দের জিনিস খুঁজুন: ইঙ্ক (ink), ইগলু (igloo), পোকা (insect),
+                ইন (inn)। শিশুর সঙ্গে একসঙ্গে করে দেখান। শব্দ-ব্লক বসিয়ে it ও sit গড়ুন।
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L04-AUD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l04
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২৪</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 25 : RECTO (ODD) — Lesson 2.4 ================= -->
+    <div class="book-page recto" id="P025-CHD">
+        <div class="page-title">ছড়ানো কালি, ইগলু ও পোকা</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">শব্দ-গড়ার ব্লক: s - i - t -> sit</div>
+            <div class="illustration-description">
+                ছড়ানো কালির কলম (inkpot), বরফের ইগলু, ছোট পোকা (insect), আর
+                ছোট হাতের 'i'। নিচের শব্দ-ব্লকগুলো জোড়া লাগিয়ে s + i + t = sit
+                গড়ে তোলো। প্রতিটি ব্লক টোকা দিয়ে বলে শব্দ জুড়াও।
+            </div>
+            <div class="tracing-area">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 34px; font-weight: 800;">
+                    <span style="color:#3b82f6;">s</span>+
+                    <span style="color:#ef4444;">i</span>+
+                    <span style="color:#3b82f6;">t</span>
+                    <span>=</span>
+                    <span style="color:#16a34a;">sit</span>
+                </div>
+                <p>ব্লক জোড়া লাগিয়ে "s - i - t = sit" গড়ে তোলো!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L04-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l04/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২৫</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 26 : VERSO (EVEN) — Lesson 2.5 ================= -->
+    <div class="book-page verso" id="P026-PAR">
+        <div class="page-title">পাঠ ২.৫ — /p/ ও /n/ শব্দ (মোমবাতি ও বিমান)</div>
+
+        <div class="content-box">
+            <div class="subsection-title">/p/ মোমবাতির ফুঁক (Puff Candle) ও /n/ বিমানের ডানা</div>
+            <p class="bangla-text">
+                <strong>/p/:</strong> ঠোঁট একসঙ্গে রেখে হালকা বিস্ফোরণ ("পা") করুন —
+                যেন জন্মদিনের মোমবাতি নিভিয়ে ফুঁক দিচ্ছেন। স্বরযন্ত্র কম্পন করে না।
+                <strong>/n/:</strong> জিহ্বা দাঁতের পেছনে, গোঁফে হমকার ("নননন") — যেন
+                বিমানের বজনা (airplane wings humming)।<br>
+                <strong>ব্লেন্ডিং:</strong> pat, pan, pin, tap।
+            </p>
+        </div>
+
+        <div class="action-command">
+            <div class="subsection-title">স্পোকেন কমান্ড (Spoken Command)</div>
+            <p class="english-text">
+                Give me the pan. (প্যানটা আমাকে দাও।)<br>
+                Puff the candle! (মোমবাতিটার ফুঁক দাও!)<br>
+                p + a + t = pat! (প+অ্যা+ট = প্যাট!)<br>
+                n + e + t = net! (ন+এ+ট = নেট!)
+            </p>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                /p/ ও /n/ শব্দের জিনিস খুঁজুন: প্যান (pan), পিন (pin), নেট (net),
+                নার্স (nurse), পেঙ্গুইন (penguin)। জোড়ায় জোড়ায় বলিয়ে ব্লেন্ড করুন।
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L05-AUD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l05
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২৬</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 27 : RECTO (ODD) — Lesson 2.5 ================= -->
+    <div class="book-page recto" id="P027-CHD">
+        <div class="page-title">মোমবাতি ও উড়ন্ত বিমান</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">দুই-সংযোগি পাতা: /p/ ও /n/</div>
+            <div class="illustration-description">
+                বাম দিকে জন্মদিনের মোমবাতির ফুঁক (/p/) ও ডান দিকে উড়ন্ত বিমান (/n/)।
+                নিচের "দেখে বলো" জিনিসগুলো — প্যান (pan), পিন (pin), নেট (net) —
+                আঙুল দিয়ে দেখিয়ে শব্দ বলো। প্রতিটি শব্দ স্পষ্ট উচ্চারণ করো।
+            </div>
+            <div class="tracing-area">
+                <div style="display: flex; justify-content: space-around; font-size: 36px;">
+                    <span>🎂 /p/</span>
+                    <span>✈️ /n/</span>
+                </div>
+                <div style="display: flex; justify-content: space-around; font-size: 26px; margin-top: 12px;">
+                    <span>🍳 pan</span>
+                    <span>📌 pin</span>
+                    <span>🥅 net</span>
+                </div>
+                <p>দেখে বলো: pan, pin, net — প্রতিটি শব্দ স্পষ্ট বলো!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-L05-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/l05/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২৭</div>
+        </div>
+    </div>
+    <!-- ================= PAGE 28 : VERSO (EVEN) — Week 2 Review ================= -->
+    <div class="book-page verso" id="P028-PAR">
+        <div class="page-title">পাঠ ২.৬ — গ্রুপ ১ শব্দ-তালিকা ও ব্লেন্ডিং যাচাই</div>
+
+        <div class="content-box">
+            <div class="subsection-title">গ্রুপ ১ শব্দ-তালিকা (Group 1 Sounds: s, a, t, i, p, n)</div>
+            <p class="bangla-text">
+                <strong>s</strong> — /ssss/ সাপ • <strong>a</strong> — /æ/ পিঁপড়ে •
+                <strong>t</strong> — /t/ টেনিস • <strong>i</strong> — /ɪ/ ইঁদুর •
+                <strong>p</strong> — /p/ মোমবাতি • <strong>n</strong> — /n/ বিমান।
+            </p>
+            <div class="subsection-title mt-8">অভিভাবক ৫-বিন্দু রুব্রিক (Parent Rubric)</div>
+            <ul class="checklist">
+                <li>☐ ১ — ছয়টি শব্দের নিজস্ব উচ্চারণ আলাদা করতে পারে</li>
+                <li>☐ ২ — ছয়টি অক্ষর চিনতে ও বলতে পারে</li>
+                <li>☐ ৩ — CVC শব্দ (at, it, sit, pat, pan, pin, tap) ব্লেন্ড করতে পারে</li>
+                <li>☐ ৪ — নির্দিষ্ট দিকনির্দেশ (Spoken command) মানতে পারে</li>
+                <li>☐ ৫ — নতুন শব্দ শুনে আনন্দে সাড়া দেয়</li>
+            </ul>
+        </div>
+
+        <div class="home-activity">
+            <div class="subsection-title">বাড়ির কাজ (Home Activity)</div>
+            <p class="bangla-text">
+                শব্দ-কার্নিভাল খেলুন: ছয়টি গ্রুপ-১ অক্ষর দিয়ে যত সম্ভব শব্দ গড়ুন
+                (s, at, an, in, it, sat, tin, pin, nap)। প্রতিটি নতুন শব্দের জন্য একটি
+                তারা বসান!
+            </p>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-REV</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/review
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২৮</div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 29 : RECTO (ODD) — Week 2 Review ================= -->
+    <div class="book-page recto" id="P029-CHD">
+        <div class="page-title">শব্দ-কর্নিভাল ম্যাচ বোর্ড</div>
+
+        <div class="illustration-frame">
+            <div class="illustration-title">৬টি বেলুন-লক্ষ্য ও সোনালী তারা</div>
+            <div class="illustration-description">
+                ছয়টি রঙিন বেলুন, প্রতিটিতে একটি গ্রুপ-১ শব্দ: s, a, t, i, p, n।
+                শিশু প্রতিটি বেলুনের সঙ্গে সঠিক ছবি/শব্দ মেলাবে (s — সাপ, a — আপেল,
+                t — টেবিল, i — ইঙ্ক, p — প্যান, n — নেট)। সঠিক মিল হলে বেলুনের পাশের
+                সোনালী তারা রঙ করা হয়। ছয়টি তারা পেলে বিজয়ী!
+            </div>
+            <div class="tracing-area">
+                <div style="display: flex; justify-content: space-around; font-size: 30px; font-weight: 800; color:#3b82f6;">
+                    <span>s</span><span>a</span><span>t</span><span>i</span><span>p</span><span>n</span>
+                </div>
+                <div style="display: flex; justify-content: space-around; font-size: 22px; color:#f59e0b; margin-top: 12px;">
+                    <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                </div>
+                <p>৬টি বেলুন মিলিয়ে ৬টি সোনালী তারা জিতো!</p>
+            </div>
+        </div>
+
+        <div class="qr-block">
+            <div class="qr-placeholder">QR</div>
+            <div class="qr-caption">
+                <strong>SK-PH1-W02-REV-CHD01</strong><br>
+                https://sparkids.com/learn/phonics-1/w02/review/child
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <div class="brand-logo"><span>📚</span><span>SparkKids Phonics</span></div>
+            <div class="page-number">পৃষ্ঠা ২৯</div>
+        </div>
+    </div>
+
+</body>
+</html>

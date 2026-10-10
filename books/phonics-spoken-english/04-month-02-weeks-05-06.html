@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH - Weeks 5-6</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700;800&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #CBD5E1;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Page Container */
+        .book-page {
+            width: 210mm;
+            height: 297mm;
+            max-height: 297mm;
+            box-sizing: border-box;
+            overflow: hidden;
+            page-break-after: always;
+            break-after: page;
+            background-color: #FDFBF7;
+            position: relative;
+        }
+        
+        /* Left / Verso Pages (Even: 52, 54, 56, 58, 60, 62, 64, 66, 68, 70) */
+        .book-page:nth-child(even) {
+            padding: 14mm 22mm 14mm 14mm;
+        }
+        
+        /* Right / Recto Pages (Odd: 53, 55, 57, 59, 61, 63, 65, 67, 69, 71) */
+        .book-page:nth-child(odd) {
+            padding: 14mm 14mm 14mm 22mm;
+        }
+        
+        /* QR Code Placeholder */
+        .qr-placeholder {
+            width: 18mm;
+            height: 18mm;
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #64748b;
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        .qr-placeholder::before {
+            content: "📱";
+            font-size: 14px;
+        }
+        
+        /* Header Styles */
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 20px 0 12px 0;
+        }
+        
+        .subsection-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 16px 0 8px 0;
+        }
+        
+        /* Content Styles */
+        .content-box {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .bangla-text {
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #334155;
+            text-align: justify;
+        }
+        
+        .english-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+        
+        .spoken-routine {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        .action-command {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border: 2px solid #fbbf24;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        .home-activity {
+            background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+            border: 2px solid #a855f7;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        /* Illustration Styles */
+        .illustration-frame {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .illustration-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .illustration-description {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        /* Finger Tracing Styles */
+        .tracing-area {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .tracing-path {
+            stroke: #10b981;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* Footer */
+        .page-footer {
+            position: absolute;
+            bottom: 10mm;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 14mm;
+            font-size: 10px;
+            color: #64748b;
+        }
+        
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+        
+        /* Helper Classes */
+        .text-center { text-align: center; }
+        .mb-16 { margin-bottom: 16px; }
+        .mt-20 { margin-top: 20px; }
+        .p-16 { padding: 16px; }
+        
+        @media print {
+            body { margin: 0; }
+            .book-page { page-break-after: always; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==========================================
+         SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH
+         WEEKS 5 AND 6 (PAGES 52-71)
+         ========================================== -->
+    
+    <!-- PAGE 52: LEFT / VERSO (EVEN) - Lesson 5.1 -->
+    <div class="book-page" id="P052-PAR">
+        <div class="page-title">পাঠ ৫.১ - The Two-Letter Sound Slide (ba, ca, da, fa, ma, pa, ra, sa, ta)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Continuous phonation methodology</div>
+            <p class="bangla-text">
+                The Two-Letter Sound Slide teaches children to blend two sounds smoothly: 
+                ba, ca, da, fa, ma, pa, ra, sa, ta 
+                Keep voice ON between sounds - no stopping or restarting. 
+                This develops smooth blending skills essential for reading fluency. 
+                Spoken: "I see a..." (আমি একটা দেখি...)
+                This encourages children to complete the sentence with the blended sound.
+            </p>
+        </div>
+        
+        <div class="spoken-routine">
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                I see a... (আমি একটা দেখি...)
+                I see a bat! (আমি একটা বæt দেখি!)
+                I see a cat! (আমি একটা বিল্লি দেখি!)
+                I see a dad! (আমি একটা داد দেখি!)
+                Great blending! (শानदार मिश्रण!)
+            </p>
+        </div>
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text">
+                Sound slide practice: 
+                Use a slide or ramp at the playground or make one at home with cardboard. 
+                Place letter pairs at top: ba, ca, da, etc. 
+                Child slides down saying the blended sound. 
+                Make it a daily fun activity!
+            </p>
+        </div>
+        
+        <div class="qr-placeholder">
+            SK-PH1-W05-L01-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class("page-footer"):
+            <div class="brand-logo":
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৫২</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 53: RIGHT / RECTO (ODD) - Lesson 5.1 -->
+    <div class="book-page" id="P053-CHD">
+        <div class="page-title">Amusement park sound slide connecting consonants to ball pit 'a'</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Sound Slide with Directional Speed Arrows</div>
+            <div class="illustration-description">
+                Amusement park sound slide: 
+                Consonants at top: b, c, d, f, m, p, r, s, t 
+                Ball pit with letter 'a' at bottom 
+                Directional speed arrows showing smooth transition 
+                Children slide down saying: b + a = ba, c + a = ca, etc. 
+                Develops smooth blending and motor coordination skills.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo":
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৫৩</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 54: LEFT / VERSO (EVEN) - Lesson 5.2 -->
+    <div class="book-page" id="P054-PAR">
+        <div class="page-title">পাঠ ৫.২ - 3-Sound Arm Tapping & Blending (s-a-t -> sat, m-a-t -> mat)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">3-Sound Arm Tapping & Blending</div>
+            <p class="bangla-text">
+                3-Sound Arm Tapping & Blending technique: 
+                Tap left shoulder for first sound, 
+                right shoulder for second sound, 
+                chest for third sound. 
+                Example: s-a-t -> sat 
+                Tap left shoulder: /s/ 
+                Tap right shoulder: /a/ 
+                Tap chest: /t/ 
+                Say smoothly: sat 
+                Another example: m-a-t -> mat 
+                This develops multisensory blending skills.
+            </p>
+        </div
+        
+        <div class("spoken-routine"):
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Sit on the mat. (मत पर बैठो!)
+                Can you hear the s-a-t blend? (स-ए-ट मिश्रण सुनते हो?)
+                Listen for the sat sound! (साट सुनो!)
+                Great blending! (शानदार मिश्रण!)
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Arm tapping game: 
+                Use stuffed animals or pillows for shoulder and chest taps. 
+                Practice: s-a-t (sat), m-a-t (mat), p-a-t (pat), 
+                b-a-t (bat), c-a-t (cat) 
+                Make it a daily fun activity!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W05-L02-GAM01
+            <br>
+            Scan for game
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৫৪</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 55: RIGHT / RECTO (ODD) - Lesson 5.2 -->
+    <div class="book-page" id="P055-CHD">
+        <div class="page-title">3-carriage steam train holding letters s, a, t with sound buttons and cat sitting on mat</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Steam Train with Sound Buttons</div>
+            <div class="illustration-description">
+                3-carriage steam train: 
+                First car: letter 's' with sound button 
+                Second car: letter 'a' with sound button 
+                Third car: letter 't' with sound button 
+                Cat sitting on mat at the end 
+                Children press buttons in sequence: s-a-t 
+                Hear the sounds, then blend: sat 
+                See the cat on the mat as reward! 
+                Develops auditory-visual blending skills.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৫৫</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 56: LEFT / VERSO (EVEN) - Lesson 5.3 -->
+    <div class="book-page" id="P056-PAR">
+        <div class="page-title">পাঠ ৫.৩ - First CVC Word Set (sat, pat, tap, pan, tin)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">First CVC Word Set</div>
+            <p class="bangla-text">
+                First CVC Word Set: sat, pat, tap, pan, tin 
+                Household realia usage: 
+                sat - sitting on a mat 
+                pat - patting a dog or cat 
+                tap - tapping a faucet or spoon 
+                pan - cooking pan in the kitchen 
+                tin - tin can for storage 
+                Spoken: "Turn on/off the tap." 
+                This connects abstract sounds to concrete household objects.
+            </p>
+        </div
+        
+        <div class("spoken-routine"):
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Turn on/off the tap. (नल ऑन/ऑफ करें!)
+                Can you hear the CVC words? 
+                Listen for sat, pat, tap, pan, tin! 
+                Excellent word recognition!
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Household realia hunt: 
+                Find objects for: sat (sitting on mat), 
+                pat (patting pet), 
+                tap (turning faucet), 
+                pan (cooking pan), 
+                tin (tin can) 
+                Say each word when you find the object! 
+                Make it a daily scavenger hunt!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W05-L03-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class("page-number">পৃষ্ঠা ৫৬</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 57: RIGHT / RECTO (ODD) - Lesson 5.3 -->
+    <div class="book-page" id="P057-CHD">
+        <div class="page-title">5-tile flashcard grid with phonic dots below each letter (sat, pat, tap, pan, tin)</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Flashcard Grid with Phonic Dots</div>
+            <div class="illustration-description">
+                5-tile flashcard grid showing: 
+                sat: s-a-t with dots under each letter 
+                pat: p-a-t with dots under each letter 
+                tap: t-a-p with dots under each letter 
+                pan: p-a-n with dots under each letter 
+                tin: t-i-n with dots under each letter 
+                Phonic dots help children visualize each sound in the word. 
+                Children can trace the dots while saying each sound. 
+                Develops phonemic awareness and blending skills.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৫৭</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 58: LEFT / VERSO (EVEN) - Lesson 5.4 -->
+    <div class="book-page" id="P058-PAR">
+        <div class="page-title">পাঠ ৫.৪ - Receptive Object Identification</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Receptive Object Identification ("Point to the...")</div>
+            <p class="bangla-text">
+                Receptive Object Identification game: 
+                Parent says: "Point to the..." 
+                Child points to correct object: 
+                Point to the pan! 
+                Point to the tap! 
+                Point to the tin! 
+                Point to the mat! 
+                Point to the chair! 
+                Spoken hunt dialogue develops listening and comprehension skills.
+            </p>
+        </div
+        
+        <div class("spoken-routine"):
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Point to the pan! (पैन की ओर इशारा करें!)
+                Point to the tap! (नल की ओर इशारा करें!)
+                Point to the tin! (टिन की ओर इशारा करें!)
+                Point to the mat! (मत की ओर इशारा करें!)
+                Point to the chair! (कुर्सी की ओर इशारा करें!)
+                Well done! (बहुत बढ़िया!)
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Spoken hunt game: 
+                Hide objects around the room: 
+                pan, tap, tin, mat, chair 
+                Give verbal clues: 
+                "I'm something you cook in!" 
+                "I'm something you turn on for water!" 
+                Child finds object and says the word! 
+                Make it a daily fun activity!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W05-L04-GAM01
+            <br>
+            Scan for game
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class="page-number">পৃষ্ঠা ৫৮</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 59: RIGHT / RECTO (ODD) - Lesson 5.4 -->
+    <div class="book-page" id="P059-CHD">
+        <div class="page-title">Panoramic cozy kitchen illustration with target halos around the pan, tap, tin, mat, and chair</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Panoramic Kitchen with Target Halos</div>
+            <div class="illustration-description">
+                Panoramic cozy kitchen illustration: 
+                Halo around pan (cooking pan) 
+                Halo around tap (faucet) 
+                Halo around tin (tin can) 
+                Halo around mat (floor mat) 
+                Halo around chair (kitchen chair) 
+                Children can see where each object belongs in the kitchen. 
+                Develops spatial awareness and object recognition.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class="page-number">পৃষ্ঠা ৫৯</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 60: LEFT / VERSO (EVEN) - Lesson 5.5 -->
+    <div class="book-page" id="P060-PAR">
+        <div class("page-title">পাঠ ৫.৫ - Living Room Treasure Hunt</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Living Room Treasure Hunt</div>
+            <p class="bangla-text">
+                Living Room Treasure Hunt: 
+                Household sound card placement: 
+                Place sound cards around living room: 
+                /s/ near sofa, /a/ near armchair, /t/ near table, etc. 
+                Child hunts for cards and says the sound. 
+                Spoken: "I found it!" (मुझे मिल गया!) 
+                This develops sound recognition in environmental context.
+            </p>
+        </div
+        
+        <div class("spoken-routine"):
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                I found it! (मुझे मिल गया!)
+                Can you hear the sound? (आवाज सुनते हो?)
+                Found the [object]! ([वस्तु] मिल गया!)
+                Great hunting! (शानदार शिकार!)
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Treasure hunt variation: 
+                Use flashcards with pictures and words. 
+                Hide them around the living room. 
+                Child finds card, says word, gets reward. 
+                Make it a weekly family adventure!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W05-L05-ACT
+            <br>
+            Scan for activity
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class("page-number">পৃষ্ঠা ৬০</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 61: RIGHT / RECTO (ODD) - Lesson 5.5 -->
+    <div class="book-page" id="P061-CHD">
+        <div class="page-title">Isometric top-down living room treasure map with checkpoint stars</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Isometric Treasure Map with Checkpoint Stars</div>
+            <div class="illustration-description">
+                Isometric top-down living room treasure map: 
+                Living room layout viewed from above at an angle. 
+                Checkpoint stars at locations of sound cards: 
+                /s/ star near sofa, /a/ star near armchair, /t/ star near table, etc. 
+                Child follows map to find all checkpoints. 
+                Collecting all stars completes the treasure hunt! 
+                Develops spatial reasoning and map-reading skills.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class("page-number">পৃষ্ঠা ৬১</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 62: LEFT / VERSO (EVEN) - Lesson 6.1 -->
+    <div class="book-page" id="P062-PAR">
+        <div class="page-title">পাঠ ৬.১ - The -at Family (cat, bat, hat, mat, rat)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">The -at Family (cat, bat, hat, mat, rat)</div>
+            <p class="bangla-text">
+                The -at Family: cat, bat, hat, mat, rat 
+                Rhyme substitution method: 
+                Change the first letter to make new words: 
+                c-at -> cat 
+                b-at -> bat 
+                h-at -> hat 
+                m-at -> mat 
+                r-at -> rat 
+                Spoken: "I have a hat!" (मेरी एक टोपी है!) 
+                This develops phonemic awareness and word family recognition.
+            </p>
+        </div
+        
+        <div class("spoken-routine"):
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                I have a hat! (मेरी एक टोपी है!)
+                Can you hear the -at family? 
+                Listen for cat, bat, hat, mat, rat! 
+                Excellent rhyme recognition!
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                -at family hunt: 
+                Find objects for: cat (toy cat), 
+                bat (toy bat or sports equipment), 
+                hat (any hat), 
+                mat (exercise mat or towel), 
+                rat (toy rat) 
+                Say each word when you find the object! 
+                Make it a daily scavenger hunt!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W06-L01-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class="page-number">পৃষ্ঠা ৬২</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 63: RIGHT / RECTO (ODD) - Lesson 6.1 -->
+    <div class="book-page" id="P063-CHD">
+        <div class="page-title">5-window gingerbread cottage with target rhyming characters in each window</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Gingerbread Cottage with Rhyming Windows</div>
+            <div class="illustration-description">
+                5-window gingerbread cottage: 
+                Window 1: cat (in window) 
+                Window 2: bat (hanging from eaves) 
+                Window 3: hat (on chimney) 
+                Window 4: mat (on doorstep) 
+                Window 5: rat (peeking from basement) 
+                Children can see all -at family members in their cottage home. 
+                Develops word family recognition and spatial reasoning.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class("page-number">পৃষ্ঠা ৬৩</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 64: LEFT / VERSO (EVEN) - Lesson 6.2 -->
+    <div class="book-page" id="P064-PAR">
+        <div class="page-title">পাঠ ৬.২ - -an & -ap Families (fan, pan, van) / (cap, map, tap)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">-an & -ap Families</div>
+            <p class="bangla-text>
+                -an Family: fan, pan, van 
+                -ap Family: cap, map, tap 
+                Nasal /n/ vs. lip puff /p/: 
+                /n/ sound: air flows through nose (fan, van) 
+                /p/ sound: lips press together then release (cap, map, tap) 
+                Spoken: "I have a red cap." (मेरी एक लाल टोपी है!) 
+                This develops nasal vs bilabial stop discrimination.
+            </p>
+        </div
+        
+        <div class("spoken-routine"):
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                I have a red cap. (मेरी एक लाल टोपी है!)
+                Can you hear the -an and -ap families? 
+                Listen for fan, pan, van, cap, map, tap! 
+                Excellent family recognition!
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                -an & -ap family hunt: 
+                Find objects for: fan (hand fan or ceiling fan), 
+                pan (cooking pan), 
+                van (toy van or picture), 
+                cap (bottle cap or hat), 
+                map (picture map or drawing), 
+                tap (faucet or valve) 
+                Say each word when you find the object! 
+                Make it a daily scavenger hunt!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W06-L02-GAM01
+            <br>
+            Scan for game
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class="page-number">পৃষ্ঠা ৬৪</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 65: RIGHT / RECTO (ODD) - Lesson 6.2 -->
+    <div class="book-page" id="P065-CHD">
+        <div class("page-title">Dual column layout with sky blue -an column and coral pink -ap column</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration.title">Dual Column Layout</div>
+            <div class="illustration.description">
+                Dual column layout: 
+                Left column: sky blue -an family (fan, pan, van) 
+                Right column: coral pink -ap family (cap, map, tap) 
+                Visual separation helps distinguish nasal /n/ vs. lip puff /p/ 
+                Children can see the pattern and practice saying each word family. 
+                Develops visual discrimination and phonemic awareness.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class="page-number">পৃষ্ঠা ৬৫</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 66: LEFT / VERSO (EVEN) - Lesson 6.3 -->
+    <div class="book-page" id="P066-PAR">
+        <div class="page.title">পাঠ ৬.৩ - The -en Family (hen, pen, ten, men)</div>
+        
+        <div class="content-box">
+            <div class="subsection.title">The -en Family (hen, pen, ten, men)</div>
+            <p class="bangla.text">
+                The -en Family: hen, pen, ten, men 
+                Short /e/ vs. /æ/ acoustic boundary: 
+                /e/ as in hen, pen, ten, men 
+                /æ/ as in hat, cat, bat 
+                /e/ is more closed mouth like saying "eh" 
+                /æ/ is more open mouth like saying "ah" 
+                Spoken: "This is my pen." (यह मेरी कलम है) 
+                This develops short vowel discrimination.
+            </p>
+        </div
+        
+        <div class("spoken-routine"):
+            <p class="subsection.title">Spoken Routine</p>
+            <p class="english.text">
+                This is my pen. (यह मेरी कलम है)
+                Can you hear the -en family? 
+                Listen for hen, pen, ten, men! 
+                Excellent family recognition!
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection.title">Home Activity</p>
+            <p class="bangla.text>
+                -en family hunt: 
+                Find objects for: hen (toy hen or picture), 
+                pen (writing pen or marker), 
+                ten (number ten or group of ten), 
+                men (group of men or picture) 
+                Say each word when you find the object! 
+                Make it a daily scavenger hunt!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W06-L03-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class="page-number">পৃষ্ঠা ৬৬</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 67: RIGHT / RECTO (ODD) - Lesson 6.3 -->
+    <div class="book-page" id="P067-CHD">
+        <div class="page.title">Spectacled Red Hen sitting at school desk writing '10' with a ballpoint pen</div>
+        
+        <div class="illustration.frame">
+            <div class="illustration.title">Red Hen Writing '10'</div>
+            <div class="illustration.description">
+                Spectacled Red Hen wearing glasses, 
+                sitting at school desk, 
+                writing '10' with a ballpoint pen. 
+                Develops letter formation, number recognition, 
+                and fine motor skills. 
+                Connects -en family word 'ten' with actual number concept.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class="page-number">পৃষ্ঠা ৬৭</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 68: LEFT / VERSO (EVEN) - Lesson 6.4 -->
+    <div class="book-page" id="P068-PAR">
+        <div class="page.title">পাঠ ৬.৪ - -et & -ed Families</div>
+        
+        <div class="content-box">
+            <div class="subsection.title">-et & -ed Families</div>
+            <p class="bangla.text">
+                -et Family: net, pet, wet 
+                -ed Family: bed, red 
+                First Decodable Mini-Phrases: 
+                "A red bed" 
+                "A wet pet" 
+                Spoken: "Time to sleep, go to bed." (सोने का समय हो गया, बिस्तर पर जाओ) 
+                This develops early phrase reading and comprehension.
+            </p>
+        </div
+        
+        <div class("spoken-routine"):
+            <p class="subsection.title">Spoken Routine</p>
+            <p class="english.text">
+                Time to sleep, go to bed. (सोने का समय हो गया, बिस्तर पर जाओ)
+                Can you hear the -et and -ed families? 
+                Listen for net, pet, wet, bed, red! 
+                Excellent family recognition!
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection.title">Home Activity</p>
+            <p class="bangla.text>
+                Phrase building game: 
+                Create cards for: A, red, bed, wet, pet 
+                Child builds phrases: "A red bed", "A wet pet" 
+                Say each phrase with meaning! 
+                Make it a daily fun activity!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W06-L04-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class("page-number">পৃষ্ঠা ৬৮</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 69: RIGHT / RECTO (ODD) - Lesson 6.4 -->
+    <div class="book-page" id="P069-CHD">
+        <div class="page.title">Triptych story panels: bright red bed, puppy wet in rain, butterfly net</div>
+        
+        <div class="illustration.frame">
+            <div class="illustration.title">Triptych Story Panels</div>
+            <div class="illustration.description">
+                Triptych story panels: 
+                Panel 1: bright red bed (-ed family) 
+                Panel 2: puppy wet in rain (-et family) 
+                Panel 3: butterfly net (-et family) 
+                Children can follow the story sequence: 
+                Puppy gets wet in rain -> Needs to dry on red bed -> 
+                Uses butterfly net to play 
+                Develops narrative sequencing and comprehension.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class("page-number">পৃষ্ঠা ৬৯</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 70: LEFT / VERSO (EVEN) - Lesson 6.5 -->
+    <div class="book-page" id="P070-PAR">
+        <div class="page.title">পাঠ ৬.৫ - Tricky Sight Words I & the</div>
+        
+        <div class="content-box">
+            <div class="subsection.title">Tricky Sight Words I & the</div>
+            <p class="bangla.text">
+                Tricky Sight Words I & the 
+                "Look, Say, Cover, Remember" routine: 
+                Look at the word, 
+                Say it out loud, 
+                Cover it, 
+                Remember and say it again. 
+                First full sentences: 
+                "I see the cat." 
+                "I have a hat." 
+                "The cat is red." 
+                This develops sight word recognition and early sentence reading.
+            </p>
+        </div
+        
+        <div class("spoken-routine"):
+            <p class="subsection.title">Spoken Routine</p>
+            <p class="english.text">
+                I see the cat. (मैं बिल्ली देखता/देखती हूँ)
+                I have a hat. (मेरी एक टोपी है)
+                The cat is red. (बिल्ली लाल है)
+                Can you hear the tricky words? 
+                Listen for I and the! 
+                Excellent sight word recognition!
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection.title">Home Activity</p>
+            <p class="bangla.text>
+                Look, Say, Cover, Remember game: 
+                Flashcards with I, the, cat, hat, see 
+                Look at card, say word, cover, recall and say again 
+                Make it a daily fun activity!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W06-L05-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class("page-number">পৃষ্ঠা ৭০</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 71: RIGHT / RECTO (ODD) - Lesson 6.5 -->
+    <div class="book-page" id="P071-CHD">
+        <div class="page.title">Golden Star badge for I, blue cloud badge for the, and illustrated sentence reading strips</div>
+        
+        <div class="illustration.frame">
+            <div class="illustration.title">Sight Word Badges and Sentence Strips</div>
+            <div class="illustration.description">
+                Golden Star badge for I 
+                Blue cloud badge for the 
+                Illustrated sentence reading strips: 
+                "I see the cat." with cat illustration 
+                "I have a hat." with hat illustration 
+                "The cat is red." with red cat illustration 
+                Children earn badges for mastering sight words. 
+                Sentence strips provide context for word usage. 
+                Develops sight word mastery and reading confidence.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div
+            <div class("page-number">পৃষ্ঠা ৭১</div>
+        </div>
+    </div>
+</body>
+</html>

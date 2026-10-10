@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH - Weeks 3-4</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;700;800&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #CBD5E1;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Page Container */
+        .book-page {
+            width: 210mm;
+            height: 297mm;
+            max-height: 297mm;
+            box-sizing: border-box;
+            overflow: hidden;
+            page-break-after: always;
+            break-after: page;
+            background-color: #FDFBF7;
+            position: relative;
+        }
+        
+        /* Left / Verso Pages (Even: 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50) */
+        .book-page:nth-child(even) {
+            padding: 14mm 22mm 14mm 14mm;
+        }
+        
+        /* Right / Recto Pages (Odd: 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51) */
+        .book-page:nth-child(odd) {
+            padding: 14mm 14mm 14mm 22mm;
+        }
+        
+        /* QR Code Placeholder */
+        .qr-placeholder {
+            width: 18mm;
+            height: 18mm;
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #64748b;
+            margin: 10px 0;
+            position: relative;
+        }
+        
+        .qr-placeholder::before {
+            content: "📱";
+            font-size: 14px;
+        }
+        
+        /* Header Styles */
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 20px 0 12px 0;
+        }
+        
+        .subsection-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 16px 0 8px 0;
+        }
+        
+        /* Content Styles */
+        .content-box {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .bangla-text {
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #334155;
+            text-align: justify;
+        }
+        
+        .english-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+        
+        .spoken-routine {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border: 2px solid #22c55e;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        .action-command {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border: 2px solid #fbbf24;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        .home-activity {
+            background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+            border: 2px solid #a855f7;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+        
+        /* Illustration Styles */
+        .illustration-frame {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .illustration-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .illustration-description {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        /* Finger Tracing Styles */
+        .tracing-area {
+            background: #f8fafc;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .tracing-path {
+            stroke: #10b981;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* Footer */
+        .page-footer {
+            position: absolute;
+            bottom: 10mm;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 14mm;
+            font-size: 10px;
+            color: #64748b;
+        }
+        
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+        
+        /* Helper Classes */
+        .text-center { text-align: center; }
+        .mb-16 { margin-bottom: 16px; }
+        .mt-20 { margin-top: 20px; }
+        .p-16 { padding: 16px; }
+        
+        @media print {
+            body { margin: 0; }
+            .book-page { page-break-after: always; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==========================================
+         SPARKIDS: KIDS PHONICS & SPOKEN ENGLISH
+         WEEKS 3 AND 4 (PAGES 30-51)
+         ========================================== -->
+    
+    <!-- PAGE 30: LEFT / VERSO (EVEN) - Lesson 3.1 -->
+    <div class="book-page" id="P030-PAR">
+        <div class="page-title">পাঠ ৩.১ - /c/ এবং /k/ শব্দ (কাস্টানেট_action)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Castanets Action</div>
+            <p class="bangla-text">
+                /c/ এবং /k/ উভয়ই একই শব্দ তৈরি করে (ক harsh zástupce s 이음). 
+                শিশুকে সिखান যে এই দুটি অক্ষরের ljud je isti. 
+                Castanets bajakar taali bajayen - "kak kak kak" शabad sunen. 
+                Spoken: "Look at the cat!" (बिल्ली देखो!)
+                This helps children understand that different letters can make the same sound.
+            </p>
+        </div>
+        
+        <div class="spoken-routine">
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Look at the cat! (बिल्ली देखो!)
+                Can you hear the /k/ sound? (क sound सुनते हो?)
+                Listen for the castanets! (कास्टानेट्स सुनो!)
+                Great listening! (शानदार सुनवाई!)
+            </p>
+        </div>
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text">
+                Sound matching game: 
+                Show pictures of cat, kite, cup, king. 
+                Ask child to group /k/ sound words together. 
+                Practice 5 minutes daily.
+            </p>
+        </div>
+        
+        <div class="qr-placeholder">
+            SK-PH1-W03-L01-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৩০</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 31: RIGHT / RECTO (ODD) - Lesson 3.1 -->
+    <div class="book-page" id="P031-CHD">
+        <div class="page-title">Twin Letter Header (Curly 'c' & Kicking 'k')</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Cat, Kite, Tea Cup, and Ginger Striped Cat</div>
+            <div class="illustration-description">
+                Twin letter header showing Curly 'c' and Kicking 'k'. 
+                Ginger striped cat, flying kite, and tea cup illustration. 
+                Blending practice: c - a - t -> cat 
+                Children can see how the same sound /k/ is made by both c and k letters.
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৩১</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 32: LEFT / VERSO (EVEN) - Lesson 3.2 -->
+    <div class="book-page" id="P032-PAR">
+        <div class="page-title">পাঠ ৩.২ - /e/ শব্দ (ডিম ফো Rose action)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Short /e/ (এ) Cracking Egg Action</div>
+            <p class="bangla-text">
+                Make the short /e/ sound as in "egg", "bed", "red": 
+                Mouth slightly open, lips relaxed, tongue mid-level. 
+                Crucial contrast: /æ/ (অ্যা as in pan) vs. /e/ (এ as in pen). 
+                /æ/ is wider mouth opening like saying "ah", 
+                /e/ is more closed mouth like saying "eh". 
+                This distinction is essential for proper phonics development. 
+                Practice by saying "pan" vs "pen", "bat" vs "bet".
+            </p>
+        </div>
+        
+        <div class="spoken-routine">
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Eat your egg. (अंडा खाओ!)
+                Can you hear the /e/ sound? (ए sound सुनते हो?)
+                Listen for the cracking egg! (अंडा फूटने की आवाज सुनो!)
+                Excellent listening! (शानदार सुनवाई!)
+            </p>
+        </div>
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text">
+                Egg sound detection: 
+                Listen for /e/ sound in: 
+                Cracking eggs, 
+                Door creaking, 
+                Fan switching on, 
+                Water dripping. 
+                Make it a daily listening game!
+            </p>
+        </div>
+        
+        <div class="qr-placeholder">
+            SK-PH1-W03-L02-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৩২</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 33: RIGHT / RECTO (ODD) - Lesson 3.2 -->
+    <div class="book-page" id="P033-CHD">
+        <div class="page-title">Speckled Hen Cracking Egg into Pan</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Hen, Egg, Pan, and Nest Maze</div>
+            <div class="illustration-description">
+                Speckled hen cracking egg into pan. 
+                Maze from hen to nest through straw and hay. 
+                Blending: hen, pet, net 
+                Children can trace the path from hen to nest 
+                while saying each sound: /h/ + /e/ + /n/ -> hen, etc.
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৩৩</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 34: LEFT / VERSO (EVEN) - Lesson 3.3 -->
+    <div class="book-page" id="P034-PAR">
+        <div class="page-title">পাঠ ৩.৩ - /h/ এবং /r/ শব্দ (প� slik дихание и игривый щенок)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Panting Breath /h/ and Playful Puppy /r/ with rag</div>
+            <p class="bangla-text">
+                Make /h/ sound like panting breath: 
+                Open mouth, breathe out slowly like after running. 
+                Unvoiced glottal fricative (no vocal cord vibration). 
+                Make /r/ sound like playful puppy: 
+                Tongue curls up and back, 
+                air flows over tongue. 
+                Voiced alveolar approximant (vocal cords vibrate). 
+                Blending practice: 
+                /h/ + /æ/ + /t/ -> hat 
+                /r/ + /e/ + /d/ -> red 
+                /r/ + /æ/ + /t/ -> rat 
+                Spoken: "Where is your hat?" (आपकी टोपी कहाँ है?)
+            </p>
+        </div
+        
+        <div class="spoken-routine">
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Where is your hat? (आपकी टोपी कहाँ है?)
+                Can you hear the /h/ and /r/ sounds? 
+                Listen for the panting breath and playful puppy! 
+                Excellent consonant discrimination!
+            </p>
+        </div>
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Sound hunting game: 
+                Listen for /h/ sound (breathing after running, wind, sighing) 
+                Listen for /r/ sound (puppy growling, car engine, water flowing) 
+                Make it a daily observation game during playtime.
+            </p>
+        </div
+        
+        <div class="qr-placeholder">
+            SK-PH1-W03-L03-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৩৪</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 35: RIGHT / RECTO (ODD) - Lesson 3.3 -->
+    <div class="book-page" id="P035-CHD">
+        <div class="page-title">Bunny Wearing Top Hat, Brown Puppy Shaking Red Cloth Rag</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Hat and Rag Coloring Challenge</div>
+            <div class="illustration-description">
+                Bunny wearing top hat (/h/ sound). 
+                Brown puppy shaking red cloth rag (/r/ sound). 
+                Coloring challenge for red hat: 
+                Children color the hat red while saying /h/ sound. 
+                Develops sound-symbol association and fine motor skills.
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৩৫</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 36: LEFT / VERSO (EVEN) - Lesson 3.4 -->
+    <div class="book-page" id="P038-PAR">
+        <div class="page-title">পাঠ ৩.৪ - /m/ এবং /d/ শব্দ (যামি টুমি এবং ড্রাম)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Yummy Tummy /m/ (closed lips hum) & Banging Drum /d/ (tongue tap)</div>
+            <p class="bangla-text">
+                Make /m/ sound like yummy tummy: 
+                Lips closed, humming like enjoying food. 
+                Voiced bilabial nasal (vocal cords vibrate, air through nose). 
+                Make /d/ sound like banging drum: 
+                Tongue taps roof of mouth behind teeth, 
+                then releases with small air burst. 
+                Voiced alveolar stop (vocal cords vibrate). 
+                Spoken: "Yummy food!" / "Drink your milk." 
+                This develops nasal vs stop consonant discrimination.
+            </p>
+        </div
+        
+        <div class="spoken-routine">
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Yummy food! (स्वादिष्ट खाना!)
+                Drink your milk. (अपना दूध पियो!)
+                Can you hear the /m/ and /d/ sounds? 
+                Listen for the humming tummy and banging drum! 
+                Excellent consonant discrimination!
+            </p>
+        </div>
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text">
+                Sound discrimination game: 
+                Listen for /m/ sound (humming, singing, mmm) 
+                Listen for /d/ sound (drum, door, bed) 
+                Make it a daily listening game during meals.
+            </p>
+        </div
+        
+        <div class="qr-placeholder">
+            SK-PH1-W03-L04-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৩৮</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 37: RIGHT / RECTO (ODD) - Lesson 3.4 -->
+    <div class="book-page" id="P039-CHD">
+        <div class="page-title">Ripe Golden Mango, Marching Snare Drum, Glass of Milk</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Blending: d - a - d -> dad</div>
+            <div class="illustration-description">
+                Ripe golden mango (/m/ sound association). 
+                Marching snare drum (/d/ sound). 
+                Glass of milk (/m/ sound). 
+                Children can see how /d/ + /a/ + /d/ makes the word "dad". 
+                Develops blending skills and word recognition.
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৩৯</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 40: LEFT / VERSO (EVEN) - Lesson 3.5 -->
+    <div class="book-page" id="P040-PAR">
+        <div class="page-title">পাঠ ৩.৫ - মডিউল ২ রিভিউ (১২-সাউন্ড রিভিউ কার্নিবাল)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">12-Sound Review Carnival & Mealtime Spoken Role-Play</div>
+            <p class="bangla-text">
+                Review all 12 sounds learned so far: 
+                /s/, /a/, /t/, /i/, /p/, /n/, /k/, /e/, /h/, /r/, /m/, /d/ 
+                through carnival games and activities. 
+                Mealtime spoken role-play: 
+                "I am hungry!" -> "Eat an egg!" 
+                "I am thirsty!" -> "Drink water!" 
+                "I am tired!" -> "Go to sleep!" 
+                Develops practical language use and sound retention.
+            </p>
+        </div
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Sound carnival at home: 
+                Create stations for each sound pair: 
+                /s/ vs /sh/, /k/ vs /g/, /t/ vs /d/, etc. 
+                Use household items and pictures. 
+                Child rotates through stations identifying sounds. 
+                Make it a weekly family activity!
+            </p>
+        </div
+        
+        <div class="qr-placeholder">
+            SK-PH1-W03-L05-REV
+            <br>
+            Scan for review
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪০</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 41: RIGHT / RECTO (ODD) - Lesson 3.5 -->
+    <div class="book-page" id="P041-CHD">
+        <div class="page-title">12-Balloon Carnival Game Board</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Picture Matching and Reward Badges</div>
+            <div class="illustration-description">
+                12-balloon carnival game board with: 
+                Balloons for each sound: /s/, /a/, /t/, /i/, /p/, /n/, /k/, /e/, /h/, /r/, /m/, /d/ 
+                Picture matching: children match pictures to correct sound balloons. 
+                Reward badges for correct matches. 
+                First to collect all 12 badges wins! 
+                Develops comprehensive sound recognition and memory.
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪১</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 42: LEFT / VERSO (EVEN) - Lesson 4.1 -->
+    <div class="book-page" id="P042-PAR">
+        <div class="page-title">পাঠ ৪.১ - /g/ এবং /o/ শব্দ (গурgling water spiral и light switch)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Gurgling Water Spiral /g/ & Light Switch /o/ (short open /ɒ/)</div>
+            <p class="bangla-text">
+                Make /g/ sound like gurgling water spiral: 
+                Tongue touches roof of mouth behind teeth, 
+                then releases with air flowing over tongue. 
+                Voiced velar stop (vocal cords vibrate). 
+                Make /o/ sound like light switch: 
+                Lips rounded, mouth open like saying "oh". 
+                Short open /ɒ/ as in "hot", "pot", "dog". 
+                Spoken: "Switch on/off the light." 
+                This develops velar vs rounded vowel discrimination.
+            </p>
+        </div
+        
+        <div class="spoken-routine">
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Switch on/off the light. (बत्ती ऑन/ऑफ करें!)
+                Can you hear the /g/ and /o/ sounds? 
+                Listen for the gurgling water and light switch! 
+                Excellent consonant and vowel discrimination!
+            </p>
+        </div>
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Light switch game: 
+                Count how many times you turn lights on/off during the day. 
+                Say "/o/ like in off" when turning off, 
+                "/o/ like in on" when turning on. 
+                Make it a daily observation game!
+            </p>
+        </div
+        
+        <div class="qr-placeholder">
+            SK-PH1-W04-L01-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪২</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 43: RIGHT / RECTO (ODD) - Lesson 4.1 -->
+    <div class="book-page" id="P043-CHD">
+        <div class="page-title">Water Spiral Drain, Smiling Girl, Lamp Switch, Sliced Orange</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Blending: d - o - g -> dog</div>
+            <div class="illustration-description">
+                Water spiral drain (/g/ sound association). 
+                Smiling girl, lamp switch (/o/ sound), 
+                sliced orange (vitamin C and color association). 
+                Children can see how /d/ + /o/ + /g/ makes the word "dog". 
+                Develops blending skills and word recognition.
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪৩</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 44: LEFT / VERSO (EVEN) - Lesson 4.2 -->
+    <div class="book-page" id="P044-PAR">
+        <div class="page-title">পাঠ ৪.২ - /u/ এবং /l/ শব্দ (উপbrella এবং lollipop)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Up Umbrella /ʌ/ (short cut 'a') & Sweet Lollipop /l/</div>
+            <p class="bangla-text">
+                Make /ʌ/ sound like up umbrella: 
+                Mouth open, tongue relaxed like saying "up" or "cup". 
+                Short cut 'a' as in "cup", "sun", "run". 
+                Make /l/ sound like sweet lollipop: 
+                Tongue touches roof of mouth behind teeth, 
+                then releases with small air burst. 
+                Voiced alveolar lateral approximant (vocal cords vibrate). 
+                Spoken: "Open the umbrella." 
+                This develops short vowel vs lateral consonant discrimination.
+            </p>
+        </div
+        
+        <div class="spoken-routine">
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Open the umbrella. (छत्र खोलो!)
+                Can you hear the /ʌ/ and /l/ sounds? 
+                Listen for the up umbrella and sweet lollipop! 
+                Excellent sound discrimination!
+            </p>
+        </div
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Umbrella and lollipop game: 
+                Listen for /ʌ/ sound (cup, sun, fun, run) 
+                Listen for /l/ sound (leaf, ball, wall, bell) 
+                Make it a daily observation game during outdoor play.
+            </p>
+        </div
+        
+        <div class="qr-placeholder">
+            SK-PH1-W04-L02-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪৪</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 45: RIGHT / RECTO (ODD) - Lesson 4.2 -->
+    <div class="book-page" id="P045-CHD">
+        <div class="page-title">Rainbow Umbrella in Rain, Swirl Lollipop, Sunny Sky, Tea Cup</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Blending: c - u - p -> cup and s - u - n -> sun</div>
+            <div class="illustration-description">
+                Rainbow umbrella in rain (/ʌ/ sound association). 
+                Swirl lollipop (/l/ sound). 
+                Sunny sky and tea cup (vitamin C and warmth association). 
+                Children can see how /c/ + /u/ + /p/ makes the word "cup". 
+                Children can see how /s/ + /u/ + /n/ makes the word "sun". 
+                Develops blending skills and word recognition.
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪৫</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 46: LEFT / VERSO (EVEN) - Lesson 4.3 -->
+    <div class="book-page" id="P046-PAR">
+        <div class="page-title">পাঠ ৪.৩ - /f/ এবং /b/ শব্দ (Deflating fish এবং bouncing ball)</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Deflating Fish /f/ & Bouncing Ball /b/</div>
+            <p class="bangla-text">
+                Make /f/ sound like deflating fish: 
+                Lower lip touches upper teeth, 
+                air flows out with small friction. 
+                Voiceless labiodental fricative (no vocal cord vibration). 
+                Make /b/ sound like bouncing ball: 
+                Lips pressed together, then release with air burst. 
+                Voiced bilabial stop (vocal cords vibrate). 
+                Parental guide to eliminate 'b' vs. 'd' reversal (bat before ball). 
+                Spoken: "Bring the ball." 
+                This develops fricative vs stop consonant discrimination.
+            </p>
+        </div
+        
+        <div class="spoken-routine">
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                Bring the ball. (गेंद लाओ!)
+                Can you hear the /f/ and /b/ sounds? 
+                Listen for the deflating fish and bouncing ball! 
+                Excellent consonant discrimination!
+            </p>
+        </div
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Sound discrimination game: 
+                Listen for /f/ sound (fish, fan, phone, laugh) 
+                Listen for /b/ sound (ball, bed, book, bus) 
+                Make it a daily listening game during playtime.
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W04-L03-AUD01
+            <br>
+            Scan for audio
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪৬</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 47: RIGHT / RECTO (ODD) - Lesson 4.3 -->
+    <div class="book-page" id="P047-CHD">
+        <div class="page-title">Pufferfish Releasing Bubbles, Wooden Cricket Bat and Red Ball, Ceiling Fan</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Blending: bat, fan, bed</div>
+            <div class="illustration-description">
+                Pufferfish releasing bubbles (/f/ sound association). 
+                Wooden cricket bat and red ball (/b/ sound). 
+                Ceiling fan (air movement and cooling association). 
+                Children can see how /b/ + /æ/ + /t/ makes the word "bat". 
+                Children can see how /f/ + /æ/ + /n/ makes the word "fan". 
+                Children can see how /b/ + /e/ + /d/ makes the word "bed". 
+                Develops blending skills and word recognition.
+            </div>
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪৭</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 48: LEFT / VERSO (EVEN) - Lesson 4.4 -->
+    <div class="book-page" id="P048-PAR">
+        <div class="page-title">পাঠ ৪.৪ - Auditory Sorting</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">Beginning vs. Ending Sound Detective</div>
+            <p class="bangla-text">
+                Clap for initial sound, foot stamping for end sound. 
+                Spoken: "What sound is at the end of Cup?" 
+                Children listen to words and identify: 
+                Is the target sound at the beginning or end? 
+                Develops phonemic awareness and auditory processing skills.
+            </p>
+        </div
+        
+        <div class="spoken-routine">
+            <p class="subsection-title">Spoken Routine</p>
+            <p class="english-text">
+                What sound is at the end of Cup? (कप के अंत में कौन सी आवाज है?)
+                Can you hear the ending sounds? 
+                Listen for the /p/ in cup and /g/ in dog! 
+                Excellent sound detection!
+            </p>
+        </div
+        
+        <div class="home-activity">
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Sound position game: 
+                Listen for beginning sounds (/b/ in ball, /m/ in milk) 
+                Listen for ending sounds (/t/ in cat, /n/ in run) 
+                Make it a daily listening game during storytime.
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W04-L04-GAM01
+            <br>
+            Scan for game
+        </div>
+        
+        <div class="page-footer">
+            <div class="brand-logo">
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪৮</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 49: RIGHT / RECTO (ODD) - Lesson 4.4 -->
+    <div class="book-page" id="P049-CHD">
+        <div class="page-title">3-Carriage Toy Train with Missing Letter Slots</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">Beginning and Ending Sound Detection</div>
+            <div class="illustration-description">
+                3-carriage toy train with missing letter slots for: 
+                Beginning sounds: /b/, /c/, /d/ 
+                Ending sounds: /t/, /n/, /s/ 
+                Children insert correct letters to complete words: 
+                bat, cat, dog, run, sun, etc. 
+                Develops letter-sound association and spelling skills.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class="brand-logo":
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৪৯</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 50: LEFT / VERSO (EVEN) - Lesson 4.5 -->
+    <div class="book-page" id="P050-PAR">
+        <div class="page-title">পাঠ ৪.৫ - ১৮-সাউন্ড ইভেন্টরি রিভিউ & স্পোকেন কম্পিটেন্সি চেক</div>
+        
+        <div class="content-box">
+            <div class="subsection-title">18-Sound Inventory Review & Spoken Competency Check</div>
+            <p class="bangla-text>
+                Review all 18 sounds learned so far: 
+                Groups 1, 2, 3: /s/, /a/, /t/, /i/, /p/, /n/, /k/, /e/, /h/, /r/, /m/, /d/, /g/, /o/, /u/, /l/, /f/, /b/ 
+                through comprehensive inventory and competency check. 
+                Home celebration ritual: 
+                "We did it!" dance party with sound instruments. 
+                "Sound star" award for each mastered sound. 
+                Develops comprehensive phonemic awareness and confidence.
+            </p>
+        </div
+        
+        <div class("home-activity"):
+            <p class="subsection-title">Home Activity</p>
+            <p class="bangla-text>
+                Sound celebration party: 
+                Make simple instruments: 
+                Shakers (rice in bottles), 
+                Drums (pots and spoons), 
+                Wind instruments (tubes and whistles). 
+                Play "sound Simon Says" with all 18 sounds. 
+                Celebrate with a special snack and dance!
+            </p>
+        </div
+        
+        <div class("qr-placeholder"):
+            SK-PH1-W04-L05-REV
+            <br>
+            Scan for review
+        </div>
+        
+        <div class="page-footer":
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৫০</div>
+        </div>
+    </div>
+    
+    <!-- PAGE 51: RIGHT / RECTO (ODD) - Lesson 4.5 -->
+    <div class="book-page" id="P051-CHD">
+        <div class="page-title">The 18-Sound Apple Tree with Numbered Letter Apples and SparKi Waving a Graduation Flag</div>
+        
+        <div class="illustration-frame">
+            <div class="illustration-title">18-Sound Apple Tree</div>
+            <div class="illustration-description">
+                The 18-Sound Apple Tree with numbered letter apples: 
+                Each apple represents one of the 18 sounds learned. 
+                SparKi waving a graduation flag at the top. 
+                Children can place stickers on apples as they master each sound. 
+                Develops sense of accomplishment and progress tracking.
+            </div>
+        </div>
+        
+        <div class("page-footer"):
+            <div class("brand-logo"):
+                <span>📚</span>
+                <span>SparkKids Phonics</span>
+            </div>
+            <div class="page-number">পৃষ্ঠা ৫১</div>
+        </div>
+    </div>
+</body>
+</html>
